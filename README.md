@@ -9,7 +9,11 @@ Develop methods that extend GDD with a scalable table and figure extraction engi
 
 * _image-tagger_: web-based annotation engine for marking up images (PDFs) (https://github.com/UW-COSMOS/image-tagger)
 * _image-tagger-api_: database and API upon which image-tagger receives/sends data (https://github.com/UW-COSMOS/image-tagger-api)
-* repo: descrip
+* _Mask-RCNN-exp_: Mask RCNN interface for doing document segmentation. Includes code to run experimental evaluation. (https://github.com/UW-COSMOS/Mask-RCNN-exp/)
+_cosmos-datasets_: A git-lfs repository for storing datasets and weights used in cosmos experiments (https://github.com/UW-COSMOS/cosmos-datasets)
+_deeplab\_v3_: An alternative model we tested against Mask-RCNN (https://github.com/UW-COSMOS/deeplab_v3)
+_mmmask-rcnn_: A custom implementation of Mask RCNN with a multi modal architecture (https://github.com/UW-COSMOS/mmmask-rcnn)
+* repo: descri
 
 ## Phase 2
 ### Task 1: Extraction of Model Metadata
