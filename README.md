@@ -4,8 +4,6 @@
 ### Task 1: Extraction of Models from Publications
 Design and implement methods to extract models and semantically meaningful components of models that are reported in the literature in the form of equations. Incorporate weakly supervised KBC systems for such models into the ASKE pipeline.
 
-* repo: descrip
-
 ### Task 2: Table and Figure Extraction
 Develop methods that extend GDD with a scalable table and figure extraction engine that leverages state-of-the-art methods (i.e., the data model in Fonduer).
 
