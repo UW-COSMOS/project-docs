@@ -12,4 +12,4 @@ Develop methods that extend GDD with a scalable table and figure extraction engi
 Develop data extraction and integration methods to collect model metadata (from text) that corresponds to boundary conditions, sensitivity analyses, and results.
 
 ### Task 2: Data Extraction from Tables and Figures
-Design and implement methods for 1) automatic extraction of model parameterizations from tables, and 2) extraction of data from  tables and figures. Implementation of methods that link data back to model code/output and the knowledge base developed  duringTask 1 will enable human-in-the-loop automated refinements of models.
+Design and implement methods for 1) automatic extraction of  model parameterizations from tables, and 2) extraction of data from tables and figures. Implementation of methods that link data back to model code and the knowledge base developed during Task 1 will enable human-in-the-loop automated refinements of models
