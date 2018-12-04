@@ -9,6 +9,8 @@ Design and implement methods to extract models and semantically meaningful compo
 ### Task 2: Table and Figure Extraction
 Develop methods that extend GDD with a scalable table and figure extraction engine that leverages state-of-the-art methods (i.e., the data model in Fonduer).
 
+* _image-tagger_: web-based annotation engine for marking up images (PDFs)  https://github.com/UW-COSMOS/image-tagger
+* _image-tagger-api_: database and API upon which image-tagger receives/sends data https://github.com/UW-COSMOS/image-tagger-api
 * repo: descrip
 
 ## Phase 2
