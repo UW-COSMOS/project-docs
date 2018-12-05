@@ -13,7 +13,6 @@ Develop methods that extend GDD with a scalable table and figure extraction engi
 * _cosmos-datasets_: A git-lfs repository for storing datasets and weights used in cosmos experiments (https://github.com/UW-COSMOS/cosmos-datasets)
 * _deeplab\_v3_: An alternative model we tested against Mask-RCNN (https://github.com/UW-COSMOS/deeplab_v3)
 * _mmmask-rcnn_: A custom implementation of Mask RCNN with a multi modal architecture (https://github.com/UW-COSMOS/mmmask-rcnn)
-* repo: descri
 
 ## Phase 2
 ### Task 1: Extraction of Model Metadata
