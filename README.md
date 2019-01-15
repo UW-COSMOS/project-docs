@@ -22,3 +22,5 @@ Develop data extraction and integration methods to collect model metadata (from 
 
 ### Task 2: Data Extraction from Tables and Figures
 Design and implement methods for 1) automatic extraction of  model parameterizations from tables, and 2) extraction of data from tables and figures. Implementation of methods that link data back to model code and the knowledge base developed during Task 1 will enable human-in-the-loop automated refinements of models
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/DARPA_logo_%28current%29.png/320px-DARPA_logo_%28current%29.png" width=200>
