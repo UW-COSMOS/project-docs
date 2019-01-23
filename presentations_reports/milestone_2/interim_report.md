@@ -12,7 +12,7 @@ Below, we first describe the general nature of the problem and our multimodal ap
 ### Objectives and Challenges
 The following visual excerpt from a PDF, manually annotated using our in-house image tagging [application](https://github.com/UW-COSMOS/image-tagger-api), contains body text blocks, equations, equation labels, a figure, and a figure caption:  
 
-<img src="images/annotated_doc.png" alt="annotated_doc" width="600"/>
+<img src="images/annotated_doc.png" alt="annotated_doc" width="700"/>
 
 Our primary objective is to automatically recognize and visually extract these components from heterogeneous scientific publications while at the same time preserving explicit association with text-based information. For example, Equation 33, above, contains the variable *I<sub>av</sub>*, which is described in plain language in the underlying body text element. Similarly, the lowest body text block contains call-outs to specific equations [(8)-(10) and (15)-(17)] which identify them as *radical producing and consumption reactions.* This text-derived semantic description of equations is required to understand the phenomena and contexts to which they apply. Analogous requirements pertain to table and figure elements, which usually include associated text captions that are required to fully understand the context of the table/figure and to relate that element to semantic descriptions in body text.
 
