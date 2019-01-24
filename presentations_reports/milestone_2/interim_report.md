@@ -10,7 +10,7 @@ Both of these tasks required the development of methods to automatically visuall
 Below, we first describe the general nature of the problem and our multimodal approach. Next, we document the software tools that were developed and/or modified to address the problem. We then provide initial quantitative results describing the recall and precision of equation, table, and figure element extraction from PDFs from multiple different commercial and open-access publications. The performance of our code and workflow and our ability to scale to multiple millions of documents in xDD infrastructure are also assessed.
 
 ### Objectives and Challenges
-The following visual excerpt from a PDF, manually annotated using our in-house image tagging [application](https://github.com/UW-COSMOS/image-tagger-api), contains body text blocks, equations, equation labels, a figure, and a figure caption:  
+The following visual excerpt from a PDF, manually annotated using our in-house image tagging [application](https://github.com/UW-COSMOS/image-tagger), contains body text blocks, equations, equation labels, a figure, and a figure caption:  
 
 <img src="images/annotated_doc.png" alt="annotated_doc" width="700"/>
 
