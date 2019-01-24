@@ -18,7 +18,7 @@ Our primary objective is to automatically recognize and visually extract these c
 
 Ultimately, text, tables, figures, and equations must be parsed, read and explicitly related to one another in order to create a knowledge base that can used to inform scientific models. An example of equation and text-entity recognition and tuple extraction suitable for representation in a simple knowledge base follows:   
 
-<img src="images/eq_kb.png" alt="kb_task" width="700"/>
+<img src="images/eq_kb.png" alt="kb_task" width="400"/>
 
 ### Infrastructure and Software Components
 There are three main computing infrastructure and software components in the DARPA TA1 COSMOS project:
