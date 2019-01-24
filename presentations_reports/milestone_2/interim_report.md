@@ -27,7 +27,7 @@ There are three main computing infrastructure and software components in the DAR
 2. Document segmentation and segment classification
 3. Fonduer-based model extraction
 
-The combination of these three components provides a cross-disciplinary platform for accelerating the reproducibility and scalability of key elements of scientific research and provides a infrastructure for scientific model curation and construction (Phase II COSMOS project objective). Below we describe the design and implementation of our prototype COSMOS system:
+The combination of these three components provides a cross-disciplinary platform for accelerating the reproducibility and scalability of key elements of scientific research and provides an infrastructure for scientific model curation and construction (Phase II COSMOS project objective). Below we describe the design and implementation of our prototype COSMOS system:
 
 #### Document Fetching, Storage and Processing System
 IAN add basic xDD system description, stats and information here; be sure to include new project machine stats
