@@ -14,13 +14,37 @@ The following visual excerpt from a PDF, manually annotated using our in-house i
 
 <img src="images/annotated_doc.png" alt="annotated_doc" width="700"/>
 
-Our primary objective is to automatically recognize and visually extract these components from heterogeneous scientific publications while at the same time preserving explicit association with text-based information. For example, Equation 33, above, contains the variable *I<sub>av</sub>*, which is described in plain language in the underlying body text element. Similarly, the lowest body text block contains call-outs to specific equations [(8)-(10) and (15)-(17)] which identify them as *radical producing and consumption reactions.* This text-derived semantic description of equations is required to understand the phenomena and contexts to which they apply. Table and figure elements have analogous properties. Fully understanding the content of tables and figures usually requires incorporation of information from associated text captions, which then relate those tables/figures to more complete semantic descriptions in body text.
+Our primary objective is to automatically recognize and visually extract these components from heterogeneous scientific publications while at the same time preserving explicit association with text-based information. For example, Equation 33, above, contains the variable *I<sub>av</sub>*, which is described in plain language in the underlying body text element. Similarly, the lowest body text block contains call-outs to specific equations [(8)-(10) and (15)-(17)] which identify them as *radical producing and consumption reactions.* This text-derived semantic description of equations is required to understand the phenomena and contexts to which they apply. Table and figure elements have analogous properties, and fully understanding their contents usually requires incorporation of information from associated captions. Labels for figures and tables (e.g., Fig. 7, Table 1) also relate the content to more complete semantic descriptions in body text.
 
-### Software Components
+Ultimately, text, tables, figures, and equations must be parsed, read and explicitly related to one another in order to create a knowledge base that can used to inform scientific models. An example of equation and text-entity recognition and tuple extraction suitable for representation in a simple knowledge base follows:   
 
-### Initial Assessment
+<img src="images/eq_kb.png" alt="kb_task" width="700"/>
+
+### Infrastructure and Software Components
+There are three main computing infrastructure and software components in the DARPA TA1 COSMOS project:
+
+1. Document fetching, storage, and pre-processing systems
+2. Document segmentation and segment classification
+3. Fonduer-based model extraction
+
+The combination of these three components provides a cross-disciplinary platform for accelerating the reproducibility and scalability of key elements of scientific research and provides a infrastructure for scientific model curation and construction (Phase II COSMOS project objective). Below we describe the design and implementation of our prototype COSMOS system:
+
+#### Document Fetching, Storage and Processing System
+IAN add basic xDD system description, stats and information here; be sure to include new project machine stats
+
+#### Table, Figure, and Equation Extraction
+ANKUR and JOSH
+
+#### Model Extraction
+JOHN Fonduer model
+
+### Initial Assessment of Prototype System
+SEP/DAVEN annotation engine
+ANKUR/JOSH segmentation quality
+JOHN Fonduer
 
 ### Performance and Scalability
+IAN xDD throughput and estimated throughput capacity of segmentation/model software components
 
 ### Conclusions and Next Steps
 
