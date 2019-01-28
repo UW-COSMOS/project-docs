@@ -1,4 +1,4 @@
-# Design and implementation of model equation and table/figure extraction methods
+# Design and implementation of COSMOS model equation and table/figure extraction methods
 ## Introduction
 Here we provide an interim report on the design and implementation of our prototype system for automatically locating and extracting from the published literature data and information pertinent to scientific models. Two primary tasks constituted the focus of this project milestone:
 
