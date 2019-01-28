@@ -1,5 +1,5 @@
-## Design and implementation of model equation and table/figure extraction methods
-### Introduction
+# Design and implementation of model equation and table/figure extraction methods
+## Introduction
 Here we provide an interim report on the design and implementation of our prototype system for automatically locating and extracting from the published literature data and information pertinent to scientific models. Two primary tasks constituted the focus of this project milestone:
 
 1. Model equation extraction from PDFs
@@ -20,7 +20,7 @@ Ultimately, text, tables, figures, and equations must be parsed, read and explic
 
 <img src="images/eq_kb.png" alt="kb_task" width="400"/>
 
-### Executive Summary: Infrastructure and Software Components
+## Executive Summary: Infrastructure and Software Components
 There are three main computing infrastructure and software components in the DARPA TA1 COSMOS project:
 
 1. Document fetching, storage, and pre-processing systems
@@ -41,7 +41,7 @@ PAUL Fonduer model
 #### Collection of Training Data and Annotations
 DAVEN annotation engine
 
-### Technical Overview
+## Technical Overview
 THIS IS WHERE WE NEED DETAILS OF ALGORITHMS AND PIPELINE WITH QUANTITATIVE/QUALITATIVE
 
 #### Table, Figure, and Equation Extraction
