@@ -30,7 +30,7 @@ There are three main computing infrastructure and software components in the DAR
 The combination of these three components provides a cross-disciplinary platform for accelerating the reproducibility and scalability of key elements of scientific research and provides an infrastructure for scientific model curation and construction (Phase II COSMOS project objective). Below we describe the design and implementation of our prototype COSMOS system:
 
 #### Document Fetching, Storage and Processing System
-IAN add basic xDD system description, stats and information here; be sure to include new project machine stats
+IAN add basic xDD system description, throughput of documents/scalability and information here; be sure to include new project machine stats
 
 #### Table, Figure, and Equation Extraction
 ANKUR and JOSH
@@ -42,17 +42,15 @@ PAUL Fonduer model
 DAVEN annotation engine
 
 ### Technical Overview
-SEP/DAVEN annotation engine
-ANKUR/JOSH segmentation quality
-PAUL Fonduer
+THIS IS WHERE WE NEED DETAILS OF ALGORITHMS AND PIPELINE WITH QUANTITATIVE/QUALITATIVE
 
 #### Table, Figure, and Equation Extraction
 ANKUR and JOSH
+##### Evaluation and Performance
 
 #### Model Extraction
 PAUL Fonduer model
-
-### Performance and Scalability
+##### Evaluation and Performance
 IAN xDD throughput and estimated throughput capacity of segmentation/model software components
 
 ### Conclusions and Next Steps
