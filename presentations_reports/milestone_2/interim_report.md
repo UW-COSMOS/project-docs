@@ -20,7 +20,7 @@ Ultimately, text, tables, figures, and equations must be parsed, read and explic
 
 <img src="images/eq_kb.png" alt="kb_task" width="400"/>
 
-### Infrastructure and Software Components
+### Executive Summary: Infrastructure and Software Components
 There are three main computing infrastructure and software components in the DARPA TA1 COSMOS project:
 
 1. Document fetching, storage, and pre-processing systems
@@ -36,12 +36,12 @@ IAN add basic xDD system description, stats and information here; be sure to inc
 ANKUR and JOSH
 
 #### Model Extraction
-JOHN Fonduer model
+PAUL Fonduer model
 
-### Initial Assessment of Prototype System
+### Initial Prototype System
 SEP/DAVEN annotation engine
 ANKUR/JOSH segmentation quality
-JOHN Fonduer
+PAUL Fonduer
 
 ### Performance and Scalability
 IAN xDD throughput and estimated throughput capacity of segmentation/model software components
