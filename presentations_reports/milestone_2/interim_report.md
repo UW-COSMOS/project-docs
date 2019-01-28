@@ -38,10 +38,19 @@ ANKUR and JOSH
 #### Model Extraction
 PAUL Fonduer model
 
-### Initial Prototype System
+#### Collection of Training Data and Annotations
+DAVEN annotation engine
+
+### Technical Overview
 SEP/DAVEN annotation engine
 ANKUR/JOSH segmentation quality
 PAUL Fonduer
+
+#### Table, Figure, and Equation Extraction
+ANKUR and JOSH
+
+#### Model Extraction
+PAUL Fonduer model
 
 ### Performance and Scalability
 IAN xDD throughput and estimated throughput capacity of segmentation/model software components
