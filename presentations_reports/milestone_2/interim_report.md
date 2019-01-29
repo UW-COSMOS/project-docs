@@ -34,7 +34,7 @@ The combination of these three components provides a cross-disciplinary platform
 IAN add basic xDD system description, throughput of documents/scalability and information here; be sure to include new project machine stats
 
 #### Collection of Training Data and Annotations
-DAVEN annotation engine
+DAVEN annotation engine: 
 
 #### Table, Figure, and Equation Extraction
 ANKUR and JOSH
@@ -43,11 +43,15 @@ ANKUR and JOSH
 PAUL Fonduer model
 
 ## Technical Overview
-THIS IS WHERE WE NEED DETAILS OF ALGORITHMS AND PIPELINE WITH QUANTITATIVE/QUALITATIVE
+*FOLLOWING THE GENERAL OUTLINE ABOVE, THIS IS WHERE WE NEED DETAILS OF ALGORITHMS AND PIPELINE WITH QUANTITATIVE/QUALITATIVE RESULTS*
+
+#### Table, Figure, and Equation Extraction
+ANKUR and JOSH
 
 #### Table, Figure, and Equation Extraction
 ANKUR and JOSH
 ##### Evaluation and Performance
+*ideally this includes qualitative examples (images) and estimates of **recall and precision**. NB: Shanan and Daven can help generate these estimates once we have output in annotation system.*
 
 #### Model Extraction
 PAUL Fonduer model
