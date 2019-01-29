@@ -37,10 +37,10 @@ IAN add basic xDD system description, throughput of documents/scalability and in
 DAVEN annotation engine: 
 
 #### Table, Figure, and Equation Extraction
-ANKUR and JOSH
+ANKUR and JOSH: the abstract of what you are doing, maybe one or two *key* visuals
 
 #### Model Extraction
-PAUL Fonduer model
+PAUL Fonduer model: the abstract of what you are doing, maybe one or two *key* visuals
 
 ## Technical Overview
 *FOLLOWING THE GENERAL OUTLINE ABOVE, THIS IS WHERE WE NEED DETAILS OF ALGORITHMS AND PIPELINE WITH QUANTITATIVE/QUALITATIVE RESULTS*
