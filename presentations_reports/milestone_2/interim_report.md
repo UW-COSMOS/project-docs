@@ -47,9 +47,6 @@ PAUL Fonduer model
 
 #### Table, Figure, and Equation Extraction
 ANKUR and JOSH
-
-#### Table, Figure, and Equation Extraction
-ANKUR and JOSH
 ##### Evaluation and Performance
 *ideally this includes qualitative examples (images) and estimates of **recall and precision**. NB: Shanan and Daven can help generate these estimates once we have output in annotation system.*
 
