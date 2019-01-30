@@ -33,13 +33,13 @@ The combination of these three components provides a cross-disciplinary platform
 <img src="images/cosmos_pipeline.png" alt="pipeline overview", with="400" />
 
 #### Document Fetching, Storage and Processing System
-A key component of the infrastructure we are developing is an extension of the [GeoDeepDive](https://geodeepdive.org) document acquisition, storage, and processing system. This digital library and computing infrastructure is capable of supporting a wide range of activities that require information to be located and extracted from published documents. Our extended version of GeoDeepDie, **xDD**, currently contains over 8.7 million documents, principally from journals and other serials, that have been published by a variety of open-access and commercial sources. The number of documents in xDD continues to grow by some 8K daily, making it the single largest source of published scientific information that can be leveraged by multiple, collaborating teams.
+A key component of the infrastructure we are developing is an extension of the [GeoDeepDive](https://geodeepdive.org) document acquisition, storage, and processing system. This digital library and computing infrastructure is capable of supporting a wide range of activities that require information to be located and extracted from published documents. Our extended version of GeoDeepDive, **xDD**, currently contains over 8.7 million documents, principally from journals and other serials, that have been published by a variety of open-access and commercial sources. The number of documents in xDD continues to grow by some 8K daily, making it the single largest source of published scientific information that can be leveraged by multiple, collaborating teams.
 
 <img src="images/growth.png" alt="xdd_growth" width="800"/>
 
 Document access and computing capacity are foundational to any system that seeks to leverage published scientific information. xDD's strength in this regard has well-positioned our ASKE team to contribute to other ASKE team activities. We are currently collaborating with TA2 project XXXXXXX by deploying elements of their current pipeline on our larger corpus and document acquisition system.
 
-The xDD document acquisition, storage, and the processing systems are integrated into the xDD (formerly GeoDeepDive) system. This infrastructure is built to:
+The xDD document acquisition, storage, and the processing systems are integrated into the xDD system. This infrastructure is built to:
 
 1. Acquire and store PDF documents from partnered publishers, along with high-quality bibliographical metadata
 2. Extract and store the text layer from the PDF documents, allowing real-time discovery of relevant literature.
@@ -50,9 +50,9 @@ Metadata (including tracking how documents have been processed) is stored in a m
 ##### Document fetching and storage
 Through agreements with publishers, negotiated by University of Wisconsin Libraries, XDD is allowed to acquire and store PDF versions of an enormous corpus of academic literature. Each agreement is negotiated to permit key functionality, notably the ability to securely store copies of published documents (PDFs) and bibliographic metadata for internal processing. However, XDD does not permit any access to the stored documents themselves. Instead, XDD provides bibliographic citations and DOI links which point to the content on the publisher’s own platforms. The ability to access the original text on publisher platforms depends on a user’s subscription or institutional access. As per our license agreements, data products sourced from the original PDFs, described below, are provided to users, and form the basis of user-directed research projects.
 
-Data enters the XDD Infrastructure via the fetching process on a secure storage machine. This is a two-step process. First, the bibliographical metadata (including URLs to the PDF document) from publishers is downloaded, either through publisher-provided means (files, API) or via a third party system (such as CrossRef (CITE)). Second, a PDF document fetcher read this data back out using a separate process, downloading the documents from the stored URL, and stores the PDF (along with a JSON dump of the metadata) to the local file system, backed up nightly.
+Data enters the XDD Infrastructure via the fetching process on a secure storage machine. This is a two-step process. First, the bibliographical metadata (including URLs to the PDF document) from publishers is downloaded, either through publisher-provided means (files, API) or via a third party system (such as CrossRef (https://crossref.org)). Second, a PDF document fetcher read this data back out using a separate process, downloading the documents from the stored URL, and stores the PDF (along with a JSON dump of the metadata) to the local file system, backed up nightly.
 
-Once a document is fetched and its pdf is stored, its metadata is pushed into a central mongodb repository. At this point, the text layer is extracted from the text via poppler's pdftotext (CITE) tool. This text layer, like the PDF document itself, is never provided to XDD users fullstop. Instead, it is made searchable via Elasticsearch and is used as an initial starting point for some text-based processing pipelines within XDD (such as application of Stanford's CoreNLP or Google's word2vec (CITE)).
+Once a document is fetched and its pdf is stored, its metadata is pushed into a central mongodb repository. At this point, the text layer is extracted from the text via poppler's pdftotext (https://poppler.freedesktop.org/ ) tool. This text layer, like the PDF document itself, is never provided to XDD users fullstop. Instead, it is made searchable via Elasticsearch and is used as an initial starting point for some text-based processing pipelines within XDD (such as application of Stanford's CoreNLP or Google's word2vec).
 
 Although exact document acquisition allowances and interfaces vary between publishers, several criteria and objectives are shared between them. The software components of XDD's fetching system are designed to leave as little as possible being specialized for each publisher. Shared implementation includes:
 
@@ -62,15 +62,10 @@ Although exact document acquisition allowances and interfaces vary between publi
   - Database interfacing
   - Prioritization
 
-The primary xDD corpus began with Elsevier in January of 2015 and has continued to grow steadily over time. Additional partnered publishers now include Wiley, Taylor and Francis, and a number of earth science-centered society publications (GSA, SEPM, USGS, Canadian Science Publishing). In addition, xDD houses open-access documents, including works from the Public Library of Science. The total number of documents within the xDD primary corpus, categorized by source, is shown below:
-
-<img src="images/xdd_growth.png" alt="xDD Growth over time", width="800"/>
-
 The xDD infrastructure also supports secondary corpuses, which are stored alongside the primary corpus but are accessible only to specific researchers. Use cases for these auxillary corpuses include researchers who have their own data they wish to be processed using the xDD processing pipelines ("bring-your-own-data" model) or corpuses with fundamentally different document structures (e.g the complete set of PubMed abstracts).
 
-
 ##### Document processing
-The computational backbone of XDD is UW-Madison's Center for High-Throughput Computing (CHTC) (CITE), utilizing the HTCondor scheduling software (CITE). CHTC provides a large number of shared computing resources to researchers, with thousands of computing nodes serving up millions of hours of CPU time each year to hundreds of different projects. The high-throughput computing model is one in which the primary goal is maximizing overall throughput of a collection of tasks, each of which is computationally independent. The document processing requirements of XDD perfectly fits the model: applying a set of processing tools (Stanford's CoreNLP, a segmentation model, OCR) to a huge collection of documents results in millions of decoupled independent computing tasks. The integration between XDD and CHTC strives to:
+The computational backbone of xDD is UW-Madison's Center for High-Throughput Computing ([CHTC](https://chtc.cs.wisc.edu)), utilizing the HTCondor scheduling software (http://research.cs.wisc.edu/htcondor/). CHTC provides a large number of shared computing resources to researchers, with thousands of computing nodes serving up millions of hours of CPU time each year to hundreds of different projects. The high-throughput computing model is one in which the primary goal is maximizing overall throughput of a collection of tasks, each of which is computationally independent. The document processing requirements of XDD perfectly fits the model: applying a set of processing tools (Stanford's CoreNLP, a segmentation model, OCR) to a huge collection of documents results in millions of decoupled independent computing tasks. The integration between XDD and CHTC strives to:
 
 1. Support rapid deployment of new tools against the corpus
 2. Convert the PDF documents into data usable for a variety of text/datamining (TDM) analyses.
@@ -98,7 +93,7 @@ The COSMOS/xDD infrastructure is comprised of 9 machines, broken down into the g
 ###### deepdivesubmit2000
 **Purpose:** Submit jobs to HTCondor, store HTCondor output
 **Software:**
-+ HTCondor
+HTCondor
 
 **Hardware:**
 
@@ -119,8 +114,8 @@ The COSMOS/xDD infrastructure is comprised of 9 machines, broken down into the g
 ###### deepdive2000:
 **Purpose:** Secondary Elastic instance, gateway
 **Software:**
-+ nginx
-+ Elasticsearch, mongodb
+nginx
+Elasticsearch, mongodb
 
 **Notes:** Primarily a secondary Elasticsearch node + gateway for services
 **Hardware:**
@@ -133,8 +128,8 @@ The COSMOS/xDD infrastructure is comprised of 9 machines, broken down into the g
 ###### elsevier-1
 **Purpose**: Fetch and store original PDFs
 **Software:**
-+ Postgres - keeps track of what is fetched and unfetched
-+ Borg - automated backup to Elsevier-backup
+Postgres - keeps track of what is fetched and unfetched
+Borg - automated backup to Elsevier-backup
 
 **Hardware:**
 
