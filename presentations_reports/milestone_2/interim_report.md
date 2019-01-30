@@ -274,7 +274,7 @@ Next, we extend the existing document parser from the [Fonduer](https://github.c
 
 After recovering the document structure from segmentations, we utilize existing OCR framework to convert the image of body text and equations to machine-readable format. The image of body text is converted to plain text via [Tesseract](https://opensource.google.com/projects/tesseract) and the image of an equation is converted to latex code via a [neural encoder-decoder model](https://arxiv.org/pdf/1609.04938v1.pdf).
 
-Lastly, our parser will take the HTML file and the plain text output from OCR as input and populate a Postgres database according to the schema as shown in Figure 1.
+Lastly, our parser will take the HTML file and the output from the OCR engines as input and populate a PostgreSQL database according to the schema as shown in Figure 1.
 
 
 ##### Resource
