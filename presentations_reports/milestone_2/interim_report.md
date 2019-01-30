@@ -42,13 +42,36 @@ Document access and computing capacity are foundational to any system that seeks
 
 
 #### Collection of Training Data and Annotations
-DAVEN annotation engine:
+
+Due to the lack of flexible, open-source image tagging software oriented for the
+web, we developed an in-house system to collect, validate, and visualize training
+data for our models. The system is composed of two loosely-coupled components:
+[**image-tagger**](https://github.com/UW-COSMOS/image-tagger) is a *React*-based
+frontend component for displaying the location of tagged bounding boxes atop an
+image (here, a page of text). [**image-tagger-api**](https://github.com/UW-COSMOS/image-tagger-api)
+is a webserver component that provides bounding boxes to **image-tagger** and
+allows the saving of new training data from the frontend into a SQLite database
+for incorporation into model implementations. Both **image-tagger** and
+**image-tagger-api** are open-source and extensible software components that are
+useful bot within and beyond the model pipeline discussed here.
+
+In addition to saving and validating training data, the **image-tagger** frontend
+supports the visualization of arbitrary bounding boxes atop a page and forms
+the core of a system for visualizing output from the model pipeline. To this end,
+a modified **image-tagger-api** serves model output in a "View" mode, allowing
+inspection of model results.
+
+To train models for integrating equation data, the next milestone will expand
+**image-tagger** to incorporate the capture of relational information, such as
+the links between variables in an equation and in text. Further evolution of the
+rest of the model pipeline will include more seamless and automated integration
+of **image-tagger** to view various process endpoints.
 
 #### Table, Figure, and Equation Extraction
 ANKUR and JOSH: the abstract of what you are doing, maybe one or two *key* visuals
 
-Page element extraction is the task of taking as input a representation of a page and from that representation extracting information. Optical character recognition is one such extraction task: given an image representation of a page, output a stream of characters. 
-A stream of characters, however, is inadequate for representing how scientific papers communicate key points: the layout of the paper, specifically with regard to figures, tables, and equations, are integral in the communication of abstract concepts. It follows that our task requires that given an image representation input, we output a representation that both communicates the content of the paper as well as the layout. 
+Page element extraction is the task of taking as input a representation of a page and from that representation extracting information. Optical character recognition is one such extraction task: given an image representation of a page, output a stream of characters.
+A stream of characters, however, is inadequate for representing how scientific papers communicate key points: the layout of the paper, specifically with regard to figures, tables, and equations, are integral in the communication of abstract concepts. It follows that our task requires that given an image representation input, we output a representation that both communicates the content of the paper as well as the layout.
 
 To do this, we build a system that first identifies the location of each important element on a page, decides what type that element is, then extracts the textual information from within that element. For the first two steps, we adapt a popular model from the computer vision community, Faster-RCNN. Primarily used for identifying 3D objects in scene images, Faster-RCNN uses specialized convolutional neural networks to first output many regions of interests within a scene, and then classifies each region of interest. Our adaptation of this model solves the issue of domain transfer; while the out of box model is built to handle 3D, densely populated images, our adaptation specifically handles 2D, sparse images. We identify that the core problem with the original model is that it's unable to produce accurate bounding box predictions over our documents. We replace the neural network that produces regions of interest and instead use a grid proposal system. Because we know that 2D documents are typeset and regular, we utilize the fact that white space is used as visual separators to divide the papers into a grid. For each cell in the grid, we find all connected pixel regions, then draw a bounding box over the boundary connected regions. We then pass these proposals into the F-RCNN classifier to obtain labels such as body text, equations, tables, etc.
 
@@ -59,7 +82,7 @@ Finally, we collect all elements and the information collected into an html docu
 #### Model Extraction
 Prompt:PAUL Fonduer model: the abstract of what you are doing, maybe one or two *key* visuals
 
-In this stage, we aim to organize and store the table, figure and equation segmentations obtained from the previous stage into a unified data model whose schema is shown below. This unified data model will serve as a critical cornerstone for future downstream machine learning application such as knowledge base construction and co-reference resolution. 
+In this stage, we aim to organize and store the table, figure and equation segmentations obtained from the previous stage into a unified data model whose schema is shown below. This unified data model will serve as a critical cornerstone for future downstream machine learning application such as knowledge base construction and co-reference resolution.
 
 The major effort in this section is the development of a parser that takes the image segmentations of different document component as an input, utilizes tools of optical character recognition, and preserves the extracted components in persistent storage while maintaining the semantics of the document structure using the schema mentioned.
 
@@ -119,7 +142,7 @@ Lastly, our parser will take the HTML file and the plain text output from OCR as
 
 ##### Resource
 * [Link](https://github.com/UW-COSMOS/COSMOS-Parser) The code of parser that organizes and inserts the segmentations into a relational database.
-* [Link](https://github.com/guillaumegenthial/im2latex) The implementation we used for converting image of equation to latex code. 
+* [Link](https://github.com/guillaumegenthial/im2latex) The implementation we used for converting image of equation to latex code.
 * [Link](https://github.com/UW-COSMOS/latex-parser/blob/master/Equation%20Extraction%20Workflow.ipynb) An example of the equation extraction workflow.
 
 ##### Evaluation and Performance
