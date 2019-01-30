@@ -85,18 +85,19 @@ As the first step of bringing segmentations into a unified data format that pres
       <img src="img/10.1080_00103620600561071.pdf-0004/Body Text0.png">
       <div class="hocr" data-coordinates="216 308 1138 1251"></div>
     </div>
-    <div class="Equation" id="Equation1">
-      <img src="img/10.1080_00103620600561071.pdf-0004/Equation1.png">
-      <div class="hocr" data-coordinates="592 1347 814 1429"></div>
+    <div class="Equation label" id="Equation label3">
+      <img src="img/10.1080_00103620600561071.pdf-0004/Equation label3.png">
+      <div class="hocr" data-coordinates="1005 1181 1104 1232"></div>
     </div>
     <div class="Equation" id="Equation2">
       <img src="img/10.1080_00103620600561071.pdf-0004/Equation2.png">
       <div class="hocr" data-coordinates="597 1183 832 1236">
     </div>
-    <div class="Equation label" id="Equation label3">
-      <img src="img/10.1080_00103620600561071.pdf-0004/Equation label3.png">
-      <div class="hocr" data-coordinates="1005 1181 1104 1232"></div>
+    <div class="Equation" id="Equation1">
+      <img src="img/10.1080_00103620600561071.pdf-0004/Equation1.png">
+      <div class="hocr" data-coordinates="592 1347 814 1429"></div>
     </div>
+   </body>   
 </html>
 ```
 
