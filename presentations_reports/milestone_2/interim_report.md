@@ -31,10 +31,18 @@ There are three main computing infrastructure and software components in the DAR
 The combination of these three components provides a cross-disciplinary platform for accelerating the reproducibility and scalability of key elements of scientific research and provides an infrastructure for scientific model curation and construction (Phase II COSMOS project objective). Below we describe the design and implementation of our prototype COSMOS system:
 
 #### Document Fetching, Storage and Processing System
-IAN add basic xDD system description, throughput of documents/scalability and information here; be sure to include new project machine stats
+A key component of the infrastructure we are developing is an extension of the [GeoDeepDive](https://geodeepdive.org) document acquisition, storage, and processing system. This digital library and computing infrastructure is capable of supporting a wide range of activities that require information to be located and extracted from published documents. Our extended version of GeoDeepDie, **xDD**, currently contains over 8.7 million documents, principally from journals and other serials, that have been published by a variety of open-access and commercial sources. The number of documents in xDD continues to grow by some 8K daily, making it the single largest source of published scientific information that can be leveraged by multiple, collaborating teams.
+
+<img src="images/growth.png" alt="xdd_growth" width="400"/>
+
+Document access and computing capacity are foundational to any system that seeks to leverage published scientific information. xDD's strength in this regard has well-positioned our ASKE team to contribute to other ASKE team activities. We are currently collaborating with TA2 project XXXXXXX by deploying elements of their current pipeline on our larger corpus and document acquisition system.
+
+*IAN add basic xDD system description, throughput of documents/scalability and information here; be sure to include new project machine stats*
+
+
 
 #### Collection of Training Data and Annotations
-DAVEN annotation engine: 
+DAVEN annotation engine:
 
 #### Table, Figure, and Equation Extraction
 ANKUR and JOSH: the abstract of what you are doing, maybe one or two *key* visuals
