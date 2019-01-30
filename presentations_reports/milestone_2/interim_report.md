@@ -73,7 +73,7 @@ Prompt:PAUL Fonduer model
 
 ##### The parsing pipeline, the bridge between Cosmos and Fonduer
 
-As the first step of bringing segmentations into a unified data format that preserves the semantic structure of a document, we utilized the pixels coordinates of each segmentations and reconstruct the extracted components into an HTML file as shown below.
+As the first step of bringing segmentations into a unified data format that preserves the semantic structure of a document, we utilize the pixels coordinates of each segmentations and reconstruct the extracted components into an HTML file as shown below.
 ```html
 <!DOCTYPE html>
 <html>
