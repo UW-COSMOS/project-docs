@@ -30,7 +30,7 @@ There are three main computing infrastructure and software components in the DAR
 
 The combination of these three components provides a cross-disciplinary platform for accelerating the reproducibility and scalability of key elements of scientific research and provides an infrastructure for scientific model curation and construction (Phase II COSMOS project objective). Below we describe the design and implementation of our prototype COSMOS system:
 
-<img src="images/cosmos_pipeline.png" alt="pipeline overview", with="400" />
+<img src="images/cosmos_pipeline.png" alt="pipeline overview" width="400"/>
 
 #### Document Fetching, Storage and Processing System
 A key component of the infrastructure we are developing is an extension of the [GeoDeepDive](https://geodeepdive.org) document acquisition, storage, and processing system. This digital library and computing infrastructure is capable of supporting a wide range of activities that require information to be located and extracted from published documents. Our extended version of GeoDeepDive, **xDD**, currently contains over 8.7 million documents, principally from journals and other serials, that have been published by a variety of open-access and commercial sources. The number of documents in xDD continues to grow by some 8K daily, making it the single largest source of published scientific information that can be leveraged by multiple, collaborating teams.
