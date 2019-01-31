@@ -292,6 +292,12 @@ We now feed the mapped $H x W$ feature map into a classification neural net, whi
 
 Deviating from other RCNN frameworks, we do not perform bounding box offset regression over our proposal. We found that the region proposals are accurately proposed, and the bounding box regression would just add a little noise that potentially violates the whitespace boundary divisions of the proposal sections.
 
+##### Training the neural network
+
+We train the entire network from end to end. We use the Adam optimizer and heavily utilize L2 regularization. We also utilize dropout. We address the large class imbalance (for example, there is much more body text than any other class) by forcing each class to be sampled equally during training.
+
+Our collected dataset consists of 2000 training images. Furthermore, we augment our dataset with 2417 images annotated in the ICDAR POD 2017 competition. These images are only annotated with tables, equations, and figures. Because we are primarily concerned with training our classification network and not automatically producing region proposals, the lack of annotations of other classes in those images does not affect the training. We only train our network on the regions of interests for which there is a matching ground truth box for that image.
+
 
 ##### Evaluation and Performance
 *ideally this includes qualitative examples (images) and estimates of **recall and precision**. NB: Shanan and Daven can help generate these estimates once we have output in annotation system.*
