@@ -205,7 +205,9 @@ rest of the model pipeline will include more seamless and automated integration
 of **image-tagger** to view various process endpoints.
 
 #### Table, Figure, and Equation Extraction
-ANKUR and JOSH: the abstract of what you are doing, maybe one or two *key* visuals
+<Figure>
+<img src="images/mmrcnn.png" width="1000">
+</Figure>
 
 Page element extraction is the task of taking as input a representation of a page and from that representation extracting information. Optical character recognition is one such extraction task: given an image representation of a page, output a stream of characters.
 A stream of characters, however, is inadequate for representing how scientific papers communicate key points: the layout of the paper, specifically with regard to figures, tables, and equations, are integral in the communication of abstract concepts. It follows that our task requires that given an image representation input, we output a representation that both communicates the content of the paper as well as the layout.
@@ -233,7 +235,40 @@ The major effort in this section is the development of a parser that takes the i
 *FOLLOWING THE GENERAL OUTLINE ABOVE, THIS IS WHERE WE NEED DETAILS OF ALGORITHMS AND PIPELINE WITH QUANTITATIVE/QUALITATIVE RESULTS*
 
 #### Table, Figure, and Equation Extraction
-ANKUR and JOSH
+
+Our extraction model is based on convolutional neural networks. The stages of our model are as follows:
+
+1. Proposal generation via grid proposal algorithm
+2. Preprocessing of image
+3. Feature extraction via residual neural network
+4. Proposal classifier
+5. Proposal bounding box regression
+6. Run optical character recognition (OCR) module over extracted regions
+7. Consolidate region coordinates, class, and extracted text into HTML file
+
+##### Proposal generation via grid algorithm
+
+We begin the extraction pipeline by first producing region proposals. Early on we found that adapting the region proposal neural network from Faster-RCNN, which automatically detects regions of interest for scene images, does not suit the task of page element detection. The produced proposals often did not encapsulate a majority of any single element, and also would cross over into neighboring elements, which would create noise later in the OCR stage of the pipeline.
+
+We utilize the fact that scientific papers are generally divided into a grid like structure to motivate an algorithmic replacement for region proposals, which we call the grid proposal algorithm. Given a png image as input, the initial step is to first transform the $3 x N x M$ image into an $N x M$ binary matrix, where an element in the matrix is 1 if the corresponding pixel in the original image is not white, and 0 if it is.
+
+Given this binary matrix, we iterate over the matrix columnwise and find the top and bottom coordinates of all blocks consisting of only 0 and are of at least size $K x M$, where $K$ is an adjustable parameter (we set $K = 25$) and $M$ is the width of the image. The space in between each of these white space blocks are our initial rows.
+
+For each of these intial rows, we attempt to determine the number of columns $C$ within the row. We enumerate $C$ from 1 to 5, and check each of the column positions for an $H x W$ vertical block of whitespace, where $W$ is a set parameter (we set $W$ to 10) and $H$ is the height of the block. Each column position is the appropriate fraction of the row. For example, if $C=4$ we check if the whitespace block exists $\frac{1}{4}$, $\frac{1}{2}$, and $\frac{3}{4}$ of the way through the row. We then take the max $C$ that successfully partitions the row. We then divide the row into blocks according to the column separations.
+
+For each block, we run the row division procedure once more, with a slightly more fine grained whitespace partition. This is our final grid.
+
+For each cell in the grid, we next refine the cell's proposal. Given a cell, we find all 8-connected components of a certain size within the cell. An 8-connected component is a contiguous region of pixels for which each pixel is tangent to another pixel in at least one of the surrounding eight pixel locations. To find the components, we employ a standard two pass algorithm.
+
+In the first pass, a breadth first search is conducted to assign initial groups to each pixel. For each positive pixel, the north, northwest, northeast, and west pixel are checked. If none of the neighbor pixels are associated with a group number, assign a new group to the current pixel. If the neighboring positive pixels are associated with the same group, assign that group to the current pixel. If the neighboring positive pixels belong to different groups, record the groups as equivalent in a hash table and assign one of the groups to the current pixel.
+
+In the second pass, the hash table is used to merge groups. Again, breadth first search is used. For each pixel, its group is checked in the hash table for equivalence, and if a suitable equivalence exists, its group number is changed.
+
+Finally, we take each group's bounding box to obtain the connected component. We filter these components based on a minimum size. Then for each cell, we produce a bounding box over the left, top, bottom, and rightmost components in the connected components set. This is our final region proposal for the cell. For each cell, we write its updated region proposal to disk.
+
+
+
+
 ##### Evaluation and Performance
 *ideally this includes qualitative examples (images) and estimates of **recall and precision**. NB: Shanan and Daven can help generate these estimates once we have output in annotation system.*
 
