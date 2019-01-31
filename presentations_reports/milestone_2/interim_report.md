@@ -1,5 +1,7 @@
 # Design and implementation of model equation and table/figure extraction methods
 ## Introduction
+The development, refinement, and assessment of scientific models that describe natural phenomena depends heavily on empiricial and experimental records that are most commonly described in the text, tables and figures of scientific publications. Further, the theoretical underpinnings of models and key model components are also commonly expressed in the form of equations and accompanying text-based descriptions thereof. Locating and assembling all of the information relevant to a given scientific model and undestanding it at a level that is sufficient to incoporate it into model parameterization and/or assessment is a major barrier to scientific progress.
+
 Here we provide an interim report on the design and implementation of our prototype system for automatically locating and extracting from the published literature data and information pertinent to scientific models. Two primary tasks constituted the focus of this project milestone:
 
 1. Model equation extraction from PDFs
