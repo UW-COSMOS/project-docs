@@ -244,8 +244,8 @@ Our extraction model is based on convolutional neural networks. The stages of ou
 2. Preprocessing of image
 3. Feature extraction via residual neural network
 4. Proposal classifier
-6. Run optical character recognition (OCR) module over extracted regions
-7. Consolidate region coordinates, class, and extracted text into HTML file
+5. Run optical character recognition (OCR) module over extracted regions
+6. Consolidate region coordinates, class, and extracted text into HTML file
 
 ##### Proposal generation via grid algorithm
 
@@ -298,9 +298,15 @@ We train the entire network from end to end. We use the Adam optimizer and heavi
 
 Our collected dataset consists of 2000 training images. Furthermore, we augment our dataset with 2417 images annotated in the ICDAR POD 2017 competition. These images are only annotated with tables, equations, and figures. Because we are primarily concerned with training our classification network and not automatically producing region proposals, the lack of annotations of other classes in those images does not affect the training. We only train our network on the regions of interests for which there is a matching ground truth box for that image.
 
+##### Final steps
+
+The class and region of interests are written to an intermediate XML file, which are then fed into a specified OCR engine (described below).
+
 
 ##### Evaluation and Performance
 *ideally this includes qualitative examples (images) and estimates of **recall and precision**. NB: Shanan and Daven can help generate these estimates once we have output in annotation system.*
+
+
 
 #### Model Extraction
 Prompt:PAUL Fonduer model
