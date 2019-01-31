@@ -282,7 +282,15 @@ We utilize Resnet101, which is a 101 layer Resnet. We initialize the network wit
 
 ##### Proposal Classifier
 
+At this point, we have produced a convolutional feature map of the entire input image, as well as the region proposals. We now want to classify each proposal. To do so, we first must map the convolutional features from the entire image to the specific area the region proposes. We utilize the ROI Align method.
 
+ROI Align is a direct successor to the ROI Pool method proposed in Fast-RCNN. ROI Pool was first proposed as a way to associate convolutional features with proposals of any size. For each region proposal, the proposal is divided into some $H x W$ bins. Each bin is then mapped to the corresponding block of the convolutional feature map. We now perform a max pool operation over each convolutional block, which means that we take the maximum value in the block and return it. Consequently, for a region of interest of any size we return a feature map of size $H x W$.
+
+The problem with ROI Pool is that the max pool operation discards a lot of potentially important information in the convolutional feature map. ROI Align is a simple extension of ROI Pool, where instead of the max pool operation we instead sample four random points in the convolutional bin, then perform bilinear interpolation over the points to return a single value. ROI Align has been shown to preserve convolutional features slightly better than ROI Pool.
+
+We now feed the mapped $H x W$ feature map into a classification neural net, which finally outputs the class of the region of interest.
+
+Deviating from other RCNN frameworks, we do not perform bounding box offset regression over our proposal. We found that the region proposals are accurately proposed, and the bounding box regression would just add a little noise that potentially violates the whitespace boundary divisions of the proposal sections.
 
 
 ##### Evaluation and Performance
