@@ -242,7 +242,6 @@ Our extraction model is based on convolutional neural networks. The stages of ou
 2. Preprocessing of image
 3. Feature extraction via residual neural network
 4. Proposal classifier
-5. Proposal bounding box regression
 6. Run optical character recognition (OCR) module over extracted regions
 7. Consolidate region coordinates, class, and extracted text into HTML file
 
@@ -265,6 +264,21 @@ In the first pass, a breadth first search is conducted to assign initial groups 
 In the second pass, the hash table is used to merge groups. Again, breadth first search is used. For each pixel, its group is checked in the hash table for equivalence, and if a suitable equivalence exists, its group number is changed.
 
 Finally, we take each group's bounding box to obtain the connected component. We filter these components based on a minimum size. Then for each cell, we produce a bounding box over the left, top, bottom, and rightmost components in the connected components set. This is our final region proposal for the cell. For each cell, we write its updated region proposal to disk.
+
+##### Preprocessing of image
+
+After proposals have been generated, we preprocess each image to fit the input dimensions of our backbone residual neural network (resnet). We set the input to our resnet to accept images of size $1920 X 1920$, so for each image we pad each size until they fit those dimensions.
+
+##### Feature extraction
+
+We now perform feature extraction over our input images. For feature extraction we use a residual neural network (Resnet), which is a type of convolutional neural network (CNN) designed to better approximate the input-output mapping better than other CNNs.
+
+The task of feature extraction is finding a lower dimensional, more meaningful representation of the input that downstream tasks such as image classification and page element detection can utilize to better perform their tasks. Subsequently at each layer in our feature extraction CNN, we aim to learn the identity mapping $H(x) = x$. The simple intuition behind Resnet is that it's much easier for the internal layers to learn the function $F(x) = 0$, and then add the identity mapping afterward. Then, $H(x) = F(x) + x$. In practice, after a set amount of convolutional layers we simply add the input to the output of those set layers. In addition, Resnet makes use of batch normalization after each layer.
+
+We utilize Resnet101, which is a 101 layer Resnet. We initialize the network with weights trained on ImageNet. While ImageNet does not contain any images of documents, its initialization is a good starting point. Training the Resnet from scratch would require an order of magnitude more images than we have available.
+
+
+##### Proposal Classifier
 
 
 
