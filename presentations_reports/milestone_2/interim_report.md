@@ -264,16 +264,14 @@ The xDD document storage and acquisition system is comprised of six dedicated ma
 
 The xDD system is connected to COSMOS ASKE infrastructure, which is comprised primarily of 3 machines with advanced computing capabilities required to train models and perform inference tasks:
 
-**cosmos0000:** Research machine for hosting lightweight tasks, data, and services
-**Hardware:**
+**cosmos0000:** Research machine for hosting lightweight tasks, data, and services.
 
 | CPU  | Cores  | Speed  | RAM  | Disk  | Disk (used)  |
 |---|---|---|---|---|---|
 | VM  | 8  | 2.30GHz | 64GB  | 1TB  | 100GB |
 
 
-**cosmos0001 and cosmos0002:** Dedicated GPU machines for model training and research experiments
-**Hardware:**
+**cosmos0001 and cosmos0002:** Dedicated GPU machines for model training and research experiments.
 
 | CPU  | Cores  | Speed  | RAM  | Disk  | Disk (used)  |
 |---|---|---|---|---|---|
