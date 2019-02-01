@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+report="$1"
+outfile="${2:A}" # Absolute path
+# change to proper directory to catch images
+dn="${report:h}"
+fn="${report:t}"
+
+cd "${report:h}"
+
+# Have to run through html the way images are produced
+
+cat "$fn" \
+| pandoc -f markdown -t html --mathjax \
+| pandoc --pdf-engine=xelatex -V geometry:margin=1in -f html -o "$outfile"
