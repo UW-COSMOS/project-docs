@@ -1,43 +1,67 @@
-# Design and implementation of model equation and table/figure extraction methods
-## Introduction
-The development, refinement, and assessment of scientific models that describe natural phenomena depends heavily on empirical and experimental data and observations reported in the text, tables and figures of scientific publications. The theoretical underpinnings of models and key model components are also commonly expressed in the form of equations and accompanying text-based descriptions. The ability to locate and assemble specific data and information relevant to a given scientific model from across hundreds, thousands, or even millions of publications, and do so in a way that keeps up-to-date as new publications are produced, is a major barrier to scientific progress.
+# ASKE Interim Report - UW Madison - COSMOS Project
+### Organization/Date: UW - Madison, 02/01/2019
+### PIs: Prof. Theodoros Rekatsinas, Prof. Shanan Peters, and Prof. Miron Livny
 
-Here we provide an interim report on the design and implementation of our prototype system for automatically locating and extracting from the published literature data and information pertinent to scientific models. Two primary tasks constituted the focus of this TA1 project milestone:
+# 1 The COSMOS Project
+The goal of the COSMOS project is to develop a prototype knowledge base construction system that will help automate the curation of scientific models. In this section, we introduce in more details the problems along the COSMOS pipeline that we address during Phase 1 of the ASKE program and describe the challenges associated with these problems. We also provide **an executive summary that outlines the design of the COSMOS system** and our achievements during the last three months of Phase 1, as well as **collaborations with members from TA2**. In Section 2 of this manuscript, we provide a technical description of the components in the COSMOS system.
+
+## 1.1 Curation Of Scientific MOdelS (COSMOS)
+The development, refinement, and assessment of scientific models that describe natural phenomena depends heavily on empirical and experimental data and observations reported in the text, tables and figures of scientific publications. The theoretical underpinnings of models and key model components are also commonly expressed in the form of equations and accompanying text-based descriptions. The ability to locate and assemble specific data and information relevant to a given scientific model from across hundreds, thousands, or even millions of publications, and do so in a way that keeps up-to-date as new publications are produced, is a major barrier to scientific progress. In addition to the sheer current quantity of documents, the submission rate of published documents in the scientific domain is also growing exponentially. This poses a real problem, since more and more information published in the PDF documents is going dark. In order to make the content of these documents searchable (e.g., find me a phase-diagram of material XYZ), one needs essentially two components. First, you need to ingest documents from a variety of formats (with the PDF format being the most prevalent one) and convert these documents to structured data files with a structured format such as JSON, XML or HTML. Second, you need a query engine that is able to deal with a large variety of concepts (documents, images, authors, tables, etc) extracted from these documents and put these into context. We are addressing both these issues in the first phase of the COSMOS project.
+
+Here, we provide an interim report on the design and implementation of our prototype system for automatically locating and extracting from the published literature data and information pertinent to scientific models. Two primary tasks constituted the focus of this TA1 project milestone:
 
 1. Model equation extraction from PDFs
 2. Table/figure extraction from PDFs
 
 Both of these tasks require the development and deployment of methods to automatically visually segment, classify, and represent heterogeneous elements (i.e., equations, tables, figures, captions, body text blocks) within PDF documents from multiple publishers in a way that maintains contextual relationships to text-based information. Extracted equation, table, and figure elements and text must then be represented in a way that can be used in inference steps (i.e., automated knowledge base construction). We focus functionality on PDF input because the majority of published data and information in many domains of science, particularly those with field-based observational data, are available primarily or exclusively in PDF formats.
 
-Below, we first describe the general nature of the problem and our multimodal approach. Next, we document the software tools that we are developing and/or modifying to address the problem. We then provide initial quantitative results describing the recall and precision of equation, table, and figure element extraction from full-text PDFs from multiple different commercial and open-access sources. The performance of our code and workflow and our ability to scale to multiple millions of documents in xDD infrastructure are also preliminarily assessed.
+Below, we first describe the general nature of the problem and our multimodal approach. Next, we document the software tools that we are developing and/or modifying to address the problem. We then provide initial experimental results demonstrating the validity of our approach for equation, table, and figure element extraction from full-text PDFs from multiple different commercial and open-access sources. The performance of our code and workflow and our ability to scale to multiple millions of documents in xDD infrastructure are also preliminarily assessed.
 
-### Objectives and Challenges
-The following visual excerpt from a PDF, manually annotated using our in-house image tagging [application](https://github.com/UW-COSMOS/image-tagger), contains body text blocks, equations, equation labels, a figure, and a figure caption:  
+## 1.2 Objectives and Challenges
+Our primary objective is to automatically recognize and visually extract fine-grained components from heterogeneous publications that correspond to text blocks, equations, equation labels, figure, figure captions, tables, and table captures. An example of such components and the manually annotated segmentation is shown in Figure 1. This visual excerpt from a PDF was annotated with our in-house image taggging tool [[1]](#ref1) and contains body text blocks, equations, equation labels, a figure, and a figure caption.
 
-<img src="images/annotated_doc.png" alt="annotated_doc" width="700"/>
+<center><img src="images/annotated_doc.png" alt="annotated_doc" width="700"/></center>
+<center><b>Figure 1: A visual excerpt from a PDF with manual annotations using our image tagging tool. Such manual annotations are used to train the extractors used in the COSMOS system.</b></center>
 
-Our primary objective is to automatically recognize and visually extract all of these components from heterogeneous scientific publications while at the same time preserving explicit association with text-based information. For example, Equation 33, above, contains the variable *I<sub>av</sub>*, which is described in plain language in the underlying body text element. Similarly, the lowest body text block contains call-outs to specific equations [(8)-(10) and (15)-(17)] which identify them as *radical producing and consumption reactions.* This text-derived semantic description of equations is required to understand the phenomena and contexts to which they apply. Table and figure elements have analogous properties, and fully understanding their contents usually requires incorporation of information from associated captions. Labels for figures and tables (e.g., Fig. 7, Table 1) also relate the content to more complete semantic descriptions in body text.
+Beyond recognizing and visually extracting all these components, we want to preserve explicit associations with text-based information. For example, Equation (33), in the above Figure, contains the variable *I<sub>av</sub>*, which is described in plain language in the underlying body text element. Similarly, the lowest body text block contains call-outs to specific equations [(8)-(10) and (15)-(17)] which identify them as *radical producing and consumption reactions.* This text-derived semantic description of equations is required to understand the phenomena and contexts to which they apply. Table and figure elements have analogous properties, and fully understanding their contents usually requires incorporation of information from associated captions. Labels for figures and tables (e.g., Fig. 7, Table 1) also relate the content to more complete semantic descriptions in body text. 
 
-Ultimately, text, tables, figures, and equations must be parsed, read and explicitly related to one another in order to create a knowledge base that can used to inform scientific models. An example of equation and text-entity recognition and tuple extraction suitable for representation in a simple knowledge base follows:   
+Ultimately, text, tables, figures, and equations must be parsed, read, and explicitly related to one another in order to create a knowledge base that can used to inform scientific models. Here, we consider a knoweldge to be a collection of relational tables, where each table corresponds to a relation in the knoweldge base. All these tables are stored in a relational database backend. We discuss the schema of these tables for the COSMOS project later in the docuemnt. The next Figure, shows an example of equation and text-entity recognition and tuple extraction suitable for representation in a simple knowledge base.   
 
-<img src="images/eq_kb.png" alt="kb_task" width="400"/>
+<center><img src="images/eq_kb.png" alt="kb_task" width="400"/></center>
+<center><b>Figure 2: An example of using the visual segmentations to extract entries of (Equation Symbol, Description Term) relation in the COSMOS knowledge base.</b></center>
 
-## Executive Summary: Infrastructure and Software Components
-There are four main computing infrastructure and software components in the DARPA TA1 COSMOS project:
+#### Overview of Technical Challenges
+A major technical challenge in the COSMOS system is the enormous variability of scientific documents with resprect to data representation and layous. This makes it extremely challenging to access content and transform it into a representation that enables knowledge discovery. An example collection of heterogeneous documents is shown in Figure 3. As we discuss later, the methods we are developing in COSMOS are rebust to this variabilty in formatting, quality, and representation of the documents. Specifically, we propose a combination of compuer vision and natural language processing methods that can leverage multi-modal information available in the raw documents to obtain high quality results.
+
+<center><img src="images/variety_example.png" alt="variety" width="1000"/></center>
+<center><b>Figure 3: Example PDFs with heterogeneous formats. As shown the documents range from noisy scanned PDfs to high-quality PDFs. Also elements, such as tables, show high variability with respect to their orientation and layout.</b></center>
+
+Another major challenge in the COSMOS system is that of scalability. We are observing an exponential increase in the number of available scientific documents for ingenstion. The sheer amount of available data poses a significant challenge with respect to parallelization of computation and proper resource allocation. To address these issues the COSMOS systems adopts a microservises-based organization. Different microservices either communicate via REST APIs or produce and consume XML and HTML files whose elements are also persisted in a database backend. This approach not only allows us to build complex pipelines to process documents automatically, but also allows us to develop new microservices against the platform. In order to make this platform scalable, all microservices are integrated through asynchronous communication protocols by utilizing the xDD infrastructure, which gives us many benefits: It allows to do proper resource management, eliminates strong dependencies and makes the platform robust against single task failures. We discuss technical challenges associated with each component of COSMOS in more detail in Section 2, where we provide a technical description of each component. 
+
+## 1.3 Executive Summary
+This section summarizes the main components of the COSMOS system, our main achievements for the first part of Phase 1, and collaborations with ASKE teams from TA2. 
+
+### 1.3.1 Infrastructure and Software Overview
+We start with an overview of the COSMOS system and its main components. An overview is shown in Figure 4. There are four main computing infrastructure and software components in the DARPA TA1 COSMOS project:
 
 1. Document fetching, storage, and pre-processing systems
 2. Document annotation and training data acquisition
 3. Document segmentation and segment classification
 4. Fonduer-based model extraction
 
-Combining these components provides a cross-disciplinary platform capable of accelerating the reproducibility and scalability of scientific research. It also provides an infrastructure for scientific model curation and knowlege base construction (Phase II COSMOS project objective). Below we describe the design and implementation of our prototype COSMOS system:
+Component 1 is responsible for collecting, storing, and managing the raw data used as input in the COSMOS system. This component comprises of several micro-services as we describe below. The next component of COSMOS, Component 2, provides a micro-service that enables us to manually annotate input documents. The data output by this component is crucial to evaluate the quality of the results provided by the COSMOS system and also to collect training data for the next two components of COSMOS. Components 3 and 4 of COSMOS rely on state-of-the-art machine learning models to achieve their corresponding tasks. The necessary training and testing data for these components are collected via Component 2. 
 
-<img src="images/cosmos_pipeline.png" alt="pipeline overview" width="1000"/>
+<center><img src="images/cosmos_pipeline.png" alt="pipeline overview" width="1000"/></center>
+<center><b>Figure 4: An overview of the COSMOS system and its connection to the xDD infrustructure. The document fetching, storage, and pre-processing component of COSMOS is already being used by the Harvard team (EMMAA) from TA 2</b></center>
 
-### Document Fetching, Storage and Processing System
-A key component of the infrastructure we are developing is an extension of the [GeoDeepDive](https://geodeepdive.org) document acquisition, storage, and processing system. This digital library and computing infrastructure, called **xDD**, is capable of supporting a wide range of activities that require information to be continuously located and extracted from published documents. Currently, xDD contains over 8.8 million documents, principally from journals and other serials, that have been published by a variety of open-access and commercial publishers. Documents in xDD span all domains of science and biomedicine and the library continues to grow by some 8K documents daily. As a result, xDD is currently the single largest source of published scientific information that can be leveraged by multiple, collaborating teams.
+Combining these components provides a cross-disciplinary platform capable of accelerating  the reproducibility and scalability of scientific research. It also provides an infrastructure for scientific model curation and knowlege base construction (Phase 2 objective of the COSMOS project). Below we describe the design and implementation of our prototype COSMOS system.
 
-<img src="images/growth.png" alt="xdd_growth" width="800"/>
+
+#### Component 1: Document Fetching, Storage, and Processing System
+A key component of the infrastructure we are developing is an extension of the GeoDeepDive document acquisition, storage, and processing system [[2]](#ref2). This digital library and computing infrastructure, called **xDD**, is capable of supporting a wide range of activities that require information to be continuously located and extracted from published documents. Currently, xDD contains over 8.8 million documents, principally from journals and other serials, that have been published by a variety of open-access and commercial publishers. Documents in xDD span all domains of science and biomedicine and the library continues to grow by some 8K documents daily. As a result, xDD is currently the single largest source of published scientific information that can be leveraged by multiple, collaborating teams. A summary of the document aquisition trace in xDD is shown in Figure 5.
+
+<center><img src="images/growth.png" alt="xdd_growth" width="800"/></center>
+<center><b>Figure 5: A summary of the document aquisition trace in xDD. xDD is being leverages by the COSMOS projec the the EMMAA project by the Harvard Team (TA 2).</b></center>
 
 The distinguishing characteristics of the COSMOS xDD infrastructure are our ability to:
 
@@ -45,50 +69,36 @@ The distinguishing characteristics of the COSMOS xDD infrastructure are our abil
 2. Extract and index the text layer from the PDF documents, allowing rapid discovery of relevant literature.
 3. Rapidly process all stored documents via the over quarter million CPU hours that are available daily on UW-Madison's Center for High Throughput Computing (CHTC) cluster.
 
-Because access to a large collection of documents, and the computing capacity required to parse and extract information from them, is foundational to any activity that seeks to automate the utilization of published scientific information, we are well-positioned to succeed and to contribute to the success of other ASKE teams. For example, we are currently beginning collaboration with the TA2 EMMAA project by deploying elements of their current pipeline on our larger xDD and COSMOS system. The work of other ASKE team members that depends on access to the published literature may also benefit in ASKE Phase 2.
+Because access to a large collection of documents, and the computing capacity required to parse and extract information from them, is foundational to any activity that seeks to automate the utilization of published scientific information, we are well-positioned to succeed and to contribute to the success of other ASKE teams. For example, we are already collaborating with PI Peter Sorger and the TA2 EMMAA project by deploying elements of their current pipeline on our larger xDD and COSMOS system. The work of other ASKE team members that depends on access to the published literature may also benefit in ASKE Phase 2.
 
-### Collection of Training Data and Annotations
+#### Component 2: Collection of Training Data and Annotations
+Access to manually annotated data is critical to train the COSMOS system and to evaluate its performance. Due to the lack of flexible, open-source image tagging software oriented for the web, we developed an in-house system to collect, validate, and visualize training data for our models. The system is composed of two loosely-coupled components: (1) Image Tagger [[3]](#ref3), which is a *React*-based frontend component for displaying the location of tagged bounding boxes atop an image (here, a page of text), and (2) the Image Tagger API [[4]](#ref4) which is a webserver component that provides bounding boxes to Image Tagger and permits the collections of training data from the frontend into an SQLite database. Figure 6 shows screenshots of the functionalities provided by Image Tagger. Both Image Tagger and the Image Tagger API are open-source and extensible software components that are useful both within and beyond the model pipeline discussed here.
 
-Due to the lack of flexible, open-source image tagging software oriented for the
-web, we developed an in-house system to collect, validate, and visualize training
-data for our models. The system is composed of two loosely-coupled components:
-[**image-tagger**](https://github.com/UW-COSMOS/image-tagger) is a *React*-based
-frontend component for displaying the location of tagged bounding boxes atop an
-image (here, a page of text). [**image-tagger-api**](https://github.com/UW-COSMOS/image-tagger-api)
-is a webserver component that provides bounding boxes to **image-tagger** and
-allows the saving of new training data from the frontend into a SQLite database
-for incorporation into model implementations. Both **image-tagger** and
-**image-tagger-api** are open-source and extensible software components that are
-useful both within and beyond the model pipeline discussed here.
+<center><img src="images/image_tagger.png" alt="image_tagger" width="800"/></center>
+<center><b>Figure 6: An overview of the different functionalities supported by the COSMOS Image Tagger.</b></center>
+
 
 To date, we have collected annotations for 2,079 pages from a random collection of xDD documents that mention the terms "model", "equation" and "total organic carbon" (a common measurement used to characterize sediment in many different contexts). Within these 2,079 pages we have collected 19,417 bounding boxes and labels. Of these, 5,674 (29%) are body text, 2,990 (15%) are text section headers, 1,306 (7%) are figures, 1,123 (6%) are equations, and 782 (4%) are tables. Table/figure captions, references and other elements constitute the remaining 39% of the labels acquired thus far.
 
-In addition to allowing us to generate and validate training data, the **image-tagger** frontend
-supports the visualization of arbitrary bounding boxes atop a page and forms
-the core of a system for visualizing output from the model pipeline. To this end,
-a modified **image-tagger-api** serves model output in a "View" mode, allowing
-inspection of model results.
+In addition to allowing us to generate and validate training data, the Image Tagger frontend supports the visualization of arbitrary bounding boxes atop a page and forms the core of a system for visualizing output from the model pipeline. To this end, a modified Image Tagger API serves model output in a "View" mode, allowing inspection of model results.
 
-To train models for integrating equation data, the next milestone will expand
-**image-tagger** to incorporate the capture of relational information, such as
-the links between variables in an equation and in text. Further evolution of the
-rest of the model pipeline will include more seamless and automated integration
-of **image-tagger** to view various process endpoints.
+To train models for integrating equation data, the next milestone will expand Image Tagger to incorporate the capture of relational information, such as the links between variables in an equation and in text. Further evolution of the rest of the model pipeline will include more seamless and automated integration of Image Tagger to view various process endpoints.
 
-### Table, Figure, and Equation Extraction
-<Figure>
-<img src="images/mmrcnn.png" width="1000">
-</Figure>
+#### Component 3: Visual Extraction of Tables, Figures, and Equations
+This component is responsible for processing the PDFs collected from Component 1 and converting the raw PDF in an HTML representation with fine-grained information about different elements of the raw input PDF. These elements correspond to the classes described above, i.e., text components, tables, figures, equatins, section headers, etc. In addition to the visual segment that corresponds to each identified element the HTML representation of a raw PDF extracted from this component contains any text-based information contained in these elements. For example, for a figure that contains a plot we not only extract the image corresponding to the figure but also the text informaiton in the axis of the plot or the plot's legent. All this informatin together with the image correpsonding to the figure are stored in the final HTML output. To constuct the desired HTML output we combine techniques from *object detection* in image data and *optical character recognition* (OCR). The final HTML representation can be used for knoweldge discovery as it is angostic to formating and layout variations of input PDFs. An overview of Component 3 is shown in Figure 7. We briefly describe each part of ouf Component 3.
 
-Page element extraction is the task of taking as input a representation of a page and from that representation extracting information. Optical character recognition is one such extraction task: given an image representation of a page, output a stream of characters. A stream of characters, however, is inadequate for representing how scientific papers communicate key information: the layout of the paper, specifically with regard to the position of figures, tables, and equations relative to text, are integral. It follows that our task requires that given an image representation input, we output a representation that both communicates the text content of the paper as well as the layout.
+<center><img src="images/visual_extraction.png" alt="visual_extraction" width="800"/></center>
+<center><b>Figure 7: An overview of how object detectin is combined with OCR to convert a raw PDF into an HTML representation that can be used for knoweldge discovery. Object detection and OCR are executed in parallel for each page of a raw PDF.</b></center>
 
-To do this, we build a system that first identifies the location of each important element on a page, decides what type that element is, then extracts the textual information from within that element. For the first two steps, we adapt a popular model from the computer vision community, Faster-RCNN. Primarily used for identifying 3D objects in scene images, Faster-RCNN uses specialized convolutional neural networks to first output many regions of interests within a scene, and then classifies each region of interest. Our adaptation of this model solves the issue of domain transfer; while the out of box model is built to handle 3D, densely populated images, our adaptation specifically handles 2D, sparse images. We identify that the core problem with the original model is that it's unable to produce accurate bounding box predictions over our documents. We replace the neural network that produces regions of interest and instead use a grid proposal system. Because we know that 2D documents are typeset and regular, we utilize the fact that white space is used as visual separators to divide the papers into a grid. For each cell in the grid, we find all connected pixel regions, then draw a bounding box over the boundary connected regions. We then pass these proposals into the F-RCNN classifier to obtain labels such as body text, equations, tables, etc.
+As shown in Figure 3, each PDF is split into a collection of images, where each image corresponds to one page of the raw PDF. This pre-processing step is performed by Component 1 of the COSMOS system. Given these images, we first detect objects of interest in them, visually extract these objects, and perform OCR to extract any contained text. For the object detection step, we adopt a popular model from the computer vision community, Faster-RCNN (F-RCNN) [[5]](#ref5). Primarily used for identifying 3D objects in scene images, Faster-RCNN uses specialized convolutional neural networks to first output many regions of interests within a scene, and then classifies each region of interest. Our adaptation of this model solves the issue of domain transfer; while the out-of-box model is built to handle 3D, densely populated images, our adaptation specifically handles 2D, sparse images. We identify that the core problem with the original model is that it is unable to produce accurate bounding box predictions over our documents (as we demonstrate in Section 2). To mitigate this issue, we replace the regions of interest that the neural network proposes and instead use a grid proposal system. Because we know that 2D documents are typeset and regular, we utilize the fact that white space is used as visual separators to divide the papers into a grid. For each cell in the grid, we find all connected pixel regions, then draw a bounding box over the boundary connected regions. We then project the F-RCNN proposals onto the grid-based proposal to obtain labels such as body text, equations, tables, etc.
 
-With the elements, their types, and their layout produced, we move to the third step in the extraction pipeline: text extraction. For each element, we pass an image of that element into a specified text extractor. Initially, we used the OCR engine Tesseract to produce text within each image. However, Tesseract fails to produce meaningful output text for equations that were passed in. Not only was the quality poor, but the output was not a latex representation, and as such we were discarding important visual information we could utilize down the line during model extraction. To handle this issue, for all equation images we deploy a state of the art latex extractor. This latex extractor also uses a deep neural net to translate an image representation into a latex representation. Here, we found the out of box extractor did not generalize to latex images that were not produced in the same way as the dataset it was trained on. Because many of our documents are scanned in, misaligned, noisy, or all of the above, we retrain the model to produce our desired output.
+With the elements, their types, and their layout generated (and stored in XML files), we move to the next step in the extraction pipeline: text extraction. For each element, we pass an image of that element into a specified text extractor. Here, we differentiate, between equation elements and other elments. For all elements that do not correspond to equations we use the OCR engine Tesseract [[6]](#ref6). However, Tesseract fails to produce meaningful output text for equations that were passed in. Not only was the quality poor, but the output was not a latex representation, and as such we were discarding important visual information we could utilize down the line during model extraction. To handle this issue, for all equation images we deploy a state of the art latex extractor developed by the NLP group at Harvard [[7]](#ref7). This latex extractor uses an attention-based neural network to translate an image representation into a latex representation. Here, we found the out of box extractor did not generalize to latex images that were not produced in the same way as the dataset it was trained on. Because many of our documents are scanned in, misaligned, noisy, or all of the above, we retrain the model to produce our desired output.
 
 Finally, we collect all elements and the information collected into an html document. These HTML documents are read into a queryable PostgreSQL database, conforming to the schema required for Fonduer model specification.
 
-### Model Extraction
+#### Component 4: Model Extraction
+
+### 1.3.5 Model Extraction
 In this stage, we aim to organize and store the table, figure and equation segmentations obtained from the previous stage into a unified data model whose schema is shown below. This unified data model will serve as a critical cornerstone for future downstream machine learning application such as knowledge base construction and co-reference resolution.
 
 The major effort in this section is the development of a parser that takes the image segmentations of different document component as an input, utilizes tools of optical character recognition, and preserves the extracted components in persistent storage while maintaining the semantics of the document structure using the schema mentioned.
@@ -97,6 +107,11 @@ The major effort in this section is the development of a parser that takes the i
 <img src="images/data_model.png" width="400">
 <figcaption>Figure 1. The schema of data model</figcaption>
 </Figure>
+
+### 1.3.2 Collaborations
+
+We have arlready initiated a close collaboration with the TA2 EMMAA Team (PI Peter Sorger) from Harvard. The goal of this collaboration is for the EMMAA team to use the technology developed in xDD and COSMOS to obtain data for the TA2 EMMAA project.
+
 
 
 ## Technical Overview
@@ -287,3 +302,14 @@ Early experiments with a prior segmentation model are positive, with the infrast
 ### Conclusions and Next Steps
 
 ### References
+
+#### <a id="ref1"></a> [1] COSMOS Image Tagger [https://github.com/UW-COSMOS/image-tagger](https://github.com/UW-COSMOS/image-tagger)
+#### <a id="ref2"></a> [2] GeoDeepDive Project [https://geodeepdive.org](https://geodeepdive.org) 
+#### <a id="ref3"></a> [3] COSMOS Image Tagger [https://github.com/UW-COSMOS/image-tagger](https://github.com/UW-COSMOS/image-tagger)
+#### <a id="ref4"></a> [4] COSMOS Image Tagger API [https://github.com/UW-COSMOS/image-tagger-api](https://github.com/UW-COSMOS/image-tagger-api)
+#### <a id="ref5"></a> [5] Ren, Shaoqing, et al. "Faster R-CNN: Towards real-time object detection with region proposal networks." <i>Advances in neural information processing systems.</i> 2015.
+#### <a id="ref6"></a> [6] Tesseract OCR [https://github.com/tesseract-ocr/tesseract/wiki](https://github.com/tesseract-ocr/tesseract/wiki)
+#### <a id="ref7"></a> [7] Image to Latex by the Harvard NLP group [http://lstm.seas.harvard.edu/latex/](http://lstm.seas.harvard.edu/latex/)
+
+
+
