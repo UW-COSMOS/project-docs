@@ -170,71 +170,6 @@ Our collected dataset consists of 2000 training images. Furthermore, we augment 
 
 The class and region of interests are written to an intermediate XML file, which are then fed into a specified OCR engine (described below).
 
-#### xDD infrastructure
-##### Document fetching and storing
-Enabled by project-specific agreements with publishers, negotiated by University of Wisconsin Libraries, xDD acquires and stores PDF versions of a large corpus of academic literature. Each agreement is negotiated to permit key functionality, notably the ability to securely store copies of published documents (PDFs) and bibliographic metadata for internal processing. Outside users have access to full bibliographic citation and DOI information, with ULRs directing to the content on the publisher’s own platforms. As per our license agreements, data products sourced from the original PDFs, described below, are provided to users, and form the basis of user-directed research projects.
-
-Data enters the xDD Infrastructure via the fetching process on a secure storage machine. This is a two-step process. First, the bibliographical metadata (including URLs to the PDF document) from publishers is downloaded, either through publisher-provided means (files, API) or via a third party system (such as CrossRef (https://crossref.org)). Second, a PDF document fetcher read this data back out using a separate process, downloading the documents from the stored URL, and stores the PDF (along with a JSON dump of the metadata) to the local file system, backed up nightly.
-
-Once a document is fetched and its pdf is stored, its metadata is pushed into a central mongoDB repository. At this point, the text layer is extracted from the text via poppler's pdftotext (https://poppler.freedesktop.org/ ) tool. The text is made searchable via ElasticSearch and is used as an initial starting point for some text-based processing pipelines within xDD (such as application of Stanford's CoreNLP or Google's word2vec).
-
-Although exact document acquisition allowances and interfaces vary between publishers, several criteria and objectives are shared between them. The software components of xDD's fetching system are designed to be general, with as little as possible being customized for each publisher. Shared implementation includes:
-
-  - Mechanisms for download rate management.
-  - Metadata acquisition via CrossRef.
-  - Document download, storage, and data integrity components
-  - Database interfacing
-  - Prioritization
-
-The xDD infrastructure also supports secondary document collections, which are stored and processed alongside the primary corpus but accessible only to specific researchers. Use cases for these auxillary corpuses include researchers who have their own data they wish to be processed using the xDD processing pipelines ("bring-your-own-data" model) or corpuses with fundamentally different document structures (e.g the complete set of PubMed abstracts).
-
-##### Document processing
-The computational backbone of xDD is UW-Madison's Center for High-Throughput Computing ([CHTC](https://chtc.cs.wisc.edu)), utilizing the HTCondor scheduling software (http://research.cs.wisc.edu/htcondor/). CHTC provides a large number of shared computing resources to researchers, with thousands of computing nodes serving up millions of hours of CPU time each year to hundreds of different projects. The high-throughput computing model is one in which the primary goal is maximizing overall throughput of a collection of tasks, each of which is computationally independent. The document processing requirements of xDD perfectly fits the model: applying a set of processing tools (Stanford's CoreNLP, a segmentation model, OCR) to a huge collection of documents results in millions of decoupled independent computing tasks. The integration between XDD and CHTC strives to:
-
-1. Support rapid deployment of new tools against the corpus.
-2. Convert the PDF documents into data usable for a variety of text/datamining (TDM) analyses.
-3. Provide a standardized set of useful TDM products.
-
-The primary goal of supporting rapid deployment of new tools against the corpus is accomplished by creating a configuration-based system that:
-
-1. Defines the computational task in a language that CHTC understands (creating _submit files_ and defining _jobs_ in HTCondor's vocabulary)
-2. Defines a subset of documents/data products to operate on.
-3. Gathering the requisite components and submitting the jobs to the CHTC system.
-4. Updates the central metadata database with information about the documents' processing
-
-The implementation is designed to be flexible, allowing a wide variety of tasks to be defined and run (examples: running custom font-recognition scripts on all documents that have already been OCRed within the system, or applying a segmentation model to a relevant subset of earth science PDFs). CHTC and the HTCondor software allow a wide variety of critical job configurations, including Docker/singularity support, enforcing the directories be encrypted (so that the PDFs are never outside of the job while running on CHTC), and workflow automation.
-
-##### Hardware + uses
-
-The xDD document storage and acquisition system is comprised of six dedicated machines that serve the following roles:
-
-1. Data acquisition, storage, and backup
-2. Job submission interface into CHTC
-3. One machine for dedicated storage of processing output
-4. Two machines for database hosts.
-
-The xDD system is connected to COSMOS ASKE infrastructure, which is comprised primarily of 3 machines with advanced computing capabilities required to train models and perform inference tasks:
-
-**cosmos0000**
-**Purpose:** Research machine for hosting lightweight tasks, data, and services
-**Hardware:**
-
-| CPU  | Cores  | Speed  | RAM  | Disk  | Disk (used)  |
-|---|---|---|---|---|---|
-| VM  | 8  | 2.30GHz | 64GB  | 1TB  | 100GB |
-
-
-**cosmos0001 and cosmos0002**
-**Purpose:**  Dedicated GPU machines for model training and research experiments
-**Hardware:**
-
-| CPU  | Cores  | Speed  | RAM  | Disk  | Disk (used)  |
-|---|---|---|---|---|---|
-| Intel(R) Xeon(R) Gold 6148 CPU | 160  | 2.40GHz | 512GB  | 1.5TB SSD, 1.5TB HDD  | - |
-
-##### Throughput/scalability
-Scalability in xDD is accomplished by both scaling the primary data storage components (mongoDB, ElasticSearch) horizontally and by relying on the immense resources of CHTC for computing power. With roughly 10,000 computing nodes available within CHTC, over a quarter million CPU hours are available to campus researchers each day.
-
 ##### Evaluation and Performance
 *ideally this includes qualitative examples (images) and estimates of **recall and precision**. NB: Shanan and Daven can help generate these estimates once we have output in annotation system.*
 
@@ -292,6 +227,69 @@ We will extend our current pipeline and add in components to achieve the full wo
 The current xDD pipelines regularly utilize on the order of 5,000 CPU hours per day on CHTC. This utilization represents the 'steady-state' CPU requirement of xDD, including only the running of the daily fetched documents through the standard (OCR, coreNLP) pipelines.  Past sprints have pushed xDD CHTC usage over 50,000 CPU hours utilized in a day, and it is not uncommon for CHTC to provide upwards of 100,000 hours of CPU to a user in a day.
 
 Early experiments with a prior segmentation model are positive, with the infrastructure easily supporting simultaneous application of the model to thousands of documents in un-optimized CPU-only trial runs. Initial tests suggest that this version of the segmentation process requires on the order of one CPU minute per page processed. With a an average of around 12 pages per document, this corresponds to an overall throughput of 5 documents per CPU-hour. Because CHTC is a shared resource, it is difficult to predict daily availability and usage, but historical results indicate that a daily document throughputs of 25,000-100,000 documents should be expected. Both internal (code-level) and external (CHTC resource request) optimization is expected to improve overall throughput.
+
+#### xDD infrastructure
+##### Document fetching and storing
+Enabled by project-specific agreements with publishers, negotiated by University of Wisconsin Libraries, xDD acquires and stores PDF versions of a large corpus of academic literature. Each agreement is negotiated to permit key functionality, notably the ability to securely store copies of published documents (PDFs) and bibliographic metadata for internal processing. Outside users have access to full bibliographic citation and DOI information, with ULRs directing to the content on the publisher’s own platforms. As per our license agreements, data products sourced from the original PDFs, described below, are provided to users, and form the basis of user-directed research projects.
+
+Data enters the xDD Infrastructure via the fetching process on a secure storage machine. This is a two-step process. First, the bibliographical metadata (including URLs to the PDF document) from publishers is downloaded, either through publisher-provided means (files, API) or via a third party system (such as CrossRef (https://crossref.org)). Second, a PDF document fetcher read this data back out using a separate process, downloading the documents from the stored URL, and stores the PDF (along with a JSON dump of the metadata) to the local file system, backed up nightly.
+
+Once a document is fetched and its pdf is stored, its metadata is pushed into a central mongoDB repository. At this point, the text layer is extracted from the text via poppler's pdftotext (https://poppler.freedesktop.org/ ) tool. The text is made searchable via ElasticSearch and is used as an initial starting point for some text-based processing pipelines within xDD (such as application of Stanford's CoreNLP or Google's word2vec).
+
+Although exact document acquisition allowances and interfaces vary between publishers, several criteria and objectives are shared between them. The software components of xDD's fetching system are designed to be general, with as little as possible being customized for each publisher. Shared implementation includes:
+
+  - Mechanisms for download rate management.
+  - Metadata acquisition via CrossRef.
+  - Document download, storage, and data integrity components
+  - Database interfacing
+  - Prioritization
+
+The xDD infrastructure also supports secondary document collections, which are stored and processed alongside the primary corpus but accessible only to specific researchers. Use cases for these auxillary corpuses include researchers who have their own data they wish to be processed using the xDD processing pipelines ("bring-your-own-data" model) or corpuses with fundamentally different document structures (e.g the complete set of PubMed abstracts).
+
+##### Document processing
+The computational backbone of xDD is UW-Madison's Center for High-Throughput Computing ([CHTC](https://chtc.cs.wisc.edu)), utilizing the HTCondor scheduling software (http://research.cs.wisc.edu/htcondor/). CHTC provides a large number of shared computing resources to researchers, with thousands of computing nodes serving up millions of hours of CPU time each year to hundreds of different projects. The high-throughput computing model is one in which the primary goal is maximizing overall throughput of a collection of tasks, each of which is computationally independent. The document processing requirements of xDD perfectly fits the model: applying a set of processing tools (Stanford's CoreNLP, a segmentation model, OCR) to a huge collection of documents results in millions of decoupled independent computing tasks. The integration between XDD and CHTC strives to:
+
+1. Support rapid deployment of new tools against the corpus.
+2. Convert the PDF documents into data usable for a variety of text/datamining (TDM) analyses.
+3. Provide a standardized set of useful TDM products.
+
+The primary goal of supporting rapid deployment of new tools against the corpus is accomplished by creating a configuration-based system that:
+
+1. Defines the computational task in a language that CHTC understands (creating _submit files_ and defining _jobs_ in HTCondor's vocabulary)
+2. Defines a subset of documents/data products to operate on.
+3. Gathering the requisite components and submitting the jobs to the CHTC system.
+4. Updates the central metadata database with information about the documents' processing
+
+The implementation is designed to be flexible, allowing a wide variety of tasks to be defined and run (examples: running custom font-recognition scripts on all documents that have already been OCRed within the system, or applying a segmentation model to a relevant subset of earth science PDFs). CHTC and the HTCondor software allow a wide variety of critical job configurations, including Docker/singularity support, enforcing the directories be encrypted (so that the PDFs are never outside of the job while running on CHTC), and workflow automation.
+
+##### Hardware + uses
+
+The xDD document storage and acquisition system is comprised of six dedicated machines that serve the following roles:
+
+1. Data acquisition, storage, and backup
+2. Job submission interface into CHTC
+3. One machine for dedicated storage of processing output
+4. Two machines for database hosts.
+
+The xDD system is connected to COSMOS ASKE infrastructure, which is comprised primarily of 3 machines with advanced computing capabilities required to train models and perform inference tasks:
+
+**cosmos0000:** Research machine for hosting lightweight tasks, data, and services
+**Hardware:**
+
+| CPU  | Cores  | Speed  | RAM  | Disk  | Disk (used)  |
+|---|---|---|---|---|---|
+| VM  | 8  | 2.30GHz | 64GB  | 1TB  | 100GB |
+
+
+**cosmos0001 and cosmos0002:** Dedicated GPU machines for model training and research experiments
+**Hardware:**
+
+| CPU  | Cores  | Speed  | RAM  | Disk  | Disk (used)  |
+|---|---|---|---|---|---|
+| Intel(R) Xeon(R) Gold 6148 CPU | 160  | 2.40GHz | 512GB  | 1.5TB SSD, 1.5TB HDD  | - |
+
+##### Throughput/scalability
+Scalability in xDD is accomplished by both scaling the primary data storage components (mongoDB, ElasticSearch) horizontally and by relying on the immense resources of CHTC for computing power. With roughly 10,000 computing nodes available within CHTC, over a quarter million CPU hours are available to campus researchers each day.
 
 ### Conclusions and Next Steps
 
