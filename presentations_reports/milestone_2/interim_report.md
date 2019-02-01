@@ -347,6 +347,12 @@ After recovering the document structure from segmentations, we utilize existing 
 
 Lastly, our parser will take the HTML file and the output from the OCR engines as input and populate a PostgreSQL database according to the schema as shown in Figure 1.
 
+#### Next step
+We will extend our current pipeline and add in components to achive the full workflow of equation extraction as shown in Figure 2. As a next step, we aim to construct knowledge bases that can offer useful information about different components of the scientifc models based on the unified data model that we have strucutred in this stage.  
+<Figure>
+<img src="images/complete_equation_extraction.png">
+<figcaption>Figure 2. The complete workflow for equation extraction.</figcaption>
+</Figure>
 
 ##### Resource
 * [Link](https://github.com/UW-COSMOS/COSMOS-Parser) The code of parser that organizes and inserts the segmentations into a relational database.
