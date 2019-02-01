@@ -1,4 +1,4 @@
-knowledgeknowledge# ASKE Interim Report - UW Madison - COSMOS Project
+# ASKE Interim Report - UW Madison - COSMOS Project
 ### Organization/Date: UW - Madison, 02/01/2019
 ### PIs: Prof. Theodoros Rekatsinas, Prof. Shanan Peters, and Prof. Miron Livny
 
