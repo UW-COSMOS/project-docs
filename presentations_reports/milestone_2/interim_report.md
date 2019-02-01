@@ -32,7 +32,7 @@ There are four main computing infrastructure and software components in the DARP
 
 Combining these components provides a cross-disciplinary platform capable of accelerating the reproducibility and scalability of scientific research. It also provides an infrastructure for scientific model curation and knowlege base construction (Phase II COSMOS project objective). Below we describe the design and implementation of our prototype COSMOS system:
 
-<img src="images/cosmos_pipeline.png" alt="pipeline overview" width="800"/>
+<img src="images/cosmos_pipeline.png" alt="pipeline overview" width="900"/>
 
 ### Document Fetching, Storage and Processing System
 A key component of the infrastructure we are developing is an extension of the [GeoDeepDive](https://geodeepdive.org) document acquisition, storage, and processing system. This digital library and computing infrastructure, called **xDD**, is capable of supporting a wide range of activities that require information to be continuously located and extracted from published documents. Currently, xDD contains over 8.8 million documents, principally from journals and other serials, that have been published by a variety of open-access and commercial publishers. Documents in xDD span all domains of science and biomedicine and the library continues to grow by some 8K documents daily. As a result, xDD is currently the single largest source of published scientific information that can be leveraged by multiple, collaborating teams.
@@ -47,7 +47,7 @@ The distinguishing characteristics of the COSMOS xDD infrastructure are our abil
 
 Because access to a large collection of documents, and the computing capacity required to parse and extract information from them, is foundational to any activity that seeks to automate the utilization of published scientific information, we are well-positioned to succeed and to contribute to the success of other ASKE teams. For example, we are currently beginning collaboration with the TA2 EMMAA project by deploying elements of their current pipeline on our larger xDD and COSMOS system. The work of other ASKE team members that depends on access to the published literature may also benefit in ASKE Phase 2.
 
-#### Collection of Training Data and Annotations
+### Collection of Training Data and Annotations
 
 Due to the lack of flexible, open-source image tagging software oriented for the
 web, we developed an in-house system to collect, validate, and visualize training
@@ -73,7 +73,7 @@ the links between variables in an equation and in text. Further evolution of the
 rest of the model pipeline will include more seamless and automated integration
 of **image-tagger** to view various process endpoints.
 
-#### Table, Figure, and Equation Extraction
+### Table, Figure, and Equation Extraction
 <Figure>
 <img src="images/mmrcnn.png" width="1000">
 </Figure>
@@ -86,7 +86,7 @@ With the elements, their types, and their layout produced, we move to the third 
 
 Finally, we collect all elements and the information collected into an html document. These HTML documents are read into a queryable PostgreSQL database, conforming to the schema required for Fonduer model specification.
 
-#### Model Extraction
+### Model Extraction
 In this stage, we aim to organize and store the table, figure and equation segmentations obtained from the previous stage into a unified data model whose schema is shown below. This unified data model will serve as a critical cornerstone for future downstream machine learning application such as knowledge base construction and co-reference resolution.
 
 The major effort in this section is the development of a parser that takes the image segmentations of different document component as an input, utilizes tools of optical character recognition, and preserves the extracted components in persistent storage while maintaining the semantics of the document structure using the schema mentioned.
@@ -100,7 +100,7 @@ The major effort in this section is the development of a parser that takes the i
 ## Technical Overview
 *FOLLOWING THE GENERAL OUTLINE ABOVE, THIS IS WHERE WE NEED DETAILS OF ALGORITHMS AND PIPELINE WITH QUANTITATIVE/QUALITATIVE RESULTS*
 
-#### Table, Figure, and Equation Extraction
+### Table, Figure, and Equation Extraction
 
 Our extraction model is based on convolutional neural networks. The stages of our model are as follows:
 
@@ -111,7 +111,7 @@ Our extraction model is based on convolutional neural networks. The stages of ou
 5. Run optical character recognition (OCR) module over extracted regions
 6. Consolidate region coordinates, class, and extracted text into HTML file
 
-##### Proposal generation via grid algorithm
+#### Proposal generation via grid algorithm
 
 We begin the extraction pipeline by first producing region proposals. Early on we found that adapting the region proposal neural network from Faster-RCNN, which automatically detects regions of interest for scene images, does not suit the task of page element detection. The produced proposals often did not encapsulate a majority of any single element, and also would cross over into neighboring elements, which would create noise later in the OCR stage of the pipeline.
 
@@ -131,11 +131,11 @@ In the second pass, the hash table is used to merge groups. Again, breadth first
 
 Finally, we take each group's bounding box to obtain the connected component. We filter these components based on a minimum size. Then for each cell, we produce a bounding box over the left, top, bottom, and rightmost components in the connected components set. This is our final region proposal for the cell. For each cell, we write its updated region proposal to disk.
 
-##### Preprocessing of image
+#### Preprocessing of image
 
 After proposals have been generated, we preprocess each image to fit the input dimensions of our backbone residual neural network (resnet). We set the input to our resnet to accept images of size $1920 X 1920$, so for each image we pad each size until they fit those dimensions.
 
-##### Feature extraction
+#### Feature extraction
 
 We now perform feature extraction over our input images. For feature extraction we use a residual neural network (Resnet), which is a type of convolutional neural network (CNN) designed to better approximate the input-output mapping better than other CNNs.
 
@@ -144,7 +144,7 @@ The task of feature extraction is finding a lower dimensional, more meaningful r
 We utilize Resnet101, which is a 101 layer Resnet. We initialize the network with weights trained on ImageNet. While ImageNet does not contain any images of documents, its initialization is a good starting point. Training the Resnet from scratch would require an order of magnitude more images than we have available.
 
 
-##### Proposal Classifier
+#### Proposal Classifier
 
 At this point, we have produced a convolutional feature map of the entire input image, as well as the region proposals. We now want to classify each proposal. To do so, we first must map the convolutional features from the entire image to the specific area the region proposes. We utilize the ROI Align method.
 
@@ -156,22 +156,22 @@ We now feed the mapped $H x W$ feature map into a classification neural net, whi
 
 Deviating from other RCNN frameworks, we do not perform bounding box offset regression over our proposal. We found that the region proposals are accurately proposed, and the bounding box regression would just add a little noise that potentially violates the whitespace boundary divisions of the proposal sections.
 
-##### Training the neural network
+#### Training the neural network
 
 We train the entire network from end to end. We use the Adam optimizer and heavily utilize L2 regularization. We also utilize dropout. We address the large class imbalance (for example, there is much more body text than any other class) by forcing each class to be sampled equally during training.
 
 Our collected dataset consists of 2000 training images. Furthermore, we augment our dataset with 2417 images annotated in the ICDAR POD 2017 competition. These images are only annotated with tables, equations, and figures. Because we are primarily concerned with training our classification network and not automatically producing region proposals, the lack of annotations of other classes in those images does not affect the training. We only train our network on the regions of interests for which there is a matching ground truth box for that image.
 
-##### Final steps
+#### Final steps
 
 The class and region of interests are written to an intermediate XML file, which are then fed into a specified OCR engine (described below).
 
-##### Evaluation and Performance
+#### Evaluation and Performance
 *ideally this includes qualitative examples (images) and estimates of **recall and precision**. NB: Shanan and Daven can help generate these estimates once we have output in annotation system.*
 
-#### Model Extraction
+### Model Extraction
 
-##### The parsing pipeline, the bridge between Cosmos and Fonduer
+#### The parsing pipeline, the bridge between Cosmos and Fonduer
 
 As the first step of bringing segmentations into a unified data format that preserves the semantic structure of a document, we utilize the pixels coordinates of each segmentations and reconstruct the extracted components into an HTML file as shown below.
 ```html
@@ -214,18 +214,13 @@ We will extend our current pipeline and add in components to achieve the full wo
 <figcaption>Figure 2. The complete workflow for equation extraction.</figcaption>
 </Figure>
 
-##### Resource
+#### Resources
 * [Link](https://github.com/UW-COSMOS/COSMOS-Parser) The code of parser that organizes and inserts the segmentations into a relational database.
 * [Link](https://github.com/guillaumegenthial/im2latex) The implementation we used for converting image of equation to latex code.
 * [Link](https://github.com/UW-COSMOS/latex-parser/blob/master/Equation%20Extraction%20Workflow.ipynb) An example of the equation extraction workflow.
 
-##### Evaluation and Performance
-The current xDD pipelines regularly utilize on the order of 5,000 CPU hours per day on CHTC. This utilization represents the 'steady-state' CPU requirement of xDD, including only the running of the daily fetched documents through the standard (OCR, coreNLP) pipelines.  Past sprints have pushed xDD CHTC usage over 50,000 CPU hours utilized in a day, and it is not uncommon for CHTC to provide upwards of 100,000 hours of CPU to a user in a day.
-
-Early experiments with a prior segmentation model are positive, with the infrastructure easily supporting simultaneous application of the model to thousands of documents in un-optimized CPU-only trial runs. Initial tests suggest that this version of the segmentation process requires on the order of one CPU minute per page processed. With a an average of around 12 pages per document, this corresponds to an overall throughput of 5 documents per CPU-hour. Because CHTC is a shared resource, it is difficult to predict daily availability and usage, but historical results indicate that a daily document throughputs of 25,000-100,000 documents should be expected. Both internal (code-level) and external (CHTC resource request) optimization is expected to improve overall throughput.
-
-#### xDD infrastructure
-##### Document fetching and storing
+### xDD infrastructure
+#### Document fetching and storing
 Enabled by project-specific agreements with publishers, negotiated by University of Wisconsin Libraries, xDD acquires and stores PDF versions of a large corpus of academic literature. Each agreement is negotiated to permit key functionality, notably the ability to securely store copies of published documents (PDFs) and bibliographic metadata for internal processing. Outside users have access to full bibliographic citation and DOI information, with ULRs directing to the content on the publisher’s own platforms. As per our license agreements, data products sourced from the original PDFs, described below, are provided to users, and form the basis of user-directed research projects.
 
 Data enters the xDD Infrastructure via the fetching process on a secure storage machine. This is a two-step process. First, the bibliographical metadata (including URLs to the PDF document) from publishers is downloaded, either through publisher-provided means (files, API) or via a third party system (such as CrossRef (https://crossref.org)). Second, a PDF document fetcher read this data back out using a separate process, downloading the documents from the stored URL, and stores the PDF (along with a JSON dump of the metadata) to the local file system, backed up nightly.
@@ -242,7 +237,7 @@ Although exact document acquisition allowances and interfaces vary between publi
 
 The xDD infrastructure also supports secondary document collections, which are stored and processed alongside the primary corpus but accessible only to specific researchers. Use cases for these auxillary corpuses include researchers who have their own data they wish to be processed using the xDD processing pipelines ("bring-your-own-data" model) or corpuses with fundamentally different document structures (e.g the complete set of PubMed abstracts).
 
-##### Document processing
+#### Document processing
 The computational backbone of xDD is UW-Madison's Center for High-Throughput Computing ([CHTC](https://chtc.cs.wisc.edu)), utilizing the HTCondor scheduling software (http://research.cs.wisc.edu/htcondor/). CHTC provides a large number of shared computing resources to researchers, with thousands of computing nodes serving up millions of hours of CPU time each year to hundreds of different projects. The high-throughput computing model is one in which the primary goal is maximizing overall throughput of a collection of tasks, each of which is computationally independent. The document processing requirements of xDD perfectly fits the model: applying a set of processing tools (Stanford's CoreNLP, a segmentation model, OCR) to a huge collection of documents results in millions of decoupled independent computing tasks. The integration between XDD and CHTC strives to:
 
 1. Support rapid deployment of new tools against the corpus.
@@ -258,7 +253,7 @@ The primary goal of supporting rapid deployment of new tools against the corpus 
 
 The implementation is designed to be flexible, allowing a wide variety of tasks to be defined and run (examples: running custom font-recognition scripts on all documents that have already been OCRed within the system, or applying a segmentation model to a relevant subset of earth science PDFs). CHTC and the HTCondor software allow a wide variety of critical job configurations, including Docker/singularity support, enforcing the directories be encrypted (so that the PDFs are never outside of the job while running on CHTC), and workflow automation.
 
-##### Hardware + uses
+#### Hardware and Uses
 
 The xDD document storage and acquisition system is comprised of six dedicated machines that serve the following roles:
 
@@ -284,8 +279,10 @@ The xDD system is connected to COSMOS ASKE infrastructure, which is comprised pr
 |---|---|---|---|---|---|
 | Intel(R) Xeon(R) Gold 6148 CPU | 160  | 2.40GHz | 512GB  | 1.5TB SSD, 1.5TB HDD  | - |
 
-##### Throughput/scalability
-Scalability in xDD is accomplished by both scaling the primary data storage components (mongoDB, ElasticSearch) horizontally and by relying on the immense resources of CHTC for computing power.
+#### Throughput and Performance
+The current xDD pipelines regularly utilize on the order of 5,000 CPU hours per day on CHTC. This utilization represents the 'steady-state' CPU requirement of xDD, including only the running of the daily fetched documents through the standard (OCR, coreNLP) pipelines.  Past sprints have pushed xDD CHTC usage over 50,000 CPU hours utilized in a day, and it is not uncommon for CHTC to provide upwards of 100,000 hours of CPU to a user in a day.
+
+Early experiments with a prior segmentation model are positive, with the infrastructure easily supporting simultaneous application of the model to thousands of documents in un-optimized CPU-only trial runs. Initial tests suggest that this version of the segmentation process requires on the order of one CPU minute per page processed. With a an average of around 12 pages per document, this corresponds to an overall throughput of 5 documents per CPU-hour. Because CHTC is a shared resource, it is difficult to predict daily availability and usage, but historical results indicate that a daily document throughputs of 25,000-100,000 documents should be expected. Both internal (code-level) and external (CHTC resource request) optimization is expected to improve overall throughput.
 
 ### Conclusions and Next Steps
 
