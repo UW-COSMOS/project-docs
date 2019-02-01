@@ -11,5 +11,4 @@ cd "${report:h}"
 # Have to run through html the way images are produced
 
 cat "$fn" \
-| pandoc -f markdown -t html --mathjax \
-| pandoc --pdf-engine=xelatex -V geometry:margin=1in -f html -o "$outfile"
+| pandoc -f markdown -V geometry:margin=1in -o "$outfile"

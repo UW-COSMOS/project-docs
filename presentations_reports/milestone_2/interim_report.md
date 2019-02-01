@@ -1,5 +1,7 @@
 # ASKE Interim Report - UW Madison - COSMOS Project
+
 ### Organization/Date: UW - Madison, 02/01/2019
+
 ### PIs: Prof. Theodoros Rekatsinas, Prof. Shanan Peters, and Prof. Miron Livny
 
 # 1 The COSMOS Project
@@ -20,20 +22,26 @@ Below, we first describe the general nature of the problem and our multimodal ap
 ## 1.2 Objectives and Challenges
 Our primary objective is to automatically recognize and visually extract fine-grained components from heterogeneous publications that correspond to text blocks, equations, equation labels, figure, figure captions, tables, and table captures. An example of such components and the manually annotated segmentation is shown in Figure 1. This visual excerpt from a PDF was annotated with our in-house image tagging tool [[2]](#ref2) and contains body text blocks, equations, equation labels, a figure, and a figure caption.
 
-<p align ="center"><img src="images/annotated_doc.png" alt="annotated_doc" width="700"/></p>
+<p align ="center">
+![annotated_doc](images/annotated_doc.png)
+</p>
 <p align ="center"><b>Figure 1: A visual excerpt from a PDF with manual annotations using our image tagging tool. Such manual annotations are used to train the extractors used in the COSMOS system.</b></p>
 
 Beyond recognizing and visually extracting all these components, we want to preserve explicit associations with text-based information. For example, Equation (33), in Figure 1, contains the variable *I<sub>av</sub>*, which is described in plain language in the underlying body text element. Similarly, the lowest body text block contains call-outs to specific equations [(8)-(10) and (15)-(17)] which identify them as *radical producing and consumption reactions.* This text-derived semantic description of equations is required to understand the phenomena and contexts to which they apply. Table and figure elements have analogous properties, and fully understanding their contents usually requires incorporation of information from associated captions. Labels for figures and tables (e.g., Fig. 7, Table 1) also relate the content to more complete semantic descriptions in body text.
 
 Ultimately, text, tables, figures, and equations must be parsed, read, and explicitly related to one another in order to create a knowledge base that can used to inform scientific models. Here, we consider a knowledge to be a collection of relational tables, where each table corresponds to a relation in the knowledge base. All these tables are stored in a relational database backend. We discuss the schema of these tables for the COSMOS project later in the document. The next Figure, shows an example of equation and text-entity recognition and tuple extraction suitable for representation in a simple knowledge base.   
 
-<p align ="center"><img src="images/eq_kb.png" alt="kb_task" width="400"/></p>
+<p align ="center">
+![kb_task](images/eq_kb.png)
+</p>
 <p align ="center"><b>Figure 2: An example of using the visual segmentations to extract entries of (Equation Symbol, Description Term) relation in the COSMOS knowledge base.</b></p>
 
 #### Overview of Technical Challenges
 A major technical challenge in the COSMOS system is the enormous variability of scientific documents with respect to data representation and layouts. This makes it extremely challenging to access content and transform it into a representation that enables knowledge discovery. An example collection of heterogeneous documents is shown in Figure 3. As we discuss later, the methods we are developing in COSMOS are robust to this variability in formatting, quality, and representation of the documents. Specifically, we propose a combination of computer vision and natural language processing methods that can leverage multi-modal information available in the raw documents to obtain high quality results.
 
-<p align ="center"><img src="images/variety_example.png" alt="variety" width="1000"/></p>
+<p align ="center">
+![variety](images/variety_example.png)
+</p>
 <p align ="center"><b>Figure 3: Example PDFs with heterogeneous formats. As shown the documents range from noisy scanned PDfs to high-quality PDFs. Also elements, such as tables, show high variability with respect to their orientation and layout.</b></p>
 
 Another major challenge in the COSMOS system is that of scalability. We are observing an exponential increase in the number of available scientific documents for ingestion. The sheer amount of available data poses a significant challenge with respect to parallelization of computation and proper resource allocation. To address these issues the COSMOS systems adopts a microservices-based organization. Different microservices either communicate via REST APIs or produce and consume XML and HTML files whose elements are also persisted in a database backend. This approach not only allows us to build complex pipelines to process documents automatically, but also allows us to develop new microservices against the platform. In order to make this platform scalable, all microservices are integrated through asynchronous communication protocols by utilizing the xDD infrastructure, which gives us many benefits: It allows to do proper resource management, eliminates strong dependencies and makes the platform robust against single task failures. We discuss technical challenges associated with each component of COSMOS in more detail in Section 2, where we provide a technical description of each component.
@@ -51,7 +59,9 @@ We start with an overview of the COSMOS system and its main components. An overv
 
 Component 1 is responsible for collecting, storing, and managing the raw data used as input in the COSMOS system. This component comprises of several micro-services as we describe below. The next component of COSMOS, Component 2, provides a micro-service that enables us to manually annotate input documents. The data output by this component is crucial to evaluate the quality of the results provided by the COSMOS system and also to collect training data for the next two components of COSMOS. Components 3 and 4 of COSMOS rely on state-of-the-art machine learning models to achieve their corresponding tasks. The necessary training and testing data for these components are collected via Component 2.
 
-<p align ="center"><img src="images/cosmos_pipeline.png" alt="pipeline overview" width="1000"/></p>
+<p align ="center">
+![pipeline overview](images/cosmos_pipeline.png)
+</p>
 <p align ="center"><b>Figure 4: An overview of the COSMOS system and its connection to the xDD infrastructure. The document fetching, storage, and pre-processing component of COSMOS is already being used by the Harvard team (EMMAA) from TA 2</b></p>
 
 Combining these components provides a cross-disciplinary platform capable of accelerating the reproducibility and scalability of scientific research. It also provides an infrastructure for scientific model curation and knowledge base construction (Phase 2 objective of the COSMOS project). Below we describe the design and implementation of our prototype COSMOS system.
@@ -60,7 +70,9 @@ Combining these components provides a cross-disciplinary platform capable of acc
 #### Component 1: Document Fetching, Storage, and Processing System
 A key component of the infrastructure we are developing is an extension of the GeoDeepDive document acquisition, storage, and processing system [[3]](#ref3). This digital library and computing infrastructure, called **xDD**, is capable of supporting a wide range of activities that require information to be continuously located and extracted from published documents. Currently, xDD contains over 8.8 million documents, principally from journals and other serials, that have been published by a variety of open-access and commercial publishers. Documents in xDD span all domains of science and biomedicine and the library continues to grow by some 8K documents daily. As a result, xDD is currently the single largest source of published scientific information that can be leveraged by multiple, collaborating teams. A summary of the document acquisition trace in xDD is shown in Figure 5.
 
-<p align ="center"><img src="images/growth.png" alt="xdd_growth" width="800"/></p>
+<p align ="center">
+![xdd_growth](images/growth.png)
+</p>
 <p align ="center"><b>Figure 5: A summary of the document acquisition trace in xDD. xDD is being leveraged by the COSMOS project and the EMMAA project by the Harvard Team (TA 2).</b></p>
 
 The distinguishing characteristics of the COSMOS xDD infrastructure are our ability to:
@@ -74,7 +86,9 @@ Because access to a large collection of documents, and the computing capacity re
 #### Component 2: Collection of Training Data and Annotations
 Access to manually annotated data is critical to train the COSMOS system and to evaluate its performance. Due to the lack of flexible, open-source image tagging software oriented for the web, we developed an in-house system to collect, validate, and visualize training data for our models. The system is composed of two loosely-coupled components: (1) Image Tagger [[2]](#ref2), which is a *React*-based frontend component for displaying the location of tagged bounding boxes atop an image (here, a page of text), and (2) the Image Tagger API [[4]](#ref4) which is a webserver component that provides bounding boxes to Image Tagger and permits the collections of training data from the frontend into an SQLite database. Figure 6 shows screenshots of the functionalities provided by Image Tagger. Both Image Tagger and the Image Tagger API are open-source and extensible software components that are useful both within and beyond the model pipeline discussed here.
 
-<p align ="center"><img src="images/image_tagger.png" alt="image_tagger" width="800"/></p>
+<p align ="center">
+![image_tagger](images/image_tagger.png)
+</p>
 <p align ="center"><b>Figure 6: An overview of the different functionalities supported by the COSMOS Image Tagger.</b></p>
 
 
@@ -87,7 +101,9 @@ To train models for integrating equation data, the next milestone will expand Im
 #### Component 3: Visual Extraction of Tables, Figures, and Equations
 This component is responsible for processing the PDFs collected from Component 1 and converting the raw PDF in an HTML representation with fine-grained information about different elements of the raw input PDF. These elements correspond to the classes described above, i.e., text components, tables, figures, equations, section headers, etc. In addition to the visual segment that corresponds to each identified element the HTML representation of a raw PDF extracted from this component contains any text-based information contained in these elements. For example, for a figure that contains a plot we not only extract the image corresponding to the figure but also the text information in the axis of the plot or the plot's legend. All this information together with the image corresponding to the figure are stored in the final HTML output. To construct the desired HTML output we combine techniques from *object detection* in image data and *optical character recognition* (OCR). The final HTML representation can be used for knowledge discovery as it is agnostic to formatting and layout variations of input PDFs. An overview of Component 3 is shown in Figure 7. We briefly describe each part of our Component 3.
 
-<p align ="center"><img src="images/visual_extraction.png" alt="visual_extraction" width="800"/></p>
+<p align ="center">
+![visual_extraction](images/visual_extraction.png)
+</p>
 <p align ="center"><b>Figure 7: An overview of how object detection is combined with OCR to convert a raw PDF into an HTML representation that can be used for knowledge discovery. Object detection and OCR are executed in parallel for each page of a raw PDF.</b></p>
 
 As shown in Figure 3, each PDF is split into a collection of images, where each image corresponds to one page of the raw PDF. This pre-processing step is performed by Component 1 of the COSMOS system. Given these images, we first detect objects of interest in them, visually extract these objects, and perform OCR to extract any contained text. For the object detection step, we adopt a popular model from the computer vision community, Faster-RCNN (F-RCNN) [[5]](#ref5). Primarily used for identifying 3D objects in scene images, Faster-RCNN uses specialized convolutional neural networks to first output many regions of interests within a scene, and then classifies each region of interest. Our adaptation of this model solves the issue of domain transfer; while the out-of-box model is built to handle 3D, densely populated images, our adaptation specifically handles 2D, sparse images [[6]](#ref6). We identify that the core problem with the original model is that it is unable to produce accurate bounding box predictions over our documents (as we demonstrate in Section 2). To mitigate this issue, we replace the regions of interest that the neural network proposes and instead use a grid proposal system. Because we know that 2D documents are typeset and regular, we utilize the fact that white space is used as visual separators to divide the papers into a grid. For each cell in the grid, we find all connected pixel regions, then draw a bounding box over the boundary connected regions [[7]](#ref7). We then project the F-RCNN proposals onto the grid-based proposal to obtain labels such as body text, equations, tables, etc.
@@ -100,17 +116,22 @@ Finally, we collect all elements and the information collected into an html docu
 
 The last component of the COSMOS system is responsible for ingesting the HTML documents produced by Component 3 and aims to organize and store the text, table, figure, and equation information for each PDF into a unified data model that can be used by our Fonduer Knowledge Based Construction (KBC) engine [[11,12]](#ref11). For our task we have extended the initial Fonduer data model to accommodate equations. An overview is shown in Figure 8.
 
-<p align ="center"><img src="images/data_model.png" alt="data model" width="600"/></p>
+<p align ="center">
+![data_model](images/data_model.png)
+</p>
 <p align ="center"><b>Figure 8: The schema of the extended Fonduer model used to represent PDFs containing text, tables, figures, and equations.</b></p>
 
 All HTML files generated by Component 3 are parsed into Fonduer's data model via a specialized parser that we have developed [[13]](#ref13). An example of an input HTML file and a snippet of the data base generated after parsing these HTML files are shown in Figure 9.
 
-<p align ="center"><img src="images/fonduer_db.png" alt="fonduer_db"/></p>
+<p align ="center">
+![fonduer_db](images/fonduer_db.png)</p>
 <p align ="center"><b>Figure 9: An example of how PDF files are stored in Fonduer's data model. The resulting representation is agnostic to PDF variability and ready to consumed by knowledge discovery applications.</b></p>
 
 Given the data representation presented above, the next step of Component 4 is to perform cross-reference resolution for the extracted PDF elements, i.e., identify parts of text such as noun phrases that refer to entities associated with the extracted tables, equations, and figures. In Phase 1, we focus on solving the problem of cross-reference resolution for equations. Figure 10 shows an overview of the approach we follow to extract model components such as variables from equations and construct a knowledge base as the one shown in Figure 2.
 
-<p align ="center"><img src="images/complete_equation_extraction.png" alt="eq_extraction"/></p>
+<p align ="center">
+![eq_extraction](images/complete_equation_extraction.png)
+</p>
 <p align ="center"><b>Figure 10: An overview of the COSMOS service for extracting knowledge from equations.</b></p>
 
 Our pipeline for extracting model components from equations proceeds in the following steps: (1) Each equation is associated with an image and a latex extraction provided by Component 3. (2) Given this as input our service parses the latex code into an abstract syntax tree and uses that tree to generate a set of candidate symbols that correspond to variables which describe scientific quantities. Notice, that the abstract syntax tree also encodes how these different quantities are related (i.e., it encodes the mathematical relations between the identified variables). We provide an example in this Jupyter Notebook [[14]](#ref14) (3) The candidate symbols that correspond to quantities of interest are given as input to a disambiguation engine that matches some of these candidate quantities to text-spans in the text parts of the input PDF. For now, we utilize the spatial information encoded in the HTML representation of a PDF and focus on text spans that are in close proximity with the equation from which the candidate quantities are extracted. We plan to relax this assumption. The output of this step is a set of symbols that correspond to scientific quantities (entities, constants, etc) references in the text of a PDF. (4) The final step is to solve a relation extraction problem with our Fonduer engine. Given a text span that corresponds to the symbol of a scientific quantity we identify and extract a text span that corresponds to a noun phrase that describes this quantity. The extracted relation instances are stored in a separate database table as shown in Figure 10. By the end of Phase 1, we plan to extend this pipeline to tables and figures.
@@ -221,7 +242,7 @@ As the first step of bringing segmentations into a unified data format that pres
       <img src="img/10.1080_00103620600561071.pdf-0004/Equation1.png">
       <div class="hocr" data-coordinates="592 1347 814 1429"></div>
     </div>
-   </body>   
+   </body>
 </html>
 ```
 
@@ -234,7 +255,7 @@ Lastly, our parser will take the HTML file and the output from the OCR engines a
 #### Next step
 We will extend our current pipeline and add in components to achieve the full workflow of equation extraction as shown in Figure 2. As a next step, we aim to construct knowledge bases that can offer useful information about different components of the scientific models based on the unified data model that we have structured in this stage.  
 <Figure>
-<img src="images/complete_equation_extraction.png">
+![img](images/complete_equation_extraction.png)
 <figcaption>Figure 2. The complete workflow for equation extraction.</figcaption>
 </Figure>
 
@@ -324,3 +345,4 @@ Early experiments with a prior segmentation model are positive, with the infrast
 #### <a id="ref12"></a> [12] Fonduer Repository [https://github.com/HazyResearch/fonduer](https://github.com/HazyResearch/fonduer)
 #### <a id="ref13"></a> [13] HTML to Fonduer data model parser  [https://github.com/UW-COSMOS/COSMOS-Parser](https://github.com/UW-COSMOS/COSMOS-Parser)
 #### <a id="ref14"></a> [14] Candidate variable generation from scientific equations [Jupyter Notebook](https://github.com/UW-COSMOS/latex-parser/blob/master/Equation%20Extraction%20Workflow.ipynb)
+
