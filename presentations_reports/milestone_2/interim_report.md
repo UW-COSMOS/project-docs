@@ -59,9 +59,11 @@ is a webserver component that provides bounding boxes to **image-tagger** and
 allows the saving of new training data from the frontend into a SQLite database
 for incorporation into model implementations. Both **image-tagger** and
 **image-tagger-api** are open-source and extensible software components that are
-useful bot within and beyond the model pipeline discussed here.
+useful both within and beyond the model pipeline discussed here.
 
-In addition to saving and validating training data, the **image-tagger** frontend
+To date, we have collected annotations for 2,079 pages from a random collection of xDD documents that mention the terms "model", "equation" and "total organic carbon" (a common measurement used to characterize sediment in many different contexts). Within these 2,079 pages we have collected 19,417 bounding boxes and labels. Of these, 5,674 (29%) are body text, 2,990 (15%) are text section headers, 1,306 (7%) are figures, 1,123 (6%) are equations, and 782 (4%) are tables. Table/figure captions, references and other elements constitute the remaining 39% of the labels acquired thus far.
+
+In addition to allowing us to generate and validate training data, the **image-tagger** frontend
 supports the visualization of arbitrary bounding boxes atop a page and forms
 the core of a system for visualizing output from the model pipeline. To this end,
 a modified **image-tagger-api** serves model output in a "View" mode, allowing
