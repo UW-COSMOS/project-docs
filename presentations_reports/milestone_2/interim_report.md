@@ -20,8 +20,8 @@ Below, we first describe the general nature of the problem and our multimodal ap
 ## 1.2 Objectives and Challenges
 Our primary objective is to automatically recognize and visually extract fine-grained components from heterogeneous publications that correspond to text blocks, equations, equation labels, figure, figure captions, tables, and table captures. An example of such components and the manually annotated segmentation is shown in Figure 1. This visual excerpt from a PDF was annotated with our in-house image taggging tool [[1]](#ref1) and contains body text blocks, equations, equation labels, a figure, and a figure caption.
 
-<center><img src="images/annotated_doc.png" alt="annotated_doc" width="700"/></center>
-<center><b>Figure 1: A visual excerpt from a PDF with manual annotations using our image tagging tool. Such manual annotations are used to train the extractors used in the COSMOS system.</b></center>
+<p align ="center"><img src="images/annotated_doc.png" alt="annotated_doc" width="700"/></p>
+<p align ="center"><b>Figure 1: A visual excerpt from a PDF with manual annotations using our image tagging tool. Such manual annotations are used to train the extractors used in the COSMOS system.</b></p>
 
 Beyond recognizing and visually extracting all these components, we want to preserve explicit associations with text-based information. For example, Equation (33), in the above Figure, contains the variable *I<sub>av</sub>*, which is described in plain language in the underlying body text element. Similarly, the lowest body text block contains call-outs to specific equations [(8)-(10) and (15)-(17)] which identify them as *radical producing and consumption reactions.* This text-derived semantic description of equations is required to understand the phenomena and contexts to which they apply. Table and figure elements have analogous properties, and fully understanding their contents usually requires incorporation of information from associated captions. Labels for figures and tables (e.g., Fig. 7, Table 1) also relate the content to more complete semantic descriptions in body text. 
 
