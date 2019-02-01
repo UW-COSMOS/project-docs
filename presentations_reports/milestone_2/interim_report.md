@@ -1,13 +1,13 @@
 # Design and implementation of model equation and table/figure extraction methods
 ## Introduction
-The development, refinement, and assessment of scientific models that describe natural phenomena depends heavily on empiricial and experimental records that are most commonly described in the text, tables and figures of scientific publications. Further, the theoretical underpinnings of models and key model components are also commonly expressed in the form of equations and accompanying text-based descriptions thereof. Locating and assembling all of the information relevant to a given scientific model and undestanding it at a level that is sufficient to incoporate it into model parameterization and/or assessment is a major barrier to scientific progress.
+The development, refinement, and assessment of scientific models that describe natural phenomena depends heavily on empirical and experimental data and observations reported in the text, tables and figures of scientific publications. The theoretical underpinnings of models and key model components are also commonly expressed in the form of equations and accompanying text-based descriptions. The ability to locate and assemble specific data and information relevant to a given scientific model from across hundreds, thousands, or even millions of publications, and do so in a way that keeps up-to-date as new publications are produced, is a major barrier to scientific progress.
 
-Here we provide an interim report on the design and implementation of our prototype system for automatically locating and extracting from the published literature data and information pertinent to scientific models. Two primary tasks constituted the focus of this project milestone:
+Here we provide an interim report on the design and implementation of our prototype system for automatically locating and extracting from the published literature data and information pertinent to scientific models. Two primary tasks constituted the focus of this TA1 project milestone:
 
 1. Model equation extraction from PDFs
 2. Table/figure extraction from PDFs
 
-Both of these tasks require the development and deployment of methods to automatically visually segment, classify, and represent heterogeneous elements (i.e., equations, tables, figures, captions, body text blocks) within PDF documents from multiple publishers in a way that maintains contextual relationships to text-based information. Extracted equation, table, and figure elements and text must then be represented in a way that can be used in inference steps (i.e., automated knowledge base construction). We focus functionality on PDF input because the majority of published data and information in many domains of science, particularly those with field-based observational data, are available primariy or exclusively in PDF formats.
+Both of these tasks require the development and deployment of methods to automatically visually segment, classify, and represent heterogeneous elements (i.e., equations, tables, figures, captions, body text blocks) within PDF documents from multiple publishers in a way that maintains contextual relationships to text-based information. Extracted equation, table, and figure elements and text must then be represented in a way that can be used in inference steps (i.e., automated knowledge base construction). We focus functionality on PDF input because the majority of published data and information in many domains of science, particularly those with field-based observational data, are available primarily or exclusively in PDF formats.
 
 Below, we first describe the general nature of the problem and our multimodal approach. Next, we document the software tools that we are developing and/or modifying to address the problem. We then provide initial quantitative results describing the recall and precision of equation, table, and figure element extraction from full-text PDFs from multiple different commercial and open-access sources. The performance of our code and workflow and our ability to scale to multiple millions of documents in xDD infrastructure are also preliminarily assessed.
 
@@ -23,53 +23,53 @@ Ultimately, text, tables, figures, and equations must be parsed, read and explic
 <img src="images/eq_kb.png" alt="kb_task" width="400"/>
 
 ## Executive Summary: Infrastructure and Software Components
-There are three main computing infrastructure and software components in the DARPA TA1 COSMOS project:
+There are four main computing infrastructure and software components in the DARPA TA1 COSMOS project:
 
 1. Document fetching, storage, and pre-processing systems
 2. Document annotation and training data acquisition
-2. Document segmentation and segment classification
-3. Fonduer-based model extraction
+3. Document segmentation and segment classification
+4. Fonduer-based model extraction
 
-The combination of these three components provides a cross-disciplinary platform for accelerating the reproducibility and scalability of key elements of scientific research and provides an infrastructure for scientific model curation and construction (Phase II COSMOS project objective). Below we describe the design and implementation of our prototype COSMOS system:
+Combining these components provides a cross-disciplinary platform capable of accelerating the reproducibility and scalability of scientific research. It also provides an infrastructure for scientific model curation and knowlege base construction (Phase II COSMOS project objective). Below we describe the design and implementation of our prototype COSMOS system:
 
 <img src="images/cosmos_pipeline.png" alt="pipeline overview" width="600"/>
 
 #### Document Fetching, Storage and Processing System
-A key component of the infrastructure we are developing is an extension of the [GeoDeepDive](https://geodeepdive.org) document acquisition, storage, and processing system. This digital library and computing infrastructure is capable of supporting a wide range of activities that require information to be located and extracted from published documents. Our extended version of GeoDeepDive, **xDD**, currently contains over 8.7 million documents, principally from journals and other serials, that have been published by a variety of open-access and commercial sources. The number of documents in xDD continues to grow by some 8K daily, making it the single largest source of published scientific information that can be leveraged by multiple, collaborating teams.
+A key component of the infrastructure we are developing is an extension of the [GeoDeepDive](https://geodeepdive.org) document acquisition, storage, and processing system. This digital library and computing infrastructure, called **xDD**, is capable of supporting a wide range of activities that require information to be located and extracted from published documents. xDD currently contains over 8.8 million documents, principally from journals and other serials, that have been published by a variety of open-access and commercial publishers. The number of documents in xDD spans all domains of science and biomedicine and continues to grow by some 8K daily, making it the single largest source of published scientific information that can be leveraged by multiple, collaborating teams.
 
 <img src="images/growth.png" alt="xdd_growth" width="800"/>
 
-Document access and computing capacity are foundational to any system that seeks to leverage published scientific information. xDD's strength in this regard has well-positioned our ASKE team to contribute to other ASKE team activities. We are currently collaborating with TA2 project XXXXXXX by deploying elements of their current pipeline on our larger corpus and document acquisition system.
+Because document access and computing capacity are foundational to any system that seeks to leverage published scientific information, the COSMOS ASKE TA1 project is well-positioned to contribute to other ASKE team activities. We are currently beginning collaboration with TA2 project EMMAA by deploying elements of their current pipeline on our larger corpus and automated document acquisition system. The work of other ASKE team members that intersect in the published literature may also benefit in Phase 2.
 
-The xDD document acquisition, storage, and the processing systems are integrated into the xDD system. This infrastructure is built to:
+COSMOS xDD infrastructure is built to:
 
 1. Acquire and store PDF documents from partnered publishers, along with high-quality bibliographical metadata
-2. Extract and store the text layer from the PDF documents, allowing real-time discovery of relevant literature.
-3. Process the stored documents, either via UW-Madison's Center for High Throughput Computing (CHTC) cluster or on machines purchased specifically for the COSMOS project
+2. Extract and store the text layer from the PDF documents, allowing rapid discovery of relevant literature.
+3. Process the stored documents, either via UW-Madison's Center for High Throughput Computing (CHTC) cluster or on machines purchased specifically for the COSMOS project.
 
-Metadata (including tracking how documents have been processed) is stored in a mongoDB instance, with a shadowed Elasticsearch instance running alongside to enable robust and scalable searching of the documents' metadata (including text contents when available).
+Metadata (including tracking how documents have been processed) is stored in a mongoDB instance, with a shadowed ElasticSearch instance running alongside to enable robust and scalable searching of the documents' metadata (including text contents, when available).
 
 ##### Document fetching and storage
-Through agreements with publishers, negotiated by University of Wisconsin Libraries, XDD is allowed to acquire and store PDF versions of an enormous corpus of academic literature. Each agreement is negotiated to permit key functionality, notably the ability to securely store copies of published documents (PDFs) and bibliographic metadata for internal processing. However, XDD does not permit any access to the stored documents themselves. Instead, XDD provides bibliographic citations and DOI links which point to the content on the publisher’s own platforms. The ability to access the original text on publisher platforms depends on a user’s subscription or institutional access. As per our license agreements, data products sourced from the original PDFs, described below, are provided to users, and form the basis of user-directed research projects.
+Enabled by project-specific agreements with publishers, negotiated by University of Wisconsin Libraries, xDD  acquires and stores PDF versions of a large corpus of academic literature. Each agreement is negotiated to permit key functionality, notably the ability to securely store copies of published documents (PDFs) and bibliographic metadata for internal processing. Outside users have access to full bibliographic citation and DOI information, with ULRs directing to the content on the publisher’s own platforms. As per our license agreements, data products sourced from the original PDFs, described below, are provided to users, and form the basis of user-directed research projects.
 
-Data enters the XDD Infrastructure via the fetching process on a secure storage machine. This is a two-step process. First, the bibliographical metadata (including URLs to the PDF document) from publishers is downloaded, either through publisher-provided means (files, API) or via a third party system (such as CrossRef (https://crossref.org)). Second, a PDF document fetcher read this data back out using a separate process, downloading the documents from the stored URL, and stores the PDF (along with a JSON dump of the metadata) to the local file system, backed up nightly.
+Data enters the xDD Infrastructure via the fetching process on a secure storage machine. This is a two-step process. First, the bibliographical metadata (including URLs to the PDF document) from publishers is downloaded, either through publisher-provided means (files, API) or via a third party system (such as CrossRef (https://crossref.org)). Second, a PDF document fetcher read this data back out using a separate process, downloading the documents from the stored URL, and stores the PDF (along with a JSON dump of the metadata) to the local file system, backed up nightly.
 
-Once a document is fetched and its pdf is stored, its metadata is pushed into a central mongodb repository. At this point, the text layer is extracted from the text via poppler's pdftotext (https://poppler.freedesktop.org/ ) tool. This text layer, like the PDF document itself, is never provided to XDD users fullstop. Instead, it is made searchable via Elasticsearch and is used as an initial starting point for some text-based processing pipelines within XDD (such as application of Stanford's CoreNLP or Google's word2vec).
+Once a document is fetched and its pdf is stored, its metadata is pushed into a central mongodb repository. At this point, the text layer is extracted from the text via poppler's pdftotext (https://poppler.freedesktop.org/ ) tool. The text is made searchable via ElasticSearch and is used as an initial starting point for some text-based processing pipelines within xDD (such as application of Stanford's CoreNLP or Google's word2vec).
 
-Although exact document acquisition allowances and interfaces vary between publishers, several criteria and objectives are shared between them. The software components of XDD's fetching system are designed to leave as little as possible being specialized for each publisher. Shared implementation includes:
+Although exact document acquisition allowances and interfaces vary between publishers, several criteria and objectives are shared between them. The software components of xDD's fetching system are designed to be general, with as little as possible being customized for each publisher. Shared implementation includes:
 
-  - Mechanisms for rate management. Desired weekly document download rates are set, and the acquisition mechanism speeds or slows the current rates appropriately to stay as close to the weekly target rates as possible without crossing any defined hard limits.
-  - Metadata acquisition via CrossRef. 
+  - Mechanisms for download rate management.
+  - Metadata acquisition via CrossRef.
   - Document download, storage, and data integrity components
   - Database interfacing
   - Prioritization
 
-The xDD infrastructure also supports secondary corpuses, which are stored alongside the primary corpus but are accessible only to specific researchers. Use cases for these auxillary corpuses include researchers who have their own data they wish to be processed using the xDD processing pipelines ("bring-your-own-data" model) or corpuses with fundamentally different document structures (e.g the complete set of PubMed abstracts).
+The xDD infrastructure also supports secondary document collections, which are stored and processed alongside the primary corpus but accessible only to specific researchers. Use cases for these auxillary corpuses include researchers who have their own data they wish to be processed using the xDD processing pipelines ("bring-your-own-data" model) or corpuses with fundamentally different document structures (e.g the complete set of PubMed abstracts).
 
 ##### Document processing
-The computational backbone of xDD is UW-Madison's Center for High-Throughput Computing ([CHTC](https://chtc.cs.wisc.edu)), utilizing the HTCondor scheduling software (http://research.cs.wisc.edu/htcondor/). CHTC provides a large number of shared computing resources to researchers, with thousands of computing nodes serving up millions of hours of CPU time each year to hundreds of different projects. The high-throughput computing model is one in which the primary goal is maximizing overall throughput of a collection of tasks, each of which is computationally independent. The document processing requirements of XDD perfectly fits the model: applying a set of processing tools (Stanford's CoreNLP, a segmentation model, OCR) to a huge collection of documents results in millions of decoupled independent computing tasks. The integration between XDD and CHTC strives to:
+The computational backbone of xDD is UW-Madison's Center for High-Throughput Computing ([CHTC](https://chtc.cs.wisc.edu)), utilizing the HTCondor scheduling software (http://research.cs.wisc.edu/htcondor/). CHTC provides a large number of shared computing resources to researchers, with thousands of computing nodes serving up millions of hours of CPU time each year to hundreds of different projects. The high-throughput computing model is one in which the primary goal is maximizing overall throughput of a collection of tasks, each of which is computationally independent. The document processing requirements of xDD perfectly fits the model: applying a set of processing tools (Stanford's CoreNLP, a segmentation model, OCR) to a huge collection of documents results in millions of decoupled independent computing tasks. The integration between XDD and CHTC strives to:
 
-1. Support rapid deployment of new tools against the corpus
+1. Support rapid deployment of new tools against the corpus.
 2. Convert the PDF documents into data usable for a variety of text/datamining (TDM) analyses.
 3. Provide a standardized set of useful TDM products.
 
@@ -84,13 +84,13 @@ The implementation is designed to be flexible, allowing a wide variety of tasks 
 
 ##### Hardware + uses
 
-The COSMOS/xDD infrastructure is comprised of 9 machines, broken down into the general roles of:
+In addition to the hardware that powers the xDD system, the ASKE COSMOS infrastructure is comprised of 9 machines, broken down into the general roles of:
 
 1. Data acquisition, storage, and backup
 2. Job submission interface into CHTC
 3. One machine for dedicated storage of processing output
 4. Two machines for database hosts.
-5. Three machines for COSMOS computations. 
+5. Three machines for COSMOS computations.
 
 ###### deepdivesubmit2000
 **Purpose:** Submit jobs to HTCondor, store HTCondor output
@@ -105,7 +105,7 @@ HTCondor
 | (`gdd-datastorage`, network mounted)  |   |  |   | 44TB  | 18TB |
 
 ###### gdd-datastorage
-**Purpose:** Storage for processed documents. 
+**Purpose:** Storage for processed documents.
 **Hardware:** 44TB (7TB used)
 
 | CPU  | Cores  | Speed  | RAM  | Disk  | Disk (used)  |
@@ -114,12 +114,12 @@ HTCondor
 
 
 ###### deepdive2000:
-**Purpose:** Secondary Elastic instance, gateway
+**Purpose:** Secondary ElasticSearch instance, gateway
 **Software:**
 nginx
 Elasticsearch, mongodb
 
-**Notes:** Primarily a secondary Elasticsearch node + gateway for services
+**Notes:** Primarily a secondary ElasticSearch node + gateway for services
 **Hardware:**
 
 | CPU  | Cores  | Speed  | RAM  | Disk  | Disk (used)  |
@@ -178,7 +178,7 @@ Borg - automated backup to Elsevier-backup
 
 
 ##### Throughput/scalability
-Scalability in xDD is accomplished by both scaling the primary data storage components (mongodb, Elasticsearch) horizontally and by relying on the immense resources of CHTC for computing power. With roughly 10,000 computing nodes available within CHTC, over a quarter million CPU hours are available to campus researchers each day. 
+Scalability in xDD is accomplished by both scaling the primary data storage components (mongodb, Elasticsearch) horizontally and by relying on the immense resources of CHTC for computing power. With roughly 10,000 computing nodes available within CHTC, over a quarter million CPU hours are available to campus researchers each day.
 
 #### Collection of Training Data and Annotations
 
@@ -211,8 +211,7 @@ of **image-tagger** to view various process endpoints.
 <img src="images/mmrcnn.png" width="1000">
 </Figure>
 
-Page element extraction is the task of taking as input a representation of a page and from that representation extracting information. Optical character recognition is one such extraction task: given an image representation of a page, output a stream of characters.
-A stream of characters, however, is inadequate for representing how scientific papers communicate key points: the layout of the paper, specifically with regard to figures, tables, and equations, are integral in the communication of abstract concepts. It follows that our task requires that given an image representation input, we output a representation that both communicates the content of the paper as well as the layout.
+Page element extraction is the task of taking as input a representation of a page and from that representation extracting information. Optical character recognition is one such extraction task: given an image representation of a page, output a stream of characters. A stream of characters, however, is inadequate for representing how scientific papers communicate key information: the layout of the paper, specifically with regard to the position of figures, tables, and equations relative to text, are integral. It follows that our task requires that given an image representation input, we output a representation that both communicates the text content of the paper as well as the layout.
 
 To do this, we build a system that first identifies the location of each important element on a page, decides what type that element is, then extracts the textual information from within that element. For the first two steps, we adapt a popular model from the computer vision community, Faster-RCNN. Primarily used for identifying 3D objects in scene images, Faster-RCNN uses specialized convolutional neural networks to first output many regions of interests within a scene, and then classifies each region of interest. Our adaptation of this model solves the issue of domain transfer; while the out of box model is built to handle 3D, densely populated images, our adaptation specifically handles 2D, sparse images. We identify that the core problem with the original model is that it's unable to produce accurate bounding box predictions over our documents. We replace the neural network that produces regions of interest and instead use a grid proposal system. Because we know that 2D documents are typeset and regular, we utilize the fact that white space is used as visual separators to divide the papers into a grid. For each cell in the grid, we find all connected pixel regions, then draw a bounding box over the boundary connected regions. We then pass these proposals into the F-RCNN classifier to obtain labels such as body text, equations, tables, etc.
 
@@ -253,7 +252,7 @@ We begin the extraction pipeline by first producing region proposals. Early on w
 
 We utilize the fact that scientific papers are generally divided into a grid like structure to motivate an algorithmic replacement for region proposals, which we call the grid proposal algorithm. Given a png image as input, the initial step is to first transform the $3 x N x M$ image into an $N x M$ binary matrix, where an element in the matrix is 1 if the corresponding pixel in the original image is not white, and 0 if it is.
 
-Given this binary matrix, we iterate over the matrix columnwise and find the top and bottom coordinates of all blocks consisting of only 0 and are of at least size $K x M$, where $K$ is an adjustable parameter (we set $K = 25$) and $M$ is the width of the image. The space in between each of these white space blocks are our initial rows.
+Given this binary matrix, we iterate over the matrix column-wise and find the top and bottom coordinates of all blocks consisting of only 0 and are of at least size $K x M$, where $K$ is an adjustable parameter (we set $K = 25$) and $M$ is the width of the image. The space in between each of these white space blocks are our initial rows.
 
 For each of these intial rows, we attempt to determine the number of columns $C$ within the row. We enumerate $C$ from 1 to 5, and check each of the column positions for an $H x W$ vertical block of whitespace, where $W$ is a set parameter (we set $W$ to 10) and $H$ is the height of the block. Each column position is the appropriate fraction of the row. For example, if $C=4$ we check if the whitespace block exists $\frac{1}{4}$, $\frac{1}{2}$, and $\frac{3}{4}$ of the way through the row. We then take the max $C$ that successfully partitions the row. We then divide the row into blocks according to the column separations.
 
@@ -275,7 +274,7 @@ After proposals have been generated, we preprocess each image to fit the input d
 
 We now perform feature extraction over our input images. For feature extraction we use a residual neural network (Resnet), which is a type of convolutional neural network (CNN) designed to better approximate the input-output mapping better than other CNNs.
 
-The task of feature extraction is finding a lower dimensional, more meaningful representation of the input that downstream tasks such as image classification and page element detection can utilize to better perform their tasks. Subsequently at each layer in our feature extraction CNN, we aim to learn the identity mapping $H(x) = x$. The simple intuition behind Resnet is that it's much easier for the internal layers to learn the function $F(x) = 0$, and then add the identity mapping afterward. Then, $H(x) = F(x) + x$. In practice, after a set amount of convolutional layers we simply add the input to the output of those set layers. In addition, Resnet makes use of batch normalization after each layer. Batch normalization normalizes the activations of each layer according the the activations' mean and standard deviation. It's not clear why batch normalization is effective theoretically, but empirically it has shown to 
+The task of feature extraction is finding a lower dimensional, more meaningful representation of the input that downstream tasks such as image classification and page element detection can utilize to better perform their tasks. Subsequently at each layer in our feature extraction CNN, we aim to learn the identity mapping $H(x) = x$. The simple intuition behind Resnet is that it's much easier for the internal layers to learn the function $F(x) = 0$, and then add the identity mapping afterward. Then, $H(x) = F(x) + x$. In practice, after a set amount of convolutional layers we simply add the input to the output of those set layers. In addition, Resnet makes use of batch normalization after each layer. Batch normalization normalizes the activations of each layer according the the activations' mean and standard deviation. It's not clear why batch normalization is effective theoretically, but empirically it has shown to
 
 We utilize Resnet101, which is a 101 layer Resnet. We initialize the network with weights trained on ImageNet. While ImageNet does not contain any images of documents, its initialization is a good starting point. Training the Resnet from scratch would require an order of magnitude more images than we have available.
 
@@ -360,7 +359,7 @@ We will extend our current pipeline and add in components to achive the full wor
 * [Link](https://github.com/UW-COSMOS/latex-parser/blob/master/Equation%20Extraction%20Workflow.ipynb) An example of the equation extraction workflow.
 
 ##### Evaluation and Performance
-The current xDD pipelines regularly utilize on the order of 5,000 CPU hours per day on CHTC. This utilization represents the 'steady-state' CPU requirement of xDD, including only the running of the daily fetched documents through the standard (OCR, coreNLP) pipelines.  Past sprints have pushed xDD CHTC usage over 50,000 CPU hours utilized in a day, and it is not uncommon for CHTC to provide upwards of 100,000 hours of CPU to a user in a day. 
+The current xDD pipelines regularly utilize on the order of 5,000 CPU hours per day on CHTC. This utilization represents the 'steady-state' CPU requirement of xDD, including only the running of the daily fetched documents through the standard (OCR, coreNLP) pipelines.  Past sprints have pushed xDD CHTC usage over 50,000 CPU hours utilized in a day, and it is not uncommon for CHTC to provide upwards of 100,000 hours of CPU to a user in a day.
 
 Early experiments with a prior segmentation model are positive, with the infrastructure easily supporting simultaneous application of the model to thousands of documents in un-optimized CPU-only trial runs. Initial tests suggest that this version of the segmentation process requires on the order of one CPU minute per page processed. With a an average of around 12 pages per document, this corresponds to an overall throughput of 5 documents per CPU-hour. Because CHTC is a shared resource, it is difficult to predict daily availability and usage, but historical results indicate that a daily document throughputs of 25,000-100,000 documents should be expected. Both internal (code-level) and external (CHTC resource request) optimization is expected to improve overall throughput.
 
