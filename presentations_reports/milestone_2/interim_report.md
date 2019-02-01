@@ -34,20 +34,18 @@ Combining these components provides a cross-disciplinary platform capable of acc
 
 <img src="images/cosmos_pipeline.png" alt="pipeline overview" width="800"/>
 
-#### Document Fetching, Storage and Processing System
-A key component of the infrastructure we are developing is an extension of the [GeoDeepDive](https://geodeepdive.org) document acquisition, storage, and processing system. This digital library and computing infrastructure, called **xDD**, is capable of supporting a wide range of activities that require information to be located and extracted from published documents. xDD currently contains over 8.8 million documents, principally from journals and other serials, that have been published by a variety of open-access and commercial publishers. The number of documents in xDD spans all domains of science and biomedicine and continues to grow by some 8K daily, making it the single largest source of published scientific information that can be leveraged by multiple, collaborating teams.
+### Document Fetching, Storage and Processing System
+A key component of the infrastructure we are developing is an extension of the [GeoDeepDive](https://geodeepdive.org) document acquisition, storage, and processing system. This digital library and computing infrastructure, called **xDD**, is capable of supporting a wide range of activities that require information to be continuously located and extracted from published documents. Currently, xDD contains over 8.8 million documents, principally from journals and other serials, that have been published by a variety of open-access and commercial publishers. Documents in xDD span all domains of science and biomedicine and the library continues to grow by some 8K documents daily. As a result, xDD is currently the single largest source of published scientific information that can be leveraged by multiple, collaborating teams.
 
 <img src="images/growth.png" alt="xdd_growth" width="800"/>
 
-Because document access and computing capacity are foundational to any system that seeks to leverage published scientific information, the COSMOS ASKE TA1 project is well-positioned to contribute to other ASKE team activities. We are currently beginning collaboration with TA2 project EMMAA by deploying elements of their current pipeline on our larger corpus and automated document acquisition system. The work of other ASKE team members that intersect in the published literature may also benefit in Phase 2.
+The distinguishing characteristics of the COSMOS xDD infrastructure are our ability to:
 
-COSMOS xDD infrastructure is built to:
+1. Continuously acquire and store PDF documents and bibliographic metadata from partnered publishers.
+2. Extract and index the text layer from the PDF documents, allowing rapid discovery of relevant literature.
+3. Rapidly process all stored documents via the over quarter million CPU hours that are available daily on UW-Madison's Center for High Throughput Computing (CHTC) cluster.
 
-1. Acquire and store PDF documents from partnered publishers, along with high-quality bibliographical metadata
-2. Extract and store the text layer from the PDF documents, allowing rapid discovery of relevant literature.
-3. Process the stored documents, either via UW-Madison's Center for High Throughput Computing (CHTC) cluster or on machines purchased specifically for the COSMOS project.
-
-Metadata (including tracking how documents have been processed) is stored in a mongoDB instance, with a shadowed ElasticSearch instance running alongside to enable robust and scalable searching of the documents' metadata (including text contents, when available).
+Because access to a large collection of documents, and the computing capacity required to parse and extract information from them, is foundational to any activity that seeks to automate the utilization of published scientific information, we are well-positioned to succeed and to contribute to the success of other ASKE teams. For example, we are currently beginning collaboration with the TA2 EMMAA project by deploying elements of their current pipeline on our larger xDD and COSMOS system. The work of other ASKE team members that depends on access to the published literature may also benefit in ASKE Phase 2.
 
 #### Collection of Training Data and Annotations
 
@@ -89,8 +87,6 @@ With the elements, their types, and their layout produced, we move to the third 
 Finally, we collect all elements and the information collected into an html document. These HTML documents are read into a queryable PostgreSQL database, conforming to the schema required for Fonduer model specification.
 
 #### Model Extraction
-Prompt:PAUL Fonduer model: the abstract of what you are doing, maybe one or two *key* visuals
-
 In this stage, we aim to organize and store the table, figure and equation segmentations obtained from the previous stage into a unified data model whose schema is shown below. This unified data model will serve as a critical cornerstone for future downstream machine learning application such as knowledge base construction and co-reference resolution.
 
 The major effort in this section is the development of a parser that takes the image segmentations of different document component as an input, utilizes tools of optical character recognition, and preserves the extracted components in persistent storage while maintaining the semantics of the document structure using the schema mentioned.
@@ -123,7 +119,7 @@ We utilize the fact that scientific papers are generally divided into a grid lik
 
 Given this binary matrix, we iterate over the matrix column-wise and find the top and bottom coordinates of all blocks consisting of only 0 and are of at least size $K x M$, where $K$ is an adjustable parameter (we set $K = 25$) and $M$ is the width of the image. The space in between each of these white space blocks are our initial rows.
 
-For each of these intial rows, we attempt to determine the number of columns $C$ within the row. We enumerate $C$ from 1 to 5, and check each of the column positions for an $H x W$ vertical block of whitespace, where $W$ is a set parameter (we set $W$ to 10) and $H$ is the height of the block. Each column position is the appropriate fraction of the row. For example, if $C=4$ we check if the whitespace block exists $\frac{1}{4}$, $\frac{1}{2}$, and $\frac{3}{4}$ of the way through the row. We then take the max $C$ that successfully partitions the row. We then divide the row into blocks according to the column separations.
+For each of these initial rows, we attempt to determine the number of columns $C$ within the row. We enumerate $C$ from 1 to 5, and check each of the column positions for an $H x W$ vertical block of whitespace, where $W$ is a set parameter (we set $W$ to 10) and $H$ is the height of the block. Each column position is the appropriate fraction of the row. For example, if $C=4$ we check if the whitespace block exists $\frac{1}{4}$, $\frac{1}{2}$, and $\frac{3}{4}$ of the way through the row. We then take the max $C$ that successfully partitions the row. We then divide the row into blocks according to the column separations.
 
 For each block, we run the row division procedure once more, with a slightly more fine grained whitespace partition. This is our final grid.
 
@@ -289,7 +285,7 @@ The xDD system is connected to COSMOS ASKE infrastructure, which is comprised pr
 | Intel(R) Xeon(R) Gold 6148 CPU | 160  | 2.40GHz | 512GB  | 1.5TB SSD, 1.5TB HDD  | - |
 
 ##### Throughput/scalability
-Scalability in xDD is accomplished by both scaling the primary data storage components (mongoDB, ElasticSearch) horizontally and by relying on the immense resources of CHTC for computing power. With roughly 10,000 computing nodes available within CHTC, over a quarter million CPU hours are available to campus researchers each day.
+Scalability in xDD is accomplished by both scaling the primary data storage components (mongoDB, ElasticSearch) horizontally and by relying on the immense resources of CHTC for computing power.
 
 ### Conclusions and Next Steps
 
