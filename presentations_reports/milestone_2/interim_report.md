@@ -98,7 +98,7 @@ Finally, we collect all elements and the information collected into an html docu
 
 #### Component 4: Model Extraction
 
-The last component of the COSMOS system is responsible for ingesting the HTML documents produced by Component 3 and aims to organize and store the text, table, figure, and equation information for each PDF into a unified data model that can be used by our Fonduer Knowledge Based Construction (KBC) engine [[11,12]](#ref11). For our task we have extended the initial Fonduer data model to accommodate equations. An overview is shown in Figure 8.
+The last component of the COSMOS system is responsible for ingesting the HTML documents produced by Component 3 and aims to organize and store the text, table, figure, and equation information for each PDF into a unified data model that can be used by our Fonduer Knowledge Base Construction (KBC) engine [[11,12]](#ref11). For our task we have extended the initial Fonduer data model to accommodate equations. An overview is shown in Figure 8.
 
 <p align ="center"><img src="images/data_model.png" alt="data model" width="600"/></p>
 <p align ="center"><b>Figure 8: The schema of the extended Fonduer model used to represent PDFs containing text, tables, figures, and equations.</b></p>
@@ -122,7 +122,6 @@ We have already initiated a collaboration with the TA2 EMMAA Team (PI Peter Sorg
 
 
 ## Technical Overview
-*FOLLOWING THE GENERAL OUTLINE ABOVE, THIS IS WHERE WE NEED DETAILS OF ALGORITHMS AND PIPELINE WITH QUANTITATIVE/QUALITATIVE RESULTS*
 
 ### Table, Figure, and Equation Extraction
 
@@ -302,11 +301,15 @@ The xDD system is connected to COSMOS ASKE infrastructure, which is comprised pr
 | Intel(R) Xeon(R) Gold 6148 CPU | 160  | 2.40GHz | 512GB  | 1.5TB SSD, 1.5TB HDD  | - |
 
 #### Throughput and Performance
-The current xDD pipelines regularly utilize on the order of 5,000 CPU hours per day on CHTC. This utilization represents the 'steady-state' CPU requirement of xDD, including only the running of the daily fetched documents through the standard (OCR, coreNLP) pipelines.  Past sprints have pushed xDD CHTC usage over 50,000 CPU hours utilized in a day, and it is not uncommon for CHTC to provide upwards of 100,000 hours of CPU to a user in a day.
+The current xDD pipelines regularly utilize on the order of 5,000 CPU hours per day on CHTC. This utilization represents the 'steady-state' CPU requirement of xDD, including only the running of the daily fetched documents through the standard (OCR, coreNLP) pipelines. Past sprints have pushed xDD CHTC usage over 50,000 CPU hours utilized in a day, and it is not uncommon for CHTC to provide upwards of 100,000 hours of CPU to a user in a day.
 
-Early experiments with a prior segmentation model are positive, with the infrastructure easily supporting simultaneous application of the model to thousands of documents in un-optimized CPU-only trial runs. Initial tests suggest that this version of the segmentation process requires on the order of one CPU minute per page processed. With a an average of around 12 pages per document, this corresponds to an overall throughput of 5 documents per CPU-hour. Because CHTC is a shared resource, it is difficult to predict daily availability and usage, but historical results indicate that a daily document throughputs of 25,000-100,000 documents should be expected. Both internal (code-level) and external (CHTC resource request) optimization is expected to improve overall throughput.
+Early experiments with a prior segmentation model are positive, with the infrastructure easily supporting simultaneous application of the model to thousands of documents in un-optimized CPU-only trial runs. Initial tests suggest that this version of the segmentation process requires on the order of one CPU minute per page processed. With a an average of around 12 pages per document, this corresponds to an overall throughput of 5 documents per CPU-hour. Because CHTC is a shared resource, it is difficult to predict daily availability and usage, but historical results indicate that daily document throughputs of 25,000-100,000 documents should be expected. Both internal (code-level) and external (CHTC resource request) optimization is expected to improve overall throughput.
 
 ### Conclusions and Next Steps
+
+We have described a prototype system, based on convolutional neural networks, to visually locate and extract equations, tables, figures, and text objects from heterogeneous PDF documents and then represent them in a unified data model that can be used by our Fonduer Knowledge Base Construction engine [[11,12]](#ref11). Preliminary results demonstrate the feasibility and scalability of this system. Our prototype is deployed on xDD infrastructure, which uniquely provides us instant access to more than 8.8 million PDFs from multiple commercial and open-access publishers, as well as a continuous stream of approximately 8K additional documents per day and the promise of new publisher access in the future. Computing capacity provided by xDD's deployment on the UW-Madison CHTC cluster will allows us to rapidly deploy and scale-up.
+
+ Our next steps involve finalizing our visual document processing pipeline and deploying it on xDD for continuous ingestion of  documents specifically relevant to the cGENIE model. Note that none of our fundamental components, including both xDD and our visual PDF segmentation and extraction pipeline, are domain-specific. Thus, cGENIE is serving only as test-bed for validating our methods and demonstrating an ability to close-the-loop and facilitate new scientific research in a complex domain of Earth systems science that depends on observational and experimental data as well as a theoretical understanding of multiple interacting biological and physical systems. Building and releasing barebones knowledge bases that contain multimodal information from ingested documents and supporting on-demand construction of such knowledge bases for specific scientific model applications is the task of our next project Milestone.
 
 ### References
 
