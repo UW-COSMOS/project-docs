@@ -20,4 +20,4 @@ Release of barebone-KB from ingested documents. Assessment and publication of sy
 Open-source release of table/figure methods and deployment in xDD for continuous ingestion of relevant input documents.
 
 ### 2. Construct Earth systems models KB containing model tables/figures.
-Release of barebone-KB (with figures and tables) from ingested documents. Assessment and publication.
+Release of barebone-KB (with figures and tables) from ingested documents.
