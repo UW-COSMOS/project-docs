@@ -3,7 +3,7 @@ Organization/Date: UW-Madison, 04/01/2019
 
 PIs: Prof. Theodoros Rekatsinas, Prof. Shanan Peters, and Prof. Miron Livny
 
-# 1 The COSMOS Project
+## 1 The COSMOS Project
 The goal of the UW-Madison COSMOS project is to develop a prototype knowledge base construction (KBC) system to automate key steps in the curation of scientific models from the scientific literature in an ongoing fashion as the scientific literature is produced. Here, we provide **a summary that outlines our accomplishments and challenges encountered during Phase 1**. We also provide an overview of the software and data products produced during Phase 1, with links to deliverables and documentation.
 
 There were two primary tasks in this milestone, each with two deliverables:
@@ -22,15 +22,15 @@ Open-source release of table/figure methods and deployment in xDD for continuous
 #### 2. Construct Earth systems models KB containing model tables/figures.
 Release of barebone-KB (with figures and tables) from ingested documents.
 
-# 2 COSMOS Project Executive Summary
-## 
+## 2 COSMOS Project Executive Summary
+### 
 
-# 3 COSMOS Pipeline Description
-## Infrastructure
+## 3 COSMOS Pipeline Description
+### Infrastructure
 
-## System Architecture
+### System Architecture
 
-## Data Prodcuts
+### Data Prodcuts
 
-# 4 Lessons Learned and Future Directions
+## 4 Lessons Learned and Future Directions
 
