@@ -8,16 +8,16 @@ The goal of the UW-Madison COSMOS project is to develop a prototype knowledge ba
 
 There were two primary tasks in this milestone, each with two deliverables:
 
-##  Task 1: Extraction of Model Equations from Publications
-### 1. Development and deployment of barebone KBC system for scientific model curation.
+###  Task 1: Extraction of Model Equations from Publications
+#### 1. Development and deployment of barebone KBC system for scientific model curation.
 Open-source release of KBC system and deployment on xDD for continuous ingestion of relevant input documents.
 
-### 2. Earth systems model KBC containing model specifications (equations).
+#### 2. Earth systems model KBC containing model specifications (equations).
 Release of barebone-KB from ingested documents. Assessment and publication of system.
 
-## Task 2: Extraction of Tables and Figures from Publications
-### 1. Refinement of code and deployment of table/figure extraction pipeline on xDD.
+### Task 2: Extraction of Tables and Figures from Publications
+#### 1. Refinement of code and deployment of table/figure extraction pipeline on xDD.
 Open-source release of table/figure methods and deployment in xDD for continuous ingestion of relevant input documents.
 
-### 2. Construct Earth systems models KB containing model tables/figures.
+#### 2. Construct Earth systems models KB containing model tables/figures.
 Release of barebone-KB (with figures and tables) from ingested documents.
