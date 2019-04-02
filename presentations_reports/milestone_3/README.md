@@ -59,7 +59,7 @@ COSMOS consists of 9 main modules, all outlined in https://github.com/UW-COSMOS/
 
 The input to the COSMOS system is a collection of PDF documents and the output is a collection of xml files and database tables that represent the extracted knowledge bases. A description of the final of our pipeline is provided in the demo README file here: https://github.com/UW-COSMOS/cosmos-demo. The order of the different modules in this last link reflects the order in which they are pipelined. The core elements of our extraction pipeline are also described in detail in the submitted ICCV manuscript (see PDF attached to Milestone Submission).
 
-## Pipeline performance:
+### Pipeline performance:
 Note that our pipeline has not yet been optimized for end-to-end runtime. In preliminary profiling, we have identified several performance bottlenecks (such as invoking Tesseract for OCR) that we aim to address in the immediate future. Our Attentive-RCNN currently only performs well on GPUs, one of the key motivations for our acquisition of two additional high-performance GPU systems to add to UW-COSMOS infrastructure.
 
 ## 4 Lessons Learned and Future Directions
