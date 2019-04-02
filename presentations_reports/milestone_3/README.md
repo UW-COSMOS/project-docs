@@ -89,4 +89,4 @@ Of course making progress on all aforementioned fronts requires that we make adv
 - https://www.nature.com/articles/d41586-019-00556-5
 - https://phys.org/news/2019-02-artificial-intelligence-boost-earth-science.html
 - https://www.nersc.gov/news-publications/nersc-news/science-news/2018/nersc-crd-researchers-showcase-deep-learning-for-high-energy-physics-at-chep/
-- https://www.nature.com/articles/d41586-018-03977-w). 
+- https://www.nature.com/articles/d41586-018-03977-w 
