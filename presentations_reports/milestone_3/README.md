@@ -67,7 +67,10 @@ One of the core challenges that we experienced during Phase 1 has to do with the
 A different fundamental challenge that we are observing in our pipelines is the sensitivity of deep learning models to distributional shift. Specifically, we are experiencing scenarios where during inference time, objects that we need to classify correspond to out-of-distribution inputs (i.e., inputs that were rare or not present in our training data). In such cases, it is well-known that deep learning models are brittle as they assign these unknown models to existing classes with very high-confidence (https://arxiv.org/abs/1706.02690). Such an example is shown in the following image, where a figure has been classified as equation. We plan to focus on these issues during Phase 2 enhancing our inference pipeline with out-of-distribution detectors. Notice that our structured prediction ML models for data cleaning can also help improve the quality of our results in this case.
 
 <p align ="center"><img src="images/classification_error.jpg" alt="classification error" width="400"/></p>
-<p align ="center"><b>Figure 1. Although we achieve very high overall precision and recall, out-of-distribution objects, such as the figure above, result in misclassifications. Additional context after our classification can help improve the quality of our extractions. We will address this issue and improve overal extraction and KB quality during Phase 2.</b></p>
+<p align ="center"><b>Figure 1. Although we achieve very high overall precision and recall, out-of-distribution objects, such as the figure above, result in misclassifications. Additional context after our classification will help improve the quality of our extractions. We will address this issue and improve overal extraction and KB quality during Phase 2.</b></p>
+
+<p align ="center"><img src="images/example.jpg" alt="classification error" width="400"/></p>
+<p align ="center"><b>Figure 2. Example of succesful classification of elements on a publication page. This example derives from a PDF report from the Integrated Offshore Drilling Program Report (http://www.iodp.org). No publications from this source were included in the training set and therefore none of the training set had the formatting of this particular page. However, the Attentive-RCN classifications are robust.</b></p>
 
 
 ### Research Outlook
