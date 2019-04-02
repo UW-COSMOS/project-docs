@@ -3,34 +3,75 @@ Organization/Date: UW-Madison, 04/01/2019
 
 PIs: Prof. Theodoros Rekatsinas, Prof. Shanan Peters, and Prof. Miron Livny
 
-## 1 The COSMOS Project
-The goal of the UW-Madison COSMOS project is to develop a prototype knowledge base construction (KBC) system to automate key steps in the curation of scientific models from the scientific literature in an ongoing fashion as the scientific literature is produced. Here, we provide **a summary that outlines our accomplishments and challenges encountered during Phase 1**. We also provide an overview of the software and data products produced during Phase 1, with links to deliverables and documentation.
+## 1 Overview of The COSMOS Project 
+The primary goal of the UW-Madison COSMOS project is to develop a prototype knowledge base construction (KBC) system to automate key steps in the curation of scientific models from the published literature in a repeatable, scalable fashion as the scientific literature is produced. Here, we provide **a summary that outlines our accomplishments and challenges encountered during Phase 1**. We also provide an overview of the software and data products developed and delivered during Phase 1, with links to code and documentation.
 
-There were two primary tasks in this milestone, each with two deliverables:
+There were two primary tasks in Milestone 3, each with two subtasks:
 
 ###  Task 1: Extraction of Model Equations from Publications
-#### 1. Development and deployment of barebone KBC system for scientific model curation.
+#### Subtask 1. Development and deployment of barebone KBC system for scientific model curation.
 Open-source release of KBC system and deployment on xDD for continuous ingestion of relevant input documents.
 
-#### 2. Earth systems model KBC containing model specifications (equations).
+#### Subtask 2. Earth systems model KBC containing model specifications (equations).
 Release of barebone-KB from ingested documents. Assessment and publication of system.
 
 ### Task 2: Extraction of Tables and Figures from Publications
-#### 1. Refinement of code and deployment of table/figure extraction pipeline on xDD.
+#### Subtask 1. Refinement of code and deployment of table/figure extraction pipeline on xDD.
 Open-source release of table/figure methods and deployment in xDD for continuous ingestion of relevant input documents.
 
-#### 2. Construct Earth systems models KB containing model tables/figures.
+#### Subtask 2. Construct Earth systems models KB containing model tables/figures.
 Release of barebone-KB (with figures and tables) from ingested documents.
 
+In what follows, we first provide **an executive summary where we outline the main research-, code-, and data-products** the COSMOS team developed during Phase 1. We then provide **a high-level description of the COSMOS pipeline with links to the code modules and their documentation**. Finally, we discuss **lessons-learned and research challenges highlighted by our efforts** during Phase 1 and conclude with **our vision for a research agenda towards contextual reasoning over scientific models**.
+
+## Milestone 3: List of Research, Code, and Data Products
+1. A submission to ICCV 2019 [http://iccv2019.thecvf.com](http://iccv2019.thecvf.com) on a new deep learning model for object detection. The paper was attached in the submitted Milestone Report.
+2. An open-source release of the COSMOS pipeline, which can be found at [https://github.com/UW-COSMOS/Cosmos](https://github.com/UW-COSMOS/Cosmos). We also provide additional documentation of the main modules and functionalities of [https://uw-cosmos.github.io/Cosmos/](https://uw-cosmos.github.io/Cosmos/).
+3. A deployable, dockerized demo of the COSMOS pipeline with instructions for local execution of end-end-pipeline (i.e., document ingestion, KBC creation, result visualization): [https://github.com/UW-COSMOS/cosmos-demo](https://github.com/UW-COSMOS/cosmos-demo).
+4. A live demo running on our cloud-based GPU node [http://c240g5-110119.wisc.cloudlab.us:5000](http://c240g5-110119.wisc.cloudlab.us:5000). Instructions for interacting with this demo are provided directly on the link 
+5. A live search interface over the KB constructed by COSMOS pipeline over a subset of xDD documents that are relevant to cGENIE Earth System Model. This live search interface is currently available at [http://birdnest.geology.wisc.edu/cosmos](http://birdnest.geology.wisc.edu/cosmos) and will continue to grow as xDD documents are acquired and processed.
+
+
 ## 2 COSMOS Project Executive Summary
-### 
+We have completed initial releases of three primary deliverables for Phase 1, which encompases all subtasks within Tasks 1 and 2 as well as some additional capabilities not described in our original Milestone 3 objectives. 
+
+####Deliverable 1: Table, Figure, and Equation Extraction and KBC Engine.
+Our technical solution to the problem of recognizing and extracting table, figure, and equation elements from heterogeneously formatted scientific publications, a key element of Tasks 1 and 2, are described in a paper submitted to the International Conference of Computer Vision (ICCV) 2019, one of the top venues for computer vision research. A PDF of our paper was attached to the Milestone Submission. The PDF is not uploaded to our public GitHub repository, as this would violate the double-blind submission policy of the conference. The new visual document segmentation model describe therein, Attentive-RCNN, yields a 17% mAP improvement compared to state-of-the-art object detection models and can be successfully applied across a wide-range of PDF documents published between 1970 and today.
+
+The quality of the Attentive-RCNN model’s document regional proposals and classifications will continue to improve as we accumulate additional training data and refine the model and post-processing steps (an area of active research interest). Once table and figure elements are extracted, constructing a barebone-KB for these entities is a straightforward task. Constructing a barebone-KB for equations for scientific models is more complex. This requires identifying the text-based description of the equation (i.e., the phrase describing the identify of the equation) as well as the individual components of the equation (e.g., variables, constants), which are typically described in-line with body text, often with representations that differ from those within the equation itself. Our KB for equations includes both visual and LaTex representations of equations as well as individual variables within equations and text phrases describing all of these components in plain-language.  
+
+The code for the entire Cosmos model pipeline is contained in our Cosmos project repo: https://github.com/UW-COSMOS/Cosmos. This repo contains a README describing the overall system and basic code-level documentation (https://uw-cosmos.github.io/Cosmos/). The input for this pipeline is a directory of PDFs and the primary outputs of are KBs (i.e., csv and PostgreSQL databases), as described in Tasks 1 and 2, as well as a basic visualization and search interface that summarizes pipeline output at the document page and entity (figure, table, equation) levels. For convenience, we also provide docker images with the Cosmos KBC pipeline. Step-by-step instructions for deploying the docker images with the entire end-to-end pipeline are found in the cosmos-demo repo: https://github.com/UW-COSMOS/cosmos-demo. 
+
+####Deliverable 2: Searchable KB for Table, Figure and Equations Extracted from xDD Documents.
+We have deployed the Cosmos model pipeline on two COSMOS GPU computing infrastructure of the COSMOS pipeline over a subset of geoscientific publications from xDD that are pertinent to components of the cGENIE model. The KB will continue growing and improving as we enter Phase 2. An interface to explore these knowledge bases is provided in http://birdnest.geology.wisc.edu/cosmos. Note that we will continuously improve the quality of extractions available via this portal as we expect to incorporate updates to our Attentive-RCNN and post-processing algorithms to improve quality (see Section 4: Lessons Learned). Note too that our model is completely domain-agnostic. Our focal project for Phase 2 involves an Earth Systems model, but the xDD infrastructure and Attentive-RCNN model encompass all domains of published scholarly knowledge.
+
+####Deliverable 3: Web Service for COSMOS Pipeline
+To allows users to take advantage of GPUs that may not be locally available and to enable the model to be easily run across arbitrarily selected PDFs, we deployed the Cosmos pipeline as a cloud-based service. In this deployment, users interact with a simple web interface (still under active development) and upload their own PDFs in a zipped directory. These PDFs are then processed by the pipeline on a VM with accessible GPUs and the resultant KBs and user interfaces made available. This online portal as well as instructions on how to use it can be found here: http://c240g5-110119.wisc.cloudlab.us:5000. Currently our service will accept only one job at a time. We plan to extend its capability to multiple concurrent requests during the next couple of months. Our goal is to enable domain researchers upload their own corpora.
 
 ## 3 COSMOS Pipeline Description
-### Infrastructure
+### Document Acquisition and Computing Infrastructure
+Since the start of Phase 1, xDD infrastructure, an integral part of the UW-COSMOS pipeline, has accumulated an additional 1M documents from multiple commercial and open-access publishers. Over 9.2M documents spanning all domains of scholarship are now accessible to UW-COSMOS. Negotiations with additional publishers (notably, Springer-Nature) are underway and we anticipate that the xDD document acquisition pipeline will continue to grow the library at a rate of approximately 9K documents/day throughout the duration of Phase 2. Currently, xDD is one of the world’s largest single repositories of scientific publications that span all domains of knowledge and that can be used in a repeatable fashion. The uniqueness of the xDD document acquisition and management system is a central component of the UW-COSMOS project.
+
+In addition to the xDD digital library and document acquisition system and coupled high throughput computing resources provided by the UW-Madison CHTC, core UW-COSMOS project computing infrastructure consists of four high-performance GPU systems (two machines were acquired and stood-up at the start of the project, two more are in the process of being stood-up). These high-performance GPU nodes (80 core, 2.4Ghz Intel Xeon(R) Gold 6148 CPUs, 512GB RAM, Nvidia Tesla V100 32GB) are essential to supplying the throughput necessary to process large numbers of documents and populate KBs in the COSMOS pipeline. This type of compute is required as we are dealing with mixed workloads. Attentive-RCNN benefits from GPUs as it relies on expensive to run Convolutional Neural Networks. The speed ups we observed due to the use of GPUs are at least 10x. Knowledge base construction and OCR on the other hand benefit from parallelism across CPUs.
 
 ### System Architecture
+COSMOS consists of 9 main modules, all outlined in https://github.com/UW-COSMOS/Cosmos, and a visualization and search end-point for results (https://github.com/UW-COSMOS/cosmos-visualizer). A high-level description of how these modules interact is provided in the documentation and in the [interim report](https://github.com/UW-COSMOS/project-docs/blob/master/presentations_reports/milestone_2/interim_report.md). 
 
-### Data Prodcuts
+The input to the COSMOS system is a collection of PDF documents and the output is a collection of xml files and database tables that represent the extracted knowledge bases. A description of the final of our pipeline is provided in the demo README file here: https://github.com/UW-COSMOS/cosmos-demo. The order of the different modules in this last link reflects the order in which they are pipelined. The core elements of our extraction pipeline are also described in detail in the submitted ICCV manuscript (see PDF attached to Milestone Submission).
 
 ## 4 Lessons Learned and Future Directions
+
+### Lessons Learned
+One of the core challenges that we experienced during Phase 1 has to do with the heterogeneity in scientific publications and the applicability of state-of-the-art extraction models across different scientific domains and scientific journals. As outlined in our ICCV submission state-of-the-art extraction models are brittle in the presence of objects of heterogeneous aspect-ratios and sizes. For instance, we found that the state-of-the-art models do not perform well at extracting equations. This is why incorporating additional knowledge in these ML models leads to higher quality results (see our ICCV submission on the Attentive-RCNN model). During the next couple of months (end of Phase 1 and beginning of Phase 2) we aim to follow a similar approach to improve the performance of our post-processing model. Following the weak-supervision paradigm (https://dawn.cs.stanford.edu/2017/07/16/weak-supervision/) and combining it with our state-of-the-art data cleaning models and results (http://www.holoclean.io and https://arxiv.org/abs/1801.06750) we envision a weakly supervised structured ML model for postprocessing and increasing the quality of annotations and extractions of COSMOS. In general, this is a core direction we envision many of the modern Artificial Intelligence models to be adopting in the near future: AI infused with scientific and domain models will become more apparent (see our Future Directions below). 
+
+A different fundamental challenge that we are observing in our pipelines is the sensitivity of deep learning models to distributional shift. Specifically, we are experiencing scenarios where during inference time, objects that we need to classify correspond to out-of-distribution inputs (i.e., inputs that were rare or not present in our training data). In such cases, it is well-known that deep learning models are brittle as they assign these unknown models to existing classes with very high-confidence (https://arxiv.org/abs/1706.02690). Such an example is shown in the following image, where a figure has been classified as equation. We plan to focus on these issues during Phase 2 enhancing our inference pipeline with out-of-distribution detectors. Notice that our structured prediction ML models for data cleaning can also help improve the quality of our results in this case.
+
+### Research Outlook
+Advancing the state-of-the-art in many domains of science requires that we capitalize fully on published scientific knowledge. Doing so requires the ability to locate and extract all available data, observations, experimental results, and model predictions from across hundreds, thousands, or millions of heterogeneous publications in a way that can be transformed into actionable results. The heterogeneity of published scientific papers, and the rapid growth in published scientific knowledge, poses three main challenges in this regard.
+
+First, scientific papers are made available and distributed via different mechanisms across multiple different commercial and open-access publishers, each with their own policies for downloading and use. The xDD infrastructure of UW-COSMOS addresses these challenges and provides a single repository of documents and citation metadata spanning all domains of scientific knowledge. Currently, xDD contains more than 9.2M documents from all domains of knowledge. Thus, the UW-COSMOS ASKE has integrated into its core infrastructure the single largest collection of published scientific knowledge that can be used in this capacity anywhere in the world.
+
+Second, scientific papers are formatted (i.e., “typeset” or laid out) following a wide variety of time-evolving conventions. For example, journals publish content in one-column, two-column, three-column formats; some  journals use page headers, others page footers, and some use both. It is not acceptable for scientific questions to limit technical solutions for KBC to a subset of scientific publications, such as those following a single formatting convention or that are distributed principally in LaTex or as XML. This is because the vast majority of published scientific content, including crucial and nearly irreplaceable legacy data, are only currently available in heterogeneous PDF formats. *Any comprehensive attempt to incorporate published scientific knowledge and models into automated workflows must have systems capable of handling the heterogeneity of scientific publications.*
+
+Third, understanding the content of tables and figures, and the phenomena to which equations apply, requires combining visual extractions with information from text in captions and full-text of documents. 
 
