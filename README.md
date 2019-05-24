@@ -10,10 +10,11 @@ Develop methods that extend xDD with a scalable table, figure, and equation extr
 
 Our end-to-end pipeline for Phase 1 is documented and available as docker image here in our [cosmos-demo repo](https://github.com/UW-COSMOS/cosmos-demo). See linked repos for individual code components.
 
+<p align ="center"><img src="presentations_reports/milestone_3/images/UW-COSMOS" alt="UW-COSMOS" width="450"/></p>
 
 ## Phase 2
 ### Task 1: Extraction of Model Metadata
-Develop data extraction and integration methods to collect data and model metadata (from text). Extracted information will correspond to specified scientific model boundary conditions and parameterizations and will be used to validate and assess model output. 
+Develop data extraction and integration methods to collect data and model metadata (from text). Extracted information will correspond to specified scientific model boundary conditions and parameterizations and will be used to validate and assess model output.
 
 * _cGENIE_: widely used community Earth systems model, oriented around carbon (https://github.com/UW-COSMOS/cgenie.muffin)
 
