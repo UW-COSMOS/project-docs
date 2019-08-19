@@ -23,4 +23,7 @@ Develop data extraction and integration methods to collect data and model metada
 ### Task 2: Data Extraction from Tables and Figures
 Design and implement methods for 1) automatic extraction of  model parameterizations from tables, and 2) extraction of data from tables and figures. Implementation of methods that link data back to model code and the knowledge base developed during Task 1 will enable human-in-the-loop automated refinement ad assessment of scientific models.
 
+#### Demo Day Poster
+A high-level overview of our Phase 2 activities and status is summarized in our [DARPA Demo Day Poster](https://github.com/UW-COSMOS/project-docs/tree/master/presentations_reports/ASKE_demo_poster.pdf).
+
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/DARPA_Logo.jpg/640px-DARPA_Logo.jpg" width=200>
