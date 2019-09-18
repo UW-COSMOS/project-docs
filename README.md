@@ -10,10 +10,10 @@ Develop methods that extend xDD with a scalable table, figure, and equation extr
 
 Our end-to-end pipeline for Phase 1 is documented and available as docker image here in our [cosmos-demo repo](https://github.com/UW-COSMOS/cosmos-demo). See linked repos for individual code components.
 
-<p align ="center"><img src="presentations_reports/milestone_3/images/UW-COSMOS.png" alt="UW-COSMOS" width="600"/></p>
+<p align ="center"><img src="presentations_reports/images/overview.png" alt="UW-COSMOS" width="600"/></p>
 
 ## Phase 2
-An overview of our Phase 1 activities, position relative to TA1 and TA2 ASKE objectives, and plan for moving into Phase 2 and beyond is provided in our [Phase 2 Workshop summary report](https://github.com/UW-COSMOS/project-docs/blob/master/presentations_reports/ASKE_Ph2_position_COSMOS.pdf).
+An overview of our Phase 1 activities, position relative to TA1 and TA2 ASKE objectives, and initial linking of key elements of model code to elements of our model-created KBC in Phase 2 (and beyond the scope of this project) is provided in our [Phase 2 Workshop summary report](https://github.com/UW-COSMOS/project-docs/blob/master/presentations_reports/ASKE_Ph2_position_COSMOS.pdf).
 
 ### Task 1: Extraction of Model Metadata
 Develop data extraction and integration methods to collect data and model metadata (from text). Extracted information will correspond to specified scientific model boundary conditions and parameterizations and will be used to validate and assess model output.
