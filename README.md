@@ -15,6 +15,8 @@ Our end-to-end pipeline for Phase 1 is documented and available as docker image 
 ## Phase 2
 An overview of our Phase 1 activities, position relative to TA1 and TA2 ASKE objectives, and initial linking of key elements of model code to elements of our model-created KBC in Phase 2 (and beyond the scope of this project) is provided in our [Phase 2 Workshop summary report](https://github.com/UW-COSMOS/project-docs/blob/master/presentations_reports/ASKE_Ph2_position_COSMOS.pdf).
 
+A timeline with links to project milestone deliverables is found on our project [Wiki](https://github.com/UW-COSMOS/project-docs/wiki/Project-Milestones).
+
 ### Task 1: Extraction of Model Metadata
 Develop data extraction and integration methods to collect data and model metadata (from text). Extracted information will correspond to specified scientific model boundary conditions and parameterizations and will be used to validate and assess model output.
 
