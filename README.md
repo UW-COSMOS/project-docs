@@ -26,11 +26,13 @@ Develop data extraction and integration methods to collect data and model metada
 ### Task 2: Data Extraction from Tables and Figures
 Design and implement methods for 1) automatic extraction of  model parameterizations from tables, and 2) extraction of data from tables and figures. Implementation of methods that link data back to model code and the knowledge base developed during Task 1 will enable human-in-the-loop automated refinement ad assessment of scientific models.
 
-#### Demo Day Poster
+### Demo Day Poster and Other Prodcuts
 A high-level overview of our Phase 2 activities and status is summarized in our [DARPA Demo Day Poster](https://github.com/UW-COSMOS/project-docs/tree/master/presentations_reports/ASKE_demo_poster.pdf). Please see this [recorded video of our live demo](https://drive.google.com/file/d/1V09nLcijn2SqHAPf1dSHIXdi8ys5-B1O/view?usp=sharing) (the video was recoreded at UW-Madison prior to the September 12, 2019 Demo Day). 
 
 A requested follow up webinar and live demo for our DARPA Demo Day presentation was delivered to the [NIH IMAG](https://www.imagwiki.nibib.nih.gov/webinars/2019-ml-msm-pre-meeting-webinar-darpa-aske-cosmos-platform) group on 3 Oct. 2019 ([PDF of the slides](https://github.com/UW-COSMOS/project-docs/blob/master/presentations_reports/NIH_2019.pdf)). Video of the webinar is broken into three components: [xDD](https://www.youtube.com/watch?v=2caVjq4Jxog), [COSMOS](https://www.youtube.com/watch?v=2XP_fxSWhMs&t=10s), and a [live demo](https://www.youtube.com/watch?v=-oEFualmi-I&t=13s).
 
 An overview of project motivations and Demo Day components was delievered on October 18th ([PDF of presentation](https://github.com/UW-COSMOS/project-docs/blob/master/presentations_reports/ASKE_TA1_Demo_FINAL.key.pdf)).
+
+Our preliminary project general website is [cosmos.wisc.edu](http://cosmos.wisc.edu).
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/DARPA_Logo.jpg/640px-DARPA_Logo.jpg" width=200>
