@@ -1,7 +1,8 @@
 # Goals and Approaches for TA1 Phases and Tasks
 
 ## Phase 1
-See our [Milestone 3 Report](https://github.com/UW-COSMOS/project-docs/tree/master/presentations_reports/milestone_3) for an overview of Phase 1 outcomes and links to relevant repos.
+See our [Milestone 3 Report](https://github.com/UW-COSMOS/project-docs/tree/master/presentations_reports/milestone_3) for an overview of Phase 1 outcomes and links to relevant repos. A manuscript describing our method for visual object detection with region embeddings is available as a [preprint](https://arxiv.org/abs/1910.12462).
+
 ### Task 1: Extraction of Models from Publications
 Design and implement methods to extract models and semantically meaningful components of models that are reported in the literature in the form of equations. Incorporate weakly supervised KBC systems for such models into the ASKE pipeline.
 
