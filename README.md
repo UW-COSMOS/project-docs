@@ -31,7 +31,7 @@ A high-level overview of our Phase 2 activities and status is summarized in our 
 
 A requested follow up webinar and live demo for our DARPA Demo Day presentation was delivered to the [NIH IMAG](https://www.imagwiki.nibib.nih.gov/webinars/2019-ml-msm-pre-meeting-webinar-darpa-aske-cosmos-platform) group on 3 Oct. 2019 ([PDF of the slides](https://github.com/UW-COSMOS/project-docs/blob/master/presentations_reports/NIH_2019.pdf)). Video of the webinar is broken into three components: [xDD](https://www.youtube.com/watch?v=2caVjq4Jxog), [COSMOS](https://www.youtube.com/watch?v=2XP_fxSWhMs&t=10s), and a [live demo](https://www.youtube.com/watch?v=-oEFualmi-I&t=13s).
 
-An overview of project motivations and Demo Day components was delievered on October 18th ([PDF of presentation](https://github.com/UW-COSMOS/project-docs/blob/master/presentations_reports/ASKE_TA1_Demo_FINAL.key.pdf)).
+An overview of project motivations, our Demo Day components, and our anticipated next steps was delievered on October 18th to ASKE leadership ([PDF of presentation](https://github.com/UW-COSMOS/project-docs/blob/master/presentations_reports/ASKE_TA1_Demo_FINAL.key.pdf)).
 
 Our preliminary project general website is [cosmos.wisc.edu](http://cosmos.wisc.edu).
 
