@@ -182,6 +182,12 @@ The xDD system is connected to the COSMOS ASKE infrastructure, which is comprise
 |---|---|---|---|---|---|---|
 | Intel(R) Xeon(R) Gold 6148 CPU | 160  | 2.40GHz | 512GB  | 1.5TB SSD, 1.5TB HDD  | - | Nvidia Tesla V100 32GB |
 
+**cosmos0003 and cosmos0004:** Dedicated GPU machines for model training and research experiments (added after 1 and 2).
+
+| CPU  | Cores  | Speed  | RAM  | Disk  | Disk (used)  | GPU |
+|---|---|---|---|---|---|---|
+| Intel(R) Xeon(R) Gold 5115 CPU | 40  | 2.40GHz | 256GB  | 1.5TB SSD, 1.5TB HDD  | - | 2x Nvidia Tesla V100 32GB |
+
 ### 2.1.4 Throughput and Performance
 The current xDD pipelines regularly utilize on the order of 5,000 CPU hours per day on CHTC. This utilization represents the 'steady-state' CPU requirement of xDD, including only the running of the daily fetched documents through the standard (OCR, coreNLP) pipelines.  Past sprints have pushed xDD CHTC usage over 50,000 CPU hours utilized in a day, and it is not uncommon for CHTC to provide upwards of 100,000 hours of CPU to a user in a day.
 
