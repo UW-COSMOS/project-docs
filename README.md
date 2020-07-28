@@ -3,7 +3,13 @@
 ## Phase 3 (beginning August 2020)
 Phase 3 activities will focus on refining and extending xDD and COSMOS APIs that expose data and information in the published scientific literature. Our overarching objective is to develop and deploy an end-to-end platform and AI-powered technical assistant capable of advanced data and information retrieval and question answering over the scientific literature in near real-time, as it is published.
 
-<p align ="center"><img src="presentations_reports/images/overview2.png" alt="UW-COSMOS" width="750"/></p>
+<p align ="center"><img src="presentations_reports/images/overview2.png" alt="UW-COSMOS" width="800"/></p>
+
+### Task 1: Scale and Enhance xDD Infrastructure and APIs
+xDD is currently one of the world’s largest sources of full-text scientific publications and is perhaps unique in it’s ability to support key components of ASKE 3. Our goals are to continue growing the xDD corpus, particularly with publishers and journals relevant to SARS-CoV-2, enhance and scale API-based mechanisms to locate and extract fine-grained information from document full-texts, and develop code container templates for collaborator software deployment over document full-texts.
+
+### Task 2: Scale and Enhance COSMOS Retrieval and APIs
+In addition to releasing public versions of the COSMOS API, which allows for table, figure, and equation retrieval from the full-text of COVID-19 publications, we will  build on recent advances in weakly supervised knowledge base construction, pushing the field in new directions to build tools that are useful as part of a broader e↵ort to accelerate scientific discovery. We have been working on learnable contextual retrieval models that can be used for recommending fine-grained segments from new documents and for more accurate and complete question answering from natural language descriptions of target results. The output of this system is a collection of related passages, and experiments are showing that it is more accurate than many keyword-based systems. Our goal is to bring our new system, called Re-Flex, into COSMOS and then address the challenge of scaling it to perform well to live queries operating over large and rapidly growing corpora. Succeeding will allow for more rapid and fully contextualized responses to expert diagnostic and prognostic queries.
 
 
 ## Phase 2 (ending July 2020)
