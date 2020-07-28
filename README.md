@@ -3,7 +3,7 @@
 ## Phase 3 (beginning August 2020)
 Phase 3 activities will focus on refining and extending xDD and COSMOS APIs that expose data and information in the published scientific literature. Our overarching objective is to develop and deploy an end-to-end platform and AI-powered technical assistant capable of advanced data and information retrieval and question answering over the scientific literature in near real-time, as it is published.
 
-<p align ="center"><img src="presentations_reports/images/overview2.png" alt="UW-COSMOS" width="800"/></p>
+<p align ="center"><img src="presentations_reports/images/overview2.png" alt="UW-COSMOS" width="850"/></p>
 
 ### Task 1: Scale and Enhance xDD Infrastructure and APIs
 xDD is currently one of the world’s largest sources of full-text scientific publications and is perhaps unique in it’s ability to support key components of ASKE 3. Our goals are to continue growing the xDD corpus, particularly with publishers and journals relevant to SARS-CoV-2, enhance and scale API-based mechanisms to locate and extract fine-grained information from document full-texts, and develop code container templates for collaborator software deployment over document full-texts.
