@@ -3,7 +3,7 @@
 ## Phase 3 (beginning August 2020)
 Phase 3 activities will focus on refining and extending xDD and COSMOS APIs that expose data and information in the published scientific literature. Our overarching objective is to develop and deploy an end-to-end platform and AI-powered technical assistant capable of advanced data and information retrieval and question answering over the scientific literature in near real-time, as it is published.
 
-<p align ="center"><img src="presentations_reports/images/overview2.png" alt="UW-COSMOS" width="600"/></p>
+<p align ="center"><img src="presentations_reports/images/overview2.png" alt="UW-COSMOS" width="750"/></p>
 
 
 ## Phase 2 (ending July 2020)
