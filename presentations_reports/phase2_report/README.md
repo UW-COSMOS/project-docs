@@ -21,7 +21,7 @@ Release of barebone-KB (with indexed and retrievable figures, tables, and equati
 
 Here we first provide **an executive summary where we outline the main research-, code-, and data-products** that the COSMOS team developed during Phase 2. We then provide **a high-level description of the COSMOS pipeline with links to the code modules and their documentation**. Finally, we discuss **lessons-learned and research challenges highlighted by our efforts**.
 
-## List of Research, Code, and Data Products
+## List of Research, Code, Infrastructure, and Data Products
 1. A submission to ICCV 2019 [http://iccv2019.thecvf.com](http://iccv2019.thecvf.com) on a new deep learning model for object detection.
 2. An open-source release of the COSMOS pipeline, which can be found at [https://github.com/UW-COSMOS/Cosmos](https://github.com/UW-COSMOS/Cosmos).
 3. An open-source release of the [COSMOS document annotator](https://github.com/UW-COSMOS/cosmos-visualizer) and annotation visualizer, a web-based software package designed to allow the rapid creation of richly annotated documents.
@@ -31,6 +31,9 @@ Here we first provide **an executive summary where we outline the main research-
 7. A [live search interface](http://teststrata.geology.wisc.edu/xdd/) built on the xDD API and operating over 12.7M documents in the xDD corpus, with output tailored to drug and gene co-occurrences and word embedding model results from the COVID-19 set. A short video describing the components is available [here](https://www.youtube.com/watch?v=FM2sIcZn8ZE).
 8. A [Colab Python notebook](https://colab.research.google.com/drive/1Blz6VR_P2vfPNPjUZeUYvV7EPA4UhbUv) demonstrating the use of xDD and COSMOS APIs to do fine grained retrieval and basic question answering.
 9. A Docker container mechanism for automatically deploying HMS [INDRA](http://www.indra.bio) code over targeted xDD document sets and delivering INDRA statements to remote location for ingestion into local workflows; this will serve as a template for a general service for other AKSE teams.
+
+Computing infrastructure in-place at the time of Phase 2 closing includes the following:
+
 
 ## 2 COSMOS Project Executive Summary
 We have completed initial releases of three primary deliverables for Phase 2, which encompasses all subtasks within Tasks 1 and 2 as well as some additional capabilities that were developed in response to the specific use cases and requirements presented by ASKE's COVID-19 work.
