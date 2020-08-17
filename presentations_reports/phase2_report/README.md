@@ -33,7 +33,14 @@ Here we first provide **an executive summary where we outline the main research-
 9. A Docker container mechanism for automatically deploying HMS [INDRA](http://www.indra.bio) code over targeted xDD document sets and delivering INDRA statements to remote location for ingestion into local workflows; this will serve as a template for a general service for other AKSE teams.
 
 Computing infrastructure in-place at the time of Phase 2 closing includes the following:
-
+1. Two Intel(R) Xeon(R) Gold 6148 CPU 80-core, 512GB memory, Tesla V100 machines (For COSMOS processing and research)
+2. Two Intel(R) Xeon(R) Gold 5115 CPU 20-core, 256GB memory, 2xTesla V100 machines (For COSMOS processing and research)
+3. One Intel(R) Xeon(R) Silver 4208 CPU 16-core, 128GB memory machine (For xDD document acquisition and storage)
+4. One Intel(R) Xeon(R) CPU E5-2603 v4 6-core, 32GB memory machine (For xDD document backup)
+5. Dedicated job/workflow submission virtual machine (For submitting xDD processing jobs into UW-Madison's Center for High Throughput Computing (CHTC) 
+6. Intel(R) Xeon(R) CPU E5-2603 v4 6-core, 3GB RAM (For xDD pipeline storage machine: serves as network-mounted disk)
+7. One Intel Xeon E5-2630 v3 32-core, 128GB memory machine (For primary xDD database storage) 
+8. One AMD Opteron(tm) Processor 4180 12-core, 32GB memory machine (For xDD database backup nodes)
 
 ## 2 COSMOS Project Executive Summary
 We have completed initial releases of three primary deliverables for Phase 2, which encompasses all subtasks within Tasks 1 and 2 as well as some additional capabilities that were developed in response to the specific use cases and requirements presented by ASKE's COVID-19 work.
