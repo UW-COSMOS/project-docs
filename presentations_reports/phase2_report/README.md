@@ -64,9 +64,42 @@ Since the start of Phase 1, xDD infrastructure, an integral part of the UW-COSMO
 In addition to the xDD digital library and document acquisition system and coupled high throughput computing resources provided by the UW-Madison CHTC, core UW-COSMOS project computing infrastructure consists of four high-performance GPU systems (four machines were acquired and stood-up at the start of the project). These high-performance GPU nodes (80 core, 2.4Ghz Intel Xeon(R) Gold 6148 CPUs, 512GB RAM, Nvidia Tesla V100 32GB) are essential to supplying the throughput necessary to process large numbers of documents and populate KBs in the COSMOS pipeline. This type of compute is required as we are dealing with mixed workloads. Attentive-RCNN benefits from GPUs as it relies on expensive to run Convolutional Neural Networks. The speed ups we observed due to the use of GPUs are at least 10x. Knowledge base construction and OCR on the other hand benefit from parallelism across CPUs.
 
 ### System Architecture
-COSMOS consists of 9 main modules, all outlined in https://github.com/UW-COSMOS/Cosmos, and a visualization and search end-point for results (https://github.com/UW-COSMOS/cosmos-visualizer). A high-level description of how these modules interact is provided in the repo documentation, in our [interim report](https://github.com/UW-COSMOS/project-docs/tree/master/presentations_reports/milestone_3).
+The primary COSMOS pipeline consists of a suite of services, divided into three primary pillars of functionality, all outlined in https://github.com/UW-COSMOS/Cosmos. In additional to the primary pipleline, a visualization engine (https://github.com/UW-COSMOS/cosmos-visualizer) along with search end-points provide interfaces to view and interact with results. 
 
-The input to the COSMOS system is a collection of PDF documents and the output is a collection of xml files and database tables that represent the extracted knowledge bases. A description of the final of our pipeline is provided in the demo README file in the main [COSMOS code repository](https://github.com/UW-COSMOS/Cosmos). The order of the different modules in this last link reflects the order in which they are pipelined. The core elements of our extraction pipeline are also described in detail in the submitted ICCV manuscript (see PDF attached to Milestone Submission).
+A mysql (https://www.mysql.com/) database is used as the persistent backend, with the schema detailed in the primary repository (https://github.com/UW-COSMOS/Cosmos) README.
+
+#### Primary pipeline overview
+The pipeline consists of three main pillars of functionality. Ingestion brings PDFs into the system, processes them, and stores the candidate objects identified within the documents. Extraction contextualizes the individual objects, aggregating text sections, associating figures and tables with their captions, and converts table objects into extracted dataframe. Finally, recall creates the searchable indexes to enable retrieval of information. 
+
+1. Ingestion
+    - Ingest the PDF documents
+    - Separate into page-level image objects
+    - Apply segmentation (separate regions of the page)
+    - Apply detection (visually classify regions into **objects**)
+    - Apply OCR ([Tesseract](https://github.com/tesseract-ocr/tesseract) via [pytesseract](https://pypi.org/project/pytesseract/))
+    - Postprocessing (combine and re-classify regions using a pytorch model that leverages text content)
+    - Populates `pdfs`, `pages`, `page objects` tables
+    - Functionality provided by `uwcosmos/ingest` Docker image
+2. Extraction
+    - Aggregate text sections 
+    - Associate figures and tables with their respective captions
+    - For table objects, extract dataframe objects
+    - Populates `tables`, `object_contexts` tables
+    - `uwcosmos/aggregate_sections` Docker image provides section aggregation, table + figure caption association
+    - `uwcosmos/extract_tables` Docker image provides dataframe extraction capabilities
+3. Recall
+    - Create an [Anserini](https://github.com/castorini/anserini) and [ElasticSearch](https://www.elastic.co/) indexes on the contexts and objects
+    - `uwcosmos/retrieval` Docker image creates the Anserini index
+    - `uwcosmos/es_ingest` Docker image creates the Elasticsearch index
+
+Services are run as Docker containers, with Dask (https://dask.org/) orchestrating the distribution of work. This combination provides ease of scalability (see the "Scaling" section of https://github.com/UW-COSMOS/Cosmos/blob/master/README.md)
+
+The input to the COSMOS system is a collection of PDF documents and the output is a collection of xml files and database tables that represent the extracted knowledge bases. A description of the final of our pipeline is provided in the demo README file in the main [COSMOS code repository](https://github.com/UW-COSMOS/Cosmos). 
+
+#### Search endpoints and visualization service
+Secondary API services are provided which enable recall of page-level object classification, both at the page and individual level. Contextualized extractions are similarly recallable, with text context search provided by either Anserini or Elasticsearch indexing. A visualization module is also available, which utilizes the API services to provide page- and extraction-level visualization.
+
+`uwcosmos/birdnest_backend` is the canonical Docker image which provides the object-level searching, while `uwcosmos/sbackend` provides the page-level interface. `uwcosmos/visualizer_kb` and `uwcosmos/visualizer` are the corresonding images providing the respective visualization interfaces. 
 
 ### Pipeline Performance
 Our pipeline has thus far experienced incomplete optimized for end-to-end runtime. In profiling our system for [earlier project reports](https://github.com/UW-COSMOS/project-docs/tree/master/presentations_reports/milestone_3), we identified several performance bottlenecks (such as invoking Tesseract for OCR) that we have preliminarily addressed in our final code release, thereby improving document throughput to approximately 2 seconds per page on GPU-accelerated nodes. Tbe Attentive-RCNN model currently only performs well on GPUs, one of the key motivations for our acquisition of two additional high-performance GPU systems to add to UW-COSMOS infrastructure as we scale for Phase 3.
