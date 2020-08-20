@@ -94,12 +94,12 @@ The pipeline consists of three main pillars of functionality. Ingestion brings P
     - Populates `tables`, `object_contexts` tables
     - `uwcosmos/aggregate_sections` Docker image provides section aggregation, table + figure caption association
     - `uwcosmos/extract_tables` Docker image provides dataframe extraction capabilities
-3. Recall
+3. Retrieval
     - Create an [Anserini](https://github.com/castorini/anserini) and [ElasticSearch](https://www.elastic.co/) indexes on the contexts and objects
     - `uwcosmos/retrieval` Docker image creates the Anserini index
     - `uwcosmos/es_ingest` Docker image creates the Elasticsearch index
 
-Services are run as Docker containers, with Dask (https://dask.org/) orchestrating the distribution of work. This combination provides ease of scalability (see the "Scaling" section of https://github.com/UW-COSMOS/Cosmos/blob/master/README.md)
+Services are run as Docker containers, with [Dask](https://dask.org/) orchestrating the distribution of work. This combination provides ease of scalability (see the "Scaling" section of our primary repo [readme](https://github.com/UW-COSMOS/Cosmos/blob/master/README.md)).
 
 The input to the COSMOS system is a collection of PDF documents and the output is a collection of xml files and database tables that represent the extracted knowledge bases. A description of the final of our pipeline is provided in the demo README file in the main [COSMOS code repository](https://github.com/UW-COSMOS/Cosmos). 
 
