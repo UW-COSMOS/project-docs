@@ -22,15 +22,17 @@ Release of barebone-KB (with indexed and retrievable figures, tables, and equati
 Here we first provide **an executive summary where we outline the main research-, code-, and data-products** that the COSMOS team developed during Phase 2. We then provide **a high-level description of the COSMOS pipeline with links to the code modules and their documentation**. Finally, we discuss **lessons-learned and research challenges highlighted by our efforts**.
 
 ## List of Research, Code, Infrastructure, and Data Products
-1. A submission to ICCV 2019 [http://iccv2019.thecvf.com](http://iccv2019.thecvf.com) on a new deep learning model for object detection.
-2. An open-source release of the COSMOS pipeline, which can be found at [https://github.com/UW-COSMOS/Cosmos](https://github.com/UW-COSMOS/Cosmos).
-3. An open-source release of the [COSMOS document annotator](https://github.com/UW-COSMOS/cosmos-visualizer) and annotation visualizer, a web-based software package designed to allow the rapid creation of richly annotated documents.
-4. An open-source [Dockerized end-to-end version](https://github.com/UW-COSMOS/Cosmos) of the complete, document-to-interface COSMOS pipeline, with instructions for how to instantiate on a local development machine.
-5. A [live search interface](https://cosmos.wisc.edu/sets/covid/) over the KB constructed by the COSMOS pipeline deployed over the set of xDD documents that are relevant to COVID-19 (as identified by xDD text indexing and document management services). A brief overview of the COSMOS search interface is provided in [this video](https://www.youtube.com/watch?v=w69j2N75NEU).
-6. Enhanced, fine-grained text retrieval capabilities and better documentation for the [xDD API](https://geodeepdive.org/api/), deployed over the full-text content of 12.7M scientific papers.
-7. A [live search interface](http://teststrata.geology.wisc.edu/xdd/) built on the xDD API and operating over 12.7M documents in the xDD corpus, with output tailored to drug and gene co-occurrences and word embedding model results from the COVID-19 set. A short video describing the components is available [here](https://www.youtube.com/watch?v=FM2sIcZn8ZE).
-8. A [Colab Python notebook](https://colab.research.google.com/drive/1Blz6VR_P2vfPNPjUZeUYvV7EPA4UhbUv) demonstrating the use of xDD and COSMOS APIs to do fine grained retrieval and basic question answering.
-9. A Docker container mechanism for automatically deploying HMS [INDRA](http://www.indra.bio) code over targeted xDD document sets and delivering INDRA statements to remote location for ingestion into local workflows; this will serve as a template for a general service for other AKSE teams.
+1. A submission to ICCV 2019 [http://iccv2019.thecvf.com](http://iccv2019.thecvf.com) on a new deep learning model for object detection. [https://arxiv.org/abs/1910.12462](https://arxiv.org/abs/1910.12462)
+2. A submission to EMNLP 2020 [https://2020.emnlp.org](https://2020.emnlp.org) on a new unsupervised relation extraction approach [https://openreview.net/pdf?id=bcwFkib-0Sd](https://openreview.net/pdf?id=bcwFkib-0Sd).
+3. A paper in SIGMOD 2020 [https://sigmod2020.org](https://sigmod2020.org) on discovering structured data dependencies over noisy data. This work is related to the post-processing part of the object detection system in COSMOS. [https://dl.acm.org/doi/10.1145/3318464.3389749](https://dl.acm.org/doi/10.1145/3318464.3389749)
+4. An open-source release of the COSMOS pipeline, which can be found at [https://github.com/UW-COSMOS/Cosmos](https://github.com/UW-COSMOS/Cosmos).
+5. An open-source release of the [COSMOS document annotator](https://github.com/UW-COSMOS/cosmos-visualizer) and annotation visualizer, a web-based software package designed to allow the rapid creation of richly annotated documents.
+6. An open-source [Dockerized end-to-end version](https://github.com/UW-COSMOS/Cosmos) of the complete, document-to-interface COSMOS pipeline, with instructions for how to instantiate on a local development machine.
+7. A [live search interface](https://cosmos.wisc.edu/sets/covid/) over the KB constructed by the COSMOS pipeline deployed over the set of xDD documents that are relevant to COVID-19 (as identified by xDD text indexing and document management services). A brief overview of the COSMOS search interface is provided in [this video](https://www.youtube.com/watch?v=w69j2N75NEU).
+8. Enhanced, fine-grained text retrieval capabilities and better documentation for the [xDD API](https://geodeepdive.org/api/), deployed over the full-text content of 12.7M scientific papers.
+9. A [live search interface](http://teststrata.geology.wisc.edu/xdd/) built on the xDD API and operating over 12.7M documents in the xDD corpus, with output tailored to drug and gene co-occurrences and word embedding model results from the COVID-19 set. A short video describing the components is available [here](https://www.youtube.com/watch?v=FM2sIcZn8ZE).
+10. A [Colab Python notebook](https://colab.research.google.com/drive/1Blz6VR_P2vfPNPjUZeUYvV7EPA4UhbUv) demonstrating the use of xDD and COSMOS APIs to do fine grained retrieval and basic question answering.
+11. A Docker container mechanism for automatically deploying HMS [INDRA](http://www.indra.bio) code over targeted xDD document sets and delivering INDRA statements to remote location for ingestion into local workflows; this will serve as a template for a general service for other AKSE teams.
 
 Computing infrastructure in-place at the time of Phase 2 closing includes the following:
 1. Two Intel(R) Xeon(R) Gold 6148 CPU 80-core, 512GB memory, Tesla V100 machines (For COSMOS processing and research)
@@ -84,7 +86,7 @@ The pipeline consists of three main pillars of functionality. Ingestion brings P
     - Apply segmentation (separate regions of the page)
     - Apply detection (visually classify regions into **objects**)
     - Apply OCR ([Tesseract](https://github.com/tesseract-ocr/tesseract) via [pytesseract](https://pypi.org/project/pytesseract/))
-    - Postprocessing (combine and re-classify regions using a pytorch model that leverages text content)
+    - Postprocessing (combine and re-classify regions using a pytorch model that leverages text content and prediction dependencies to denoise noisy region classifications)
     - Populates `pdfs`, `pages`, `page objects` tables
     - Functionality provided by `uwcosmos/ingest` Docker image
 2. Extraction
