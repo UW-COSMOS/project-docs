@@ -3,5 +3,6 @@
 mkdir -p output
 
 cat README.md \
-  | pandoc -t latex --metadata-file=meta.yaml \
+  | pandoc -t latex --pdf-engine=xelatex \
+    --metadata-file=meta.yaml \
     --output=output/phase2-report.pdf

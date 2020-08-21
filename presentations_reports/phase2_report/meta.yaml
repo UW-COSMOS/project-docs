@@ -1,7 +1,6 @@
 geometry: margin=1in
-mainfont: Merriweather-Regular.otf
-mainfontoptions:
-- BoldFont=Merriweather-Bold.otf
-- ItalicFont=Merriweather-Italic.otf
-- BoldItalicFont=Merriweather-BoldItalic.otf
-
+#mainfont: Merriweather-Light
+#mainfontoptions:
+#- BoldFont=Merriweather-Bold.otf
+#- ItalicFont=Merriweather-Italic.otf
+#- BoldItalicFont=Merriweather-BoldItalic.otf
