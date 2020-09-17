@@ -3,6 +3,7 @@ Here you will find a concise summary of progress made during Phase 3.
 
 ## xDD
 1. Document Ingestion
+    - 17 September: 13M document milestone crossed
     - 17 September: Agreement with Springer-Nature pending.
 
 2. Computing Infrastructure
