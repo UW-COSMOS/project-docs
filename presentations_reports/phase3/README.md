@@ -10,7 +10,7 @@ Here you will find a concise summary of progress made during Phase 3.
     - Hardware ordered
 
 3. [API](https://xdd.wisc.edu)
-    - Domain shifted and code deployed on CHTC Infrastructure
+    - geodeepive.org domain shifted, deprecated; xdd domain made active and deployed over CHTC Infrastructure
 
 ## COSMOS
 1. Pipeline
