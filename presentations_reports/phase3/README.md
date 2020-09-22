@@ -7,15 +7,23 @@ Here you will find a concise summary of progress made during Phase 3.
     - 17 September: Agreement with Springer-Nature pending.
 
 2. Computing Infrastructure
-    - Hardware ordered
+    - 28 August: Hardware purchase request made
+    - 9 September: Purchase order received by vendor
+    - 18 September: Hardware shipped
 
 3. [API](https://xdd.wisc.edu/api)
     - geodeepive.org domain shifted, deprecated; xdd domain made active and deployed over CHTC Infrastructure
 
 ## COSMOS
 1. Pipeline
+    - 14 September: New version feature-complete. PR opened
+    - 22 September: Ian still working on PR review
 
 2. API
+    - API service migrated into CHTC Infrastructure
+      - 21 September: deployed into production (e.g. https://xdd.wisc.edu/sets/covid/api/v1/search?query=death%20rates&type=Table&postprocessing_confidence=0.9&base_confidence=0.9)
+    - New earch logic features (support of AND/OR, document-level filtering)
+      - 22 September: Document-level filter terms deployed to dev. (ex:https://xdddev.chtc.io/sets/covid/api/v1/search?query=covid&ignore_bytes=true&document_filter_terms=chloroquine,remdesivir applies a requirement that both "chloroquine" and "remdesivir" appear at the document level)
 
 
 # License and Acknowledgements
