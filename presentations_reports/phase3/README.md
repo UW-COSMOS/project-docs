@@ -26,7 +26,7 @@ Here you will find a concise summary of progress made during Phase 3.
       - 22 September: Document-level filter terms deployed to dev. (ex:https://xdddev.chtc.io/sets/covid/api/v1/search?query=covid&ignore_bytes=true&document_filter_terms=chloroquine,remdesivir applies a requirement that both "chloroquine" and "remdesivir" appear at the document level)
 
 
-# License and Acknowledgements
+### License and Acknowledgements
 All development work supported by DAPRA ASKE HR00111990013 and UW-Madison.
 
 Licensed under the Apache License, Version 2.0 (the "License");
