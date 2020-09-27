@@ -9,8 +9,7 @@ Here you will find a concise summary of progress made during Phase 3.
 2. Computing Infrastructure
     - 28 August: Hardware purchase request made
     - 9 September: Purchase order received by vendor
-    - 18 September: Hardware shipped
-    - 27 September: Hardware arrived
+    - 18 September: Hardware shipped; hardware arrived 27 September
 
 3. [API](https://xdd.wisc.edu/api)
     - geodeepive.org domain host shifted, deprecated; xdd.wisc.edu domain made active and deployed on CHTC Infrastructure
