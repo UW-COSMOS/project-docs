@@ -1,7 +1,7 @@
 # Phase 3 Key Developments
 Here you will find a concise summary of progress made during Phase 3.
 
-## xDD
+## xDD: Document acquisition, storage, processing, and search infrastructure
 1. Document Ingestion
     - 17 September: 13M document milestone crossed
     - 17 September: Agreement with Springer-Nature pending.
@@ -14,7 +14,7 @@ Here you will find a concise summary of progress made during Phase 3.
 3. [API](https://xdd.wisc.edu/api)
     - geodeepive.org domain host shifted, deprecated; xdd.wisc.edu domain made active and deployed on CHTC Infrastructure
 
-## COSMOS
+## COSMOS: AI-powered technical assistant providing retrieval and question answering over text, tables, figures, equations
 1. Pipeline
     - 14 September: New version feature-complete. PR opened
     - 22 September: Ian still working on PR review
