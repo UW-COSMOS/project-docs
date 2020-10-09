@@ -10,14 +10,18 @@ Here you will find a concise summary of progress made during Phase 3.
     - 28 August: Hardware purchase request made
     - 9 September: Purchase order received by vendor
     - 18 September: Hardware shipped; hardware arrived 27 September
+    - 7 October: Hardware inventoried, racked 
 
 3. [API](https://xdd.wisc.edu/api)
     - geodeepive.org domain host shifted, deprecated; xdd.wisc.edu domain made active and deployed on CHTC Infrastructure
+    - 8 October: Development complete on augmenting xDD responses with known dictionary terms (`/snippets` and `/articles`, currently being tested within development setup)
+    - 5 October: Initial deployment of dataset filtering on `/articles` and `snippets` routes (e.g. https://xdd.wisc.edu/api/articles?term=ACE&dataset=xdd-covid-19&full_results=true)
 
 ## COSMOS: AI-powered technical assistant over text, tables, figures, equations
 1. Pipeline
     - 14 September: New version feature-complete. PR opened
     - 22 September: Ian still working on PR review
+    - 28 September: New version merged into master. Major usability improvements in core pipeline.
 
 2. API
     - API service migrated into CHTC Infrastructure
