@@ -4,7 +4,7 @@ Here you will find a concise summary of progress made during Phase 3.
 ## xDD: Document acquisition, storage, processing, and search infrastructure
 1. Document Ingestion
     - 17 September: 13M document milestone crossed
-    - 17 September: Agreement with Springer-Nature pending.
+    - 17 September: Agreement with Springer-Nature pending; 9 October draft document
 
 2. Computing Infrastructure
     - 28 August: Hardware purchase request made
