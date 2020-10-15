@@ -14,9 +14,10 @@ Here you will find a concise summary of progress made during Phase 3.
 
 3. [API](https://xdd.wisc.edu/api)
     - geodeepive.org domain host shifted, deprecated; xdd.wisc.edu domain made active and deployed on CHTC Infrastructure
-    - 8 October: Development complete on augmenting xDD responses with known dictionary terms (`/snippets` and `/articles`, currently being tested within development setup)
+    - 8 October: Development complete on augmenting xDD responses with known dictionary terms (`/snippets` and `/articles`, currently being tested within development setup: https://xdddev.chtc.io/api/snippets?term=Baraboo%20Quartzite&known_terms=true)
     - 5 October: Initial deployment of dataset filtering on `/articles` and `snippets` routes (e.g. https://xdd.wisc.edu/api/articles?term=ACE&dataset=xdd-covid-19&full_results=true)
     - 5 October: Basic visual search interface over API for document sets: https://xdd.wisc.edu/explore.html
+    - 15 October: (in active development) Integration of MITRE drug entities within `snippets` and `articles` response (https://xdddev.chtc.io/api/snippets?term=remdesivir&drugs=true)
  
 4. Custom Code Execution
     - 6 October: Initial container template for deploying collaborator code against xDD (https://github.com/UW-xDD/xdd-docker-recipe)
