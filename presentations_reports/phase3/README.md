@@ -42,7 +42,7 @@ Here you will find a concise summary of progress made during Phase 3.
     - 16 October: 72K xdd-covid-19 set documents processed via COSMOS, with updated data products:
         - 1 Cleaned + case-insensitive word2vec https://cosmos.wisc.edu/sets/covid/word2vec-api/word2vec?word=lung&model=trigram_lowered_cleaned
         - 2 xDD API articles, snippets queries restricted to only this set: (https://xdd.wisc.edu/api/articles?term=ACE2&dataset=xdd-covid-19&full_results=true or https://xdd.wisc.edu/api/snippets?term=death rate&dataset=xdd-covid-19&full_results=true )
-        - 3 COSMOS API (beta version) available: https://xdd.wisc.edu/sets/xdd-covid-19/api/beta/search?query=death%20rate&type=Figure . ~12k documents to be merged in next week.
+        - 3 COSMOS API (beta version) available: https://xdd.wisc.edu/sets/xdd-covid-19/api/v2_beta/search?query=death%20rate&type=Figure . ~12k documents to be merged in next week. NOTE: This is a different version of the COSMOS API, hence the `v2_beta` versioning.
 
 3. Visualizer and Other Apps
     - 8 October: Updates to web browser COSMOS search interface to accommodate improvements to COSMOS pipeline
