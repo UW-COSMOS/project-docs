@@ -27,10 +27,12 @@ Here you will find a concise summary of progress made during Phase 3.
     - 14 September: New version feature-complete. PR opened
     - 22 September: Ian still working on PR review
     - 28 September: New version merged into master. Major usability improvements in core pipeline.
+    - 14 October: Dockerized ingestion postprocess model training
     - Ongoing: Entity discovery module
         - Automatically discover entities from documents
         - Link entities across documents
         - Link discovered entities to external knowledge bases
+        - Enhanced semantic retrieval for tables
 
 2. API
     - API service migrated into CHTC Infrastructure
