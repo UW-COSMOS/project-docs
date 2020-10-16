@@ -38,10 +38,11 @@ Here you will find a concise summary of progress made during Phase 3.
     - API service migrated into CHTC Infrastructure
       - 21 September: deployed into production (e.g. https://xdd.wisc.edu/sets/covid/api/search?query=death%20rates&type=Table&postprocessing_confidence=0.9&base_confidence=0.9)
     - New search logic features (support of AND/OR, document-level filtering)
-      - 22 September: Document-level filter terms deployed to dev. (ex:https://xdddev.chtc.io/sets/covid/api/search?query=covid&ignore_bytes=true&document_filter_terms=chloroquine,remdesivir applies a requirement that both "chloroquine" and "remdesivir" appear at the document level)
+      - 22 September: Document-level filter terms deployed to dev. (ex:https://xdd.wisc.edu/sets/covid/api/search?query=covid&ignore_bytes=true&document_filter_terms=chloroquine,remdesivir applies a requirement that both "chloroquine" and "remdesivir" appear at the document level)
     - 16 October: 72K xdd-covid-19 set documents processed via COSMOS, with updated data products:
-        - 1
-        - 2
+        - 1 Cleaned + case-insensitive word2vec https://cosmos.wisc.edu/sets/covid/word2vec-api/word2vec?word=lung&model=trigram_lowered_cleaned
+        - 2 xDD API articles, snippets queries restricted to only this set: (https://xdd.wisc.edu/api/articles?term=ACE2&dataset=xdd-covid-19&full_results=true or https://xdd.wisc.edu/api/snippets?term=death rate&dataset=xdd-covid-19&full_results=true )
+        - 3 (COSMOS API -- still ingesting + building indexes)
 
 3. Visualizer and Other Apps
     - 8 October: Updates to web browser COSMOS search interface to accommodate improvements to COSMOS pipeline
