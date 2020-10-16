@@ -40,8 +40,10 @@ Here you will find a concise summary of progress made during Phase 3.
       - 22 September: Document-level filter terms deployed to dev. (ex:https://xdddev.chtc.io/sets/covid/api/v1/search?query=covid&ignore_bytes=true&document_filter_terms=chloroquine,remdesivir applies a requirement that both "chloroquine" and "remdesivir" appear at the document level)
 
 3. Visualizer and Other Apps
+    - 8 October: Updates to web browser COSMOS search interface to accommodate improvements to COSMOS pipeline
 
-4. Unsupervised relation extraction paper accepted to Findings of EMNLP 2020: https://arxiv.org/abs/2010.06804
+4. Publications
+    - Unsupervised relation extraction paper accepted to Findings of EMNLP 2020: https://arxiv.org/abs/2010.06804
 
 ### License and Acknowledgements
 All development work supported by DAPRA ASKE HR00111990013 and UW-Madison.
