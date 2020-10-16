@@ -38,7 +38,7 @@ Here you will find a concise summary of progress made during Phase 3.
     - API service migrated into CHTC Infrastructure
       - 21 September: deployed into production (e.g. https://xdd.wisc.edu/sets/covid/api/v1/search?query=death%20rates&type=Table&postprocessing_confidence=0.9&base_confidence=0.9)
     - New search logic features (support of AND/OR, document-level filtering)
-      - 22 September: Document-level filter terms deployed to dev. (ex:https://xdddev.chtc.io/sets/covid/api/v1/search?query=covid&ignore_bytes=true&document_filter_terms=chloroquine,remdesivir applies a requirement that both "chloroquine" and "remdesivir" appear at the document level)
+      - 22 September: Document-level filter terms deployed to dev. (ex:https://xdddev.chtc.io/sets/covid/api/search?query=covid&ignore_bytes=true&document_filter_terms=chloroquine,remdesivir applies a requirement that both "chloroquine" and "remdesivir" appear at the document level)
 
 3. Visualizer and Other Apps
     - 8 October: Updates to web browser COSMOS search interface to accommodate improvements to COSMOS pipeline
