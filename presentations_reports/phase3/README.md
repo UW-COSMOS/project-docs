@@ -24,7 +24,7 @@ Here you will find a concise summary of progress made during Phase 3.
 
 ## COSMOS: AI-powered technical assistant over text, tables, figures, equations
 1. Pipeline
-    - 14 September: New version feature-complete. Huge [PR opened](https://github.com/UW-COSMOS/Cosmos/pull/122).
+    - 14 September: New version feature-complete. Major [PR opened](https://github.com/UW-COSMOS/Cosmos/pull/122).
     - 22 September: Ian still working on PR review
     - 28 September: New version merged into master. Major usability improvements in core pipeline.
     - 14 October: Dockerized ingestion postprocess model training
