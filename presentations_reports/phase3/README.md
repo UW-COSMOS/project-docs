@@ -55,9 +55,9 @@ xDD:
     - https://xdd.wisc.edu/api: Statistics and search across entire xDD corpus (equivalent to deprecated https://geodeepdive.org/api)
         - Full-text search and retrieval of text snippets: https://xdd.wisc.edu/api/snippets
         - https://xdd.wisc.edu/sets/: xDD document sets defined by full text searches and journal titles
+
 COSMOS:
-    -
-    -
+    - base URL and links
 
 ### License and Acknowledgements
 All development work supported by DAPRA ASKE HR00111990013 and UW-Madison.
