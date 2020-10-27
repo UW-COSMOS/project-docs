@@ -51,12 +51,12 @@ Here you will find a concise summary of progress made during Phase 3.
     - Unsupervised relation extraction paper accepted to Findings of EMNLP 2020: https://arxiv.org/abs/2010.06804
 
 ## xDD and COSMOS API route overview
-xDD:
+1. xDD: 13.1M full-texts from multiple publishers spanning all disciplines
     - https://xdd.wisc.edu/api: Statistics and search across entire xDD corpus (equivalent to deprecated https://geodeepdive.org/api)
         - Full-text search and retrieval of text snippets: https://xdd.wisc.edu/api/snippets
         - https://xdd.wisc.edu/sets/: xDD document sets defined by full text searches and journal titles
 
-COSMOS:
+2. COSMOS: End-point of COSMOS document processing pipeline deployed over select documents from xDD
     - base URL and links
 
 ### License and Acknowledgements
