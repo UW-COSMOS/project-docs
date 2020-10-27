@@ -56,7 +56,7 @@ Here you will find a concise summary of progress made during Phase 3.
         - Full-text search and retrieval of text snippets: https://xdd.wisc.edu/api/snippets
     - https://xdd.wisc.edu/sets/: xDD document sets defined by full text searches and journal titles
 
-2. COSMOS: End-point of COSMOS document processing pipeline deployed over select documents from xDD
+2. COSMOS: End-point of [COSMOS document processing pipeline](https://github.com/UW-COSMOS/Cosmos) deployed over select documents from xDD
     - base URL and links
 
 ### License and Acknowledgements
