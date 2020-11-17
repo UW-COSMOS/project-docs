@@ -10,7 +10,8 @@ Here you will find a concise summary of progress made during Phase 3.
     - 28 August: Hardware purchase request made
     - 9 September: Purchase order received by vendor
     - 18 September: Hardware shipped; hardware arrived 27 September
-    - 7 October: Hardware inventoried, racked 
+    - 7 October: Hardware inventoried, racked
+    - 28 October: Online and available within CHTC kubernetes cluster.
 
 3. [API](https://xdd.wisc.edu/api)
     - geodeepive.org domain host shifted, deprecated; xdd.wisc.edu domain made active and deployed on CHTC Infrastructure
@@ -21,6 +22,15 @@ Here you will find a concise summary of progress made during Phase 3.
  
 4. Custom Code Execution
     - 6 October: Initial container template for deploying collaborator code against xDD (https://github.com/UW-xDD/xdd-docker-recipe)
+    
+5. Sets
+    - Ongoing development to add _sets_ of documents as an entity within the xDD infrastructure. A _set_ is a collection of documents, defined by queries, keywords, or manual curation, which can be operated upon within xDD.
+    - 23 October: Initial rollout of "sets" API (https://xdd.wisc.edu/sets/) to communicate what sets are defined within xDD, along with which transformations and products are available for them.
+    - 3 November: Production rollout of kubernetes resources defining set resources (COSMOS API, word2vec API)
+    - 5 November: Add IODP set (with COSMOS output availability) https://xdd.wisc.edu/sets/iodp
+    - 9 November: Add geothermal set (with COSMOS, word2vec output availability) https://xdd.wisc.edu/sets/geothermal
+    - 11 November: Add centralized COSMOS output visualizer (https://xdd.wisc.edu/set_visualizer/)
+    - 16 November: Add Mars set (with COSMOS output availability) https://xdd.wisc.edu/sets/geothermal
 
 ## COSMOS: AI-powered technical assistant over text, tables, figures, equations
 1. Pipeline
