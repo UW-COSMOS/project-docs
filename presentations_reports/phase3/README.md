@@ -31,8 +31,9 @@ Here you will find a concise summary of progress made during Phase 3.
     - 3 November: Production rollout of kubernetes resources defining set resources (COSMOS API, word2vec API)
     - 5 November: Add IODP set (with COSMOS output availability) https://xdd.wisc.edu/sets/iodp
     - 9 November: Add geothermal set (with COSMOS, word2vec output availability) https://xdd.wisc.edu/sets/geothermal
-    - 11 November: Add centralized COSMOS output visualizer (https://xdd.wisc.edu/set_visualizer/)
-    - 16 November: Add Mars set (with COSMOS output availability) https://xdd.wisc.edu/sets/geothermal
+    - 11 November: Add centralized COSMOS output visualizer for all sets (https://xdd.wisc.edu/set_visualizer/)
+    - 16 November: Add Mars Jezero Crater/Perseverance rover set (with COSMOS output availability) https://xdd.wisc.edu/sets/mars
+    - 16 November: COSMOS output visualizer now supports permalinks to COSMOS extractions stored in xDD (e.g. https://xdddev.chtc.io/set_visualizer/sets/mars/object/5abb12574e45fe1e202cb4952a6ae673b498d6f2)
 
 ## COSMOS: AI-powered technical assistant over text, tables, figures, equations
 1. Pipeline
