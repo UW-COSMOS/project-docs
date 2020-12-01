@@ -12,6 +12,7 @@ Here you will find a concise summary of progress made during Phase 3.
     - 18 September: Hardware shipped; hardware arrived 27 September
     - 7 October: Hardware inventoried, racked
     - 28 October: Online and available within CHTC kubernetes cluster.
+    - 30 November: mongo upgraded to 4.0
 
 3. [API](https://xdd.wisc.edu/api)
     - geodeepive.org domain host shifted, deprecated; xdd.wisc.edu domain made active and deployed on CHTC Infrastructure
