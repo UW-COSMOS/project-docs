@@ -47,7 +47,7 @@ Here you will find a concise summary of progress made during Phase 3.
         - Link entities across documents
         - Link discovered entities to external knowledge bases
     - 2 December (review in progress): Initial development complete for enhanced semantic retrieval for tables 
-    - 4 December - v0.2.0 release candidate - Includes new pipeline architecture, entity discovery, and semantic context for tables.
+    - 4 December - v0.2.0 [release candidate](https://github.com/UW-COSMOS/Cosmos) - Includes new pipeline architecture, entity discovery, and semantic context for tables.
       - A few more tests + documentation needed before final release
 
 2. API
