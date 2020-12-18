@@ -35,6 +35,19 @@ Here you will find a concise summary of progress made during Phase 3.
     - 11 November: Add centralized COSMOS output visualizer for all sets (https://xdd.wisc.edu/set_visualizer/)
     - 16 November: Add Mars Jezero Crater/Perseverance rover set (with COSMOS output availability) https://xdd.wisc.edu/sets/mars
     - 16 November: COSMOS output visualizer now supports permalinks to COSMOS extractions stored in xDD (e.g. https://xdddev.chtc.io/set_visualizer/sets/mars/object/5abb12574e45fe1e202cb4952a6ae673b498d6f2)
+    
+6. ASKE-ID
+    - 18 December: Prototype of ASKE-ID interface set up in dev namespace.
+    ```
+        # Reserve ASKE-IDs, to be used later. Number of ids set with _n_ parameter (default: 10)
+        curl -X POST https://xdddev.chtc.io/aske-id/reserve\?n\=3\&api_key\=995d5601-896b-4309-b21f-1684d4a6421
+        # Register above IDs to a location by passing in an array of [<ASKE-ID>, <location>] objects
+        curl -X POST -H 'Content-Type: application/json' -d '[["3e79f1fc-f7cc-4fc2-87ea-a6daa899c0f0","http://some_url"]]' https://xdddev.chtc.io/aske-id/register\?api_key\=995d5601-896b-4309-b21f-1684d4a6421f
+        # Look up the location of an ASKE-ID
+        curl -X GET https://xdddev.chtc.io/aske-id/id/3e79f1fc-f7cc-4fc2-87ea-a6daa899c0f0
+        # Directly register locations, without first reserving blocks
+        curl -X POST -H 'Content-Type: application/json' -d '["http://some_url", "https://some_other_url"]' https://xdddev.chtc.io/aske-id/create\?api_key\=995d5601-896b-4309-b21f-1684d4a6421f
+    ```
 
 ## COSMOS: AI-powered technical assistant over text, tables, figures, equations
 1. Pipeline
