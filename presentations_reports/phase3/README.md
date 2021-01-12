@@ -29,12 +29,12 @@ Here you will find a concise summary of progress made during Phase 3.
 5. Sets
     - Ongoing development to add _sets_ of documents as an entity within the xDD infrastructure. A _set_ is a collection of documents, defined by queries, keywords, or manual curation, which can be operated upon within xDD.
     - 23 October: Initial rollout of "sets" API (https://xdd.wisc.edu/sets/) to communicate what sets are defined within xDD, along with which transformations and products are available for them.
-    - 3 November: Production rollout of kubernetes resources defining set resources (COSMOS API, word2vec API)
-    - 5 November: Add IODP set (with COSMOS output availability) https://xdd.wisc.edu/sets/iodp
-    - 9 November: Add geothermal set (with COSMOS, word2vec output availability) https://xdd.wisc.edu/sets/geothermal
-    - 11 November: Add centralized COSMOS output visualizer for all sets (https://xdd.wisc.edu/set_visualizer/)
-    - 16 November: Add Mars Jezero Crater/Perseverance rover set (with COSMOS output availability) https://xdd.wisc.edu/sets/mars
-    - 16 November: COSMOS output visualizer now supports permalinks to COSMOS extractions stored in xDD (e.g. https://xdddev.chtc.io/set_visualizer/sets/mars/object/5abb12574e45fe1e202cb4952a6ae673b498d6f2)
+    - 3 November: Production rollout of kubernetes resources defining set resources (COSMOS API, word2vec API). General capability for on-demand high quality research set generation. Examples that are live:
+        - 5 November: Add IODP set (with COSMOS output availability) https://xdd.wisc.edu/sets/iodp
+        - 9 November: Add geothermal set (with COSMOS, word2vec output availability) https://xdd.wisc.edu/sets/geothermal
+        - 11 November: Add centralized COSMOS output visualizer for all sets (https://xdd.wisc.edu/set_visualizer/)
+        - 16 November: Add Mars Jezero Crater/Perseverance rover set (with COSMOS output availability) https://xdd.wisc.edu/sets/mars
+        - 16 November: COSMOS output visualizer now supports permalinks to COSMOS extractions stored in xDD (e.g. https://xdddev.chtc.io/set_visualizer/sets/mars/object/5abb12574e45fe1e202cb4952a6ae673b498d6f2)
     
 6. ASKE-ID
     - 18 December: Prototype of ASKE-ID interface set up in dev namespace.
