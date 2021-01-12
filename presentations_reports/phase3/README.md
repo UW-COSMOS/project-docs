@@ -76,7 +76,7 @@ Here you will find a concise summary of progress made during Phase 3.
 3. Visualizer and Other Apps
     - 8 October: Updates to web browser COSMOS search interface to accommodate improvements to COSMOS pipeline
     - 20 November: COSMOS table/figure search interface with integrated manual data extraction and database web App targeted for data-wg needs: http://teststrata.geology.wisc.edu/xdd/extract.php
-    - 20 December: COSMOS document annotator updated for new COSMOS back-end and new COVID19 set generated for annotation and retraining.
+    - 20 December: [COSMOS document annotator](https://github.com/UW-COSMOS/cosmos-visualizer) updated for new COSMOS back-end and new COVID19 set generated for annotation and retraining.
 
 4. Publications
     - Unsupervised relation extraction paper accepted to Findings of EMNLP 2020: https://arxiv.org/abs/2010.06804
