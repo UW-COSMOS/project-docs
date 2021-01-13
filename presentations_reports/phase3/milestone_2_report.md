@@ -5,7 +5,7 @@ UW-Madison xDD and COSMOS capabilities have been improved and extended to accomm
 ## Demos
 Our core deliverables are live data services that provide broad access to the content of publications. There are two components: xDD and COSMOS. The former is focused on text and document metadata and the latter delivers visual elements (tables, figures, equations) along with context (e.g., captions) in response to specific queries. Retrieval in both xDD and COSMOS is currently based on term/phrase matching, but we provide a variety of services to help users expand the scope of simple queries by using text embedding models trained over the target corpus. Ongoing work is focusing on entity-based retrieval and simple relation extraction.
 
-Live, production versions of these sytems can be accessed via REST-ful services, which constitute our principal demos for this Milestone.
+Live, production versions of these sytems can be accessed via REST-ful services and web pplications deployed over these services, which constitute our principal demos for this Milestone.
   - xdd: https://xdd.wisc.edu/api
   - COSMOS COVID19 data product: https://xdd.wisc.edu/sets/covid/api/search 
   - COSMOS COVID19 data search interface: https://xdd.wisc.edu/set_visualizer/sets/xdd-covid-19
