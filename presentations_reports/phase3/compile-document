@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+mkdir -p output
+
+doc=milestone_2_report
+cat $doc.md \
+  | pandoc -t latex --pdf-engine=xelatex \
+    --metadata geometry:margin=1in \
+    --output=output/$doc.pdf
