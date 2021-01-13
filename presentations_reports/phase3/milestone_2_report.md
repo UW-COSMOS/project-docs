@@ -7,6 +7,7 @@ Our core deliverables are live data services that provide broad access to the co
 
 Live, production versions of these sytems can be accessed via REST-ful services and web pplications deployed over these services, which constitute our principal demos for this Milestone.
   - xdd: https://xdd.wisc.edu/api
+  - COSMOS COVID19 text embedding models: https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/
   - COSMOS COVID19 data product: https://xdd.wisc.edu/sets/covid/api/search 
   - COSMOS COVID19 data search interface: https://xdd.wisc.edu/set_visualizer/sets/xdd-covid-19
 
