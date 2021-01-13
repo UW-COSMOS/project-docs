@@ -7,7 +7,8 @@ Our core deliverables are live data services that provide broad access to the co
 
 Live, production versions of these sytems can be accessed via REST-ful services, which constitute our principal demos for this Milestone.
   - xdd: https://xdd.wisc.edu/api
-  - COSMOS data product: https://xdd.wisc.edu/sets/covid/api/search 
+  - COSMOS COVID19 data product: https://xdd.wisc.edu/sets/covid/api/search 
+  - COSMOS COVID19 data search interface: https://xdd.wisc.edu/set_visualizer/sets/xdd-covid-19
 
 Note that COSMOS is a [standalone software stack](https://github.com/UW-COSMOS/Cosmos) capable of deployment locally over PDFs by users and it constitutes our primary code deliverable. Runs of COSMOS over xDD document sets produce data products that we then expose via REST-ful services on xDD infrastructure (second link above).
 
