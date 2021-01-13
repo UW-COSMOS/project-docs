@@ -1,4 +1,4 @@
-# Milestone 4 Report
+# Milestone 2 Report
 
 UW-Madison xDD and COSMOS capabilities have been improved and extended to accommodate emerging needs of ASKE demo projects. Our focus remains on providing dependable, scalable services oriented around  text, tables, figures and equations in publications, but recent needs and requirements from the data-wg working group, Arizona, and Uncharted have resulted in the addition of several new capabilities during the reporting period. Below we briefly summarize these new capabilities and other advances since Milestone 1 report (October). For additional summary of deliverables and timelines see our [Phase 3 Summary](https://github.com/UW-COSMOS/project-docs/tree/master/presentations_reports/phase3).
 
