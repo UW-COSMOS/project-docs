@@ -72,6 +72,7 @@ Here you will find a concise summary of progress made during Phase 3.
         - Cleaned + case-insensitive word2vec https://cosmos.wisc.edu/sets/covid/word2vec-api/word2vec?word=lung&model=trigram_lowered_cleaned
         - xDD API articles, snippets queries restricted to only this set: (https://xdd.wisc.edu/api/articles?term=ACE2&dataset=xdd-covid-19&full_results=true or https://xdd.wisc.edu/api/snippets?term=remdesivir&dataset=xdd-covid-19&full_results=true )
         - COSMOS API (beta version) available: https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/search?query=remdesivir&type=Figure .
+   - 14 January: initial doc2vec implementation over xdd-covid-19 set.
 
 3. Visualizer and Other Apps
     - 8 October: Updates to web browser COSMOS search interface to accommodate improvements to COSMOS pipeline
