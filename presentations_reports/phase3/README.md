@@ -94,6 +94,8 @@ Here you will find a concise summary of progress made during Phase 3.
     - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/: Documentation for the API to explore the word embedding model.
         - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/most_similar - Documentation for the "most_similar" function
         - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/most_similar?word=covid&n=50&model=trigram&lowered=true&cleaned=true - Example query: uni- bi- and tri-grams most similar to "covid" in the case-insensitive, ligature-cleaned model.
+4. doc2vec: End-point of document embeding model trained on document set.
+    - https://xdd.wisc.edu/sets/xdd-covid-19/doc2vec/api/similar: documentation to be added, but example ?doi=10.1002/pbc.28600
 
 ### License and Acknowledgements
 All development work supported by DAPRA ASKE HR00111990013 and UW-Madison.
