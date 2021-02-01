@@ -1,6 +1,5 @@
 # Phase 3 Key Developments
 Here you will find a concise summary of progress made during Phase 3.
-
 ## xDD: Document acquisition, storage, processing, and search infrastructure
 1. Document Ingestion
     - 17 September: 13M document milestone crossed
@@ -73,6 +72,7 @@ Here you will find a concise summary of progress made during Phase 3.
         - xDD API articles, snippets queries restricted to only this set: (https://xdd.wisc.edu/api/articles?term=ACE2&dataset=xdd-covid-19&full_results=true or https://xdd.wisc.edu/api/snippets?term=remdesivir&dataset=xdd-covid-19&full_results=true )
         - COSMOS API (beta version) available: https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/search?query=remdesivir&type=Figure .
    - 14 January: initial doc2vec implementation over xdd-covid-19 set.
+   - 1 February: custom doc2vec and word2vec vector extractions for ASKE Uncharted endpoints (to be assigned ASKE-IDs as datasets).
 
 3. Visualizer and Other Apps
     - 8 October: Updates to web browser COSMOS search interface to accommodate improvements to COSMOS pipeline
