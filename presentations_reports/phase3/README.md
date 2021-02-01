@@ -72,12 +72,12 @@ Here you will find a concise summary of progress made during Phase 3.
         - xDD API articles, snippets queries restricted to only this set: (https://xdd.wisc.edu/api/articles?term=ACE2&dataset=xdd-covid-19&full_results=true or https://xdd.wisc.edu/api/snippets?term=remdesivir&dataset=xdd-covid-19&full_results=true )
         - COSMOS API (beta version) available: https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/search?query=remdesivir&type=Figure .
    - 14 January: initial doc2vec implementation over xdd-covid-19 set.
-   - 1 February: custom doc2vec and word2vec vector extractions for ASKE Uncharted endpoints (to be assigned ASKE-IDs as datasets).
 
 3. Visualizer and Other Apps
     - 8 October: Updates to web browser COSMOS search interface to accommodate improvements to COSMOS pipeline
     - 20 November: COSMOS table/figure search interface with integrated manual data extraction and database web App targeted for data-wg needs: http://teststrata.geology.wisc.edu/xdd/extract.php
     - 20 December: [COSMOS document annotator](https://github.com/UW-COSMOS/cosmos-visualizer) updated for new COSMOS back-end and new COVID19 set generated for annotation and retraining.
+   - 1 February: custom doc2vec and word2vec vector extractions for ASKE Uncharted endpoints (to be assigned ASKE-IDs as datasets).
 
 4. Publications
     - Unsupervised relation extraction paper accepted to Findings of EMNLP 2020: https://arxiv.org/abs/2010.06804
