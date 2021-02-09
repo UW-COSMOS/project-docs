@@ -2,7 +2,7 @@
 Here you will find a concise summary of progress made during Phase 3.
 
 ## xDD and COSMOS API route overview
-1. xDD: 13.1M full-texts from multiple publishers spanning all disciplines
+1. xDD: 13.3M full-texts from multiple publishers spanning all disciplines
     - https://xdd.wisc.edu/api: Statistics and search across entire xDD corpus (equivalent to deprecated https://geodeepdive.org/api)
         - Full-text search and retrieval of text snippets: https://xdd.wisc.edu/api/snippets
     - https://xdd.wisc.edu/sets/: xDD document sets defined by full text searches and journal titles. Different transformations to documents within sets are available within sub-pages of the set. For example, documents within a set may be used to train a word embedding model, or the COSMOS extraction pipeline may be deployed to extract figures, tables, and equations for documents within a set
@@ -32,10 +32,10 @@ Here you will find a concise summary of progress made during Phase 3.
 
 3. [API](https://xdd.wisc.edu/api)
     - geodeepive.org domain host shifted, deprecated; xdd.wisc.edu domain made active and deployed on CHTC Infrastructure
-    - 8 October: Development complete on augmenting xDD responses with known dictionary terms (`/snippets` and `/articles`, currently being tested within development setup: https://xdddev.chtc.io/api/snippets?term=Baraboo%20Quartzite&known_terms=true)
+    - 8 October: Development complete on augmenting xDD responses with known dictionary terms (`/snippets` and `/articles`)
     - 5 October: Initial deployment of dataset filtering on `/articles` and `snippets` routes (e.g. https://xdd.wisc.edu/api/articles?term=ACE&dataset=xdd-covid-19&full_results=true)
     - 5 October: Basic visual search interface over API for document sets: https://xdd.wisc.edu/explore.html
-    - 15 October: (in active development) Integration of MITRE drug entities within `snippets` and `articles` response (https://xdddev.chtc.io/api/snippets?term=remdesivir&known_entities=drugs)
+    - 15 October: (in active development) Integration of MITRE drug entities within `snippets` and `articles` response (https://xdd.wisc.edu/api/snippets?term=remdesivir&known_entities=drugs)
     - 23 October: `known_entities`, `known_terms` deployed to production
     - 17 November: Added `document_filter_terms` to `/snippets` route
     - 8 February: Added `EMMAA` annotations to `known_entities`: https://xdd.wisc.edu/api/articles?docid=5e7dc0df998e17af8269af5d&known_entities=drugs,emmaa
