@@ -9,7 +9,7 @@ Live, production versions of these sytems can be accessed via REST-ful services 
 
 - xdd: [https://xdd.wisc.edu/api](https://xdd.wisc.edu/api)
 - COSMOS COVID19 text embedding models: [https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/](https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/)
-- COSMOS COVID19 data product: [https://xdd.wisc.edu/sets/covid/api/search](https://xdd.wisc.edu/sets/covid/api/search)
+- COSMOS COVID19 data product: [https://xdd.wisc.edu/sets/xdd-covid-19/api/search](https://xdd.wisc.edu/sets/xdd-covid-19/api/search)
 - COSMOS COVID19 data search interface: [https://xdd.wisc.edu/set_visualizer/sets/xdd-covid-19](https://xdd.wisc.edu/set_visualizer/sets/xdd-covid-19)
 
 Note that COSMOS is a [standalone software stack](https://github.com/UW-COSMOS/Cosmos) capable of deployment locally over PDFs by users and it constitutes our primary code deliverable. Runs of COSMOS over xDD document sets produce data products that we then expose via REST-ful services on xDD infrastructure (see links above).
