@@ -1,20 +1,20 @@
 # Phase 3 Key Developments
 Here you will find a concise summary of progress made during Phase 3.
 
-## xDD and COSMOS API route overview
-1. xDD: 13.3M full-texts from multiple publishers spanning all disciplines
+![xDD-COSMOS API overview](https://github.com/UW-COSMOS/project-docs/blob/master/presentations_reports/images/xdd_overview.jpg?raw=true)
+1. xDD API: 13.3M full-texts from multiple publishers spanning all disciplines
     - https://xdd.wisc.edu/api: Statistics and search across entire xDD corpus (equivalent to deprecated https://geodeepdive.org/api)
         - Full-text search and retrieval of text snippets: https://xdd.wisc.edu/api/snippets
     - https://xdd.wisc.edu/sets/: xDD document sets defined by full text searches and journal titles. Different transformations to documents within sets are available within sub-pages of the set. For example, documents within a set may be used to train a word embedding model, or the COSMOS extraction pipeline may be deployed to extract figures, tables, and equations for documents within a set
         - https://xdd.wisc.edu/sets/xdd-covid-19/: Lists information about the `xdd-covid-19` set of documents, and lists available products (transformations) derived from the set.
-2. COSMOS: End-point of [COSMOS document processing pipeline](https://github.com/UW-COSMOS/Cosmos) deployed over select documents from xDD
+2. COSMOS API: End-point of [COSMOS document processing pipeline](https://github.com/UW-COSMOS/Cosmos) deployed over xDD set
     - https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/: Base documentation for COSMOS search interface, available for the `xdd-covid-19` set.
     - https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/search: Documentation for searching the COSMOS extractions.
-3. word2vec: End-point of word embedding models trained on document set. 
+3. word2vec API: End-point of word embedding models trained on document set. 
     - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/: Documentation for the API to explore the word embedding model.
         - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/most_similar - Documentation for the "most_similar" function
         - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/most_similar?word=covid&n=50&model=trigram&lowered=true&cleaned=true - Example query: uni- bi- and tri-grams most similar to "covid" in the case-insensitive, ligature-cleaned model.
-4. doc2vec: End-point of document embeding model trained on document set.
+4. doc2vec API: End-point of document embeding model trained on document set.
     - https://xdd.wisc.edu/sets/xdd-covid-19/doc2vec/api/similar: documentation to be added, but example ?doi=10.1002/pbc.28600
     
 ## xDD: Document acquisition, storage, processing, and search infrastructure
