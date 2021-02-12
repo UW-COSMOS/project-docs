@@ -10,11 +10,11 @@ Here you will find a concise summary of progress made during Phase 3.
 2. **COSMOS API**: Figure, table, equation retreival by [COSMOS document processing pipeline](https://github.com/UW-COSMOS/Cosmos) deployed over xDD set
     - https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/: Base documentation for COSMOS search interface, available for the `xdd-covid-19` set.
     - https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/search: Documentation for searching the COSMOS extractions.
-3. **word2vec API**: End-point of word embedding models trained on document set. 
+3. **word2vec API**: Word embedding models (unigram, bigram, trigram) trained on xDD document set. 
     - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/: Documentation for the API to explore the word embedding model.
         - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/most_similar - Documentation for the "most_similar" function
         - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/most_similar?word=covid&n=50&model=trigram&lowered=true&cleaned=true - Example query: uni- bi- and tri-grams most similar to "covid" in the case-insensitive, ligature-cleaned model.
-4. **doc2vec API**: End-point of document embeding model trained on document set.
+4. **doc2vec API**: Document embedding model trained on xDD document set.
     - https://xdd.wisc.edu/sets/xdd-covid-19/doc2vec/api/similar: documentation to be added, but example ?doi=10.1002/pbc.28600
     
 ## xDD: Document acquisition, storage, processing, and search infrastructure
