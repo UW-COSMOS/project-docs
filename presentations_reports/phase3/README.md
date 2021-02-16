@@ -78,8 +78,12 @@ Here you will find a concise summary of progress made during Phase 3.
         - Link entities across documents
         - Link discovered entities to external knowledge bases
     - 2 December (review in progress): Initial development complete for enhanced semantic retrieval for tables 
-    - 4 December - v0.2.0 [release candidate](https://github.com/UW-COSMOS/Cosmos) - Includes new pipeline architecture, entity discovery, and semantic context for tables.
+    - 4 December - v0.3.0 [release candidate](https://github.com/UW-COSMOS/Cosmos) - Includes new pipeline architecture, entity discovery, and semantic context for tables.
       - A few more tests + documentation needed before final release
+    - 16 February 2021 - v0.4.0 - Includes retrieval API updates, new model weights.
+        - Deployment of `xdd-covid-19` run through v0.4.0 release candidate 
+            - "In-place" deployment, so no set names or route changes. 
+            - Object IDs retreivable from previous runs, but API only serves up latest results.
 
 2. API
     - API service migrated into CHTC Infrastructure
