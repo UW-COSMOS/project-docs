@@ -16,6 +16,9 @@ Here you will find a concise summary of progress made during Phase 3.
         - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/most_similar?word=covid&n=50&model=trigram&lowered=true&cleaned=true - Example query: uni- bi- and tri-grams most similar to "covid" in the case-insensitive, ligature-cleaned model.
 4. **doc2vec API**: Document embedding model trained on xDD document set.
     - https://xdd.wisc.edu/sets/xdd-covid-19/doc2vec/api/similar: documentation to be added, but example ?doi=10.1002/pbc.28600
+5. **ASKE-ID API**: Generate unique IDs and lookup metadata and linking information for data and documents used in ASKE infrastructure.
+    - https://xdddev.chtc.io/aske-id/id/: base URL for API route, used for lookup.
+    - Registering a new ASKE-ID and submitting metadata requires an API key
     
 ## xDD: Document acquisition, storage, processing, and search infrastructure
 1. Document Ingestion
