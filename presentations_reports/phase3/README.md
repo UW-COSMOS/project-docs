@@ -84,6 +84,12 @@ Here you will find a concise summary of progress made during Phase 3.
         - Deployment of `xdd-covid-19` run through v0.4.0 release candidate 
             - "In-place" deployment, so no set names or route changes. 
             - Object IDs retreivable from previous runs, but API only serves up latest results.
+    - 3 March 2021 - API updates deployed
+        - API key requirement is enforceable via environment variable (on in our deployment)
+        - Bring back extracted object bytes on `/document`
+        - Add object type filter on `/document`
+        - Bugfix: treatment of boolean parameters (`ignore_bytes`, `inclusive`) is consistent and meaningful.
+        - Docstrings added for `/document`, `/object`
 
 2. API
     - API service migrated into CHTC Infrastructure
