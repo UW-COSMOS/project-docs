@@ -10,6 +10,7 @@ Here you will find a concise summary of progress made during Phase 3.
 2. **COSMOS API**: Figure, table, equation retreival by [COSMOS document processing pipeline](https://github.com/UW-COSMOS/Cosmos) deployed over xDD set. Note that use of these routes to retrieve table and figure objects requires an API key.
     - https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/: Base documentation for COSMOS search interface, available for the `xdd-covid-19` set.
     - https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/search: Documentation for searching the COSMOS extractions.
+    - https://xdd.wisc.edu/set_visualizer/sets/xdd-covid-19: COSMOS search and discovery interface deployed over `xdd-covid-19` set.
 3. **word2vec API**: Word embedding models (unigram, bigram, trigram) trained on xDD document set. 
     - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/: Documentation for the API to explore the word embedding model.
         - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/most_similar - Documentation for the "most_similar" function
