@@ -57,6 +57,7 @@ Here you will find a concise summary of progress made during Phase 3.
         - 11 November: Add centralized COSMOS output visualizer for all sets (https://xdd.wisc.edu/set_visualizer/)
         - 16 November: Add Mars Jezero Crater/Perseverance rover set (with COSMOS output availability) https://xdd.wisc.edu/sets/mars
         - 16 November: COSMOS output visualizer now supports permalinks to COSMOS extractions stored in xDD (e.g. https://xdddev.chtc.io/set_visualizer/sets/mars/object/5abb12574e45fe1e202cb4952a6ae673b498d6f2)
+    - 20 February: Retooling of set definition for `xdd-covid-19` and regeneration of set.
     
 6. ASKE-ID
     - 18 December: Prototype of ASKE-ID interface set up in dev namespace.
@@ -85,9 +86,10 @@ Here you will find a concise summary of progress made during Phase 3.
     - 4 December - v0.3.0 [release candidate](https://github.com/UW-COSMOS/Cosmos) - Includes new pipeline architecture, entity discovery, and semantic context for tables.
       - A few more tests + documentation needed before final release
     - 16 February 2021 - v0.4.0 - Includes retrieval API updates, new model weights.
-        - Deployment of `xdd-covid-19` run through v0.4.0 release candidate 
+        - Deployment of updated `xdd-covid-19` run through v0.4.0 release candidate 
             - "In-place" deployment, so no set names or route changes. 
             - Object IDs retreivable from previous runs, but API only serves up latest results.
+    - 20 February - retraining of COSMOS visual model with additional annotations from documents in redefined xdd-covid-19 set.
     - 3 March 2021 - API updates deployed
         - API key requirement is enforceable via environment variable (on in our deployment)
         - Bring back extracted object bytes on `/document`
@@ -111,6 +113,7 @@ Here you will find a concise summary of progress made during Phase 3.
     - 20 November: COSMOS table/figure search interface with integrated manual data extraction and database web App targeted for data-wg needs: http://teststrata.geology.wisc.edu/xdd/extract.php
     - 20 December: [COSMOS document annotator](https://github.com/UW-COSMOS/cosmos-visualizer) updated for new COSMOS back-end and new COVID19 set generated for annotation and retraining.
    - 1 February: custom doc2vec and word2vec vector extractions for ASKE Uncharted endpoints (to be assigned ASKE-IDs as datasets).
+   - 25 February: updates to accommodate backend changes to COSMOS pipeline
 
 4. Publications
     - Unsupervised relation extraction paper accepted to Findings of EMNLP 2020: https://arxiv.org/abs/2010.06804
