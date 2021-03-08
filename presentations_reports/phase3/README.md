@@ -51,7 +51,7 @@ Here you will find a concise summary of progress made during Phase 3.
 5. Sets
     - Ongoing development to add _sets_ of documents as an entity within the xDD infrastructure. A _set_ is a collection of documents, defined by queries, keywords, or manual curation, which can be operated upon within xDD.
     - 23 October: Initial rollout of "sets" API (https://xdd.wisc.edu/sets/) to communicate what sets are defined within xDD, along with which transformations and products are available for them.
-    - 3 November: Production rollout of kubernetes resources defining set resources (COSMOS API, word2vec API). General capability for on-demand high quality research set generation. Examples that are live:
+    - 3 November: Production rollout of kubernetes resources defining set resources (COSMOS API, word2vec API). General capability for on-demand high quality research set generation. Testing of set infrstructure and generalizability of COSMOS pipeline realized in following examples:
         - 5 November: Add IODP set (with COSMOS output availability) https://xdd.wisc.edu/sets/iodp
         - 9 November: Add geothermal set (with COSMOS, word2vec output availability) https://xdd.wisc.edu/sets/geothermal
         - 11 November: Add centralized COSMOS output visualizer for all sets (https://xdd.wisc.edu/set_visualizer/)
