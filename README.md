@@ -1,5 +1,7 @@
 # Goals and Approaches for UW-COSMOS: TA1 Phases and Tasks (reverse chronological order)
 
+![xDD-COSMOS API overview](https://github.com/UW-COSMOS/project-docs/blob/master/presentations_reports/images/xdd_overview.jpg?raw=true)
+
 ## Phase 3 (beginning August 2020)
 Phase 3 activities will focus on refining and extending xDD and COSMOS APIs that expose data and information in the published scientific literature. Our overarching objective is to develop and deploy an end-to-end platform and AI-powered technical assistant capable of advanced data and information retrieval and question answering over the scientific literature in near real-time, as it is published. We anticipate serving as a key resource in the data and model visualization, assessment and exploration interfaces being developed by ASKE team members.
 
