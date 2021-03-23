@@ -43,7 +43,9 @@ Here you will find a concise summary of progress made during Phase 3.
     - 23 October: `known_entities`, `known_terms` deployed to production
     - 17 November: Added `document_filter_terms` to `/snippets` route
     - 8 February: Added `EMMAA` annotations to `known_entities`: https://xdd.wisc.edu/api/articles?docid=5e7dc0df998e17af8269af5d&known_entities=drugs,emmaa
-    - 8 February: Added `pubname` parameter to `/snippest`/: https://xdd.wisc.edu/api/snippets?term=Baraboo%20Quartzite&pubname=Marine%20Geology
+    - 8 February: Added `pubname` parameter to `/snippets`/: https://xdd.wisc.edu/api/snippets?term=Baraboo%20Quartzite&pubname=Marine%20Geology
+    - 23 March: Added searchable Pubmed abstracts; added `corpus` parameter to select between corpuses. (e.g. https://xdd.wisc.edu/api/articles?term=remdesivir&corpus=fulltext&max=10 vs https://xdd.wisc.edu/api/articles?term=remdesivir&corpus=pubmed_abstracts&max=10)
+      - Pubmed abstracts include `known_entity` matching
  
 4. Custom Code Execution
     - 6 October: Initial container template for deploying collaborator code against xDD (https://github.com/UW-xDD/xdd-docker-recipe)
