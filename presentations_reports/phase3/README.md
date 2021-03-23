@@ -98,6 +98,7 @@ Here you will find a concise summary of progress made during Phase 3.
         - Add object type filter on `/document`
         - Bugfix: treatment of boolean parameters (`ignore_bytes`, `inclusive`) is consistent and meaningful.
         - Docstrings added for `/document`, `/object`
+     - 23 March 2021: Deployed `image_type` parameter on all routes (options: [`original`, `thumbnail`, and `jpg`] to return smaller and/or compressed versions of extracted images.
 
 2. API
     - API service migrated into CHTC Infrastructure
