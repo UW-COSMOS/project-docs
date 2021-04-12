@@ -1,0 +1,10 @@
+# Milestone 4 Report
+
+UW-Madison xDD and COSMOS capabilities have been improved and extended to accommodate the needs of ASKE team members. Our focus continues to be on providing dependable, scalable services oriented around text, tables, figures and equations in scientific publications. Below we briefly summarize Milestone achievements and other advances made since [Milestone 2](https://github.com/UW-COSMOS/project-docs/blob/master/presentations_reports/phase3/milestone_2_report.md) report (February). For additional summary of deliverables and timelines see our [Phase 3 Summary](https://github.com/UW-COSMOS/project-docs/tree/master/presentations_reports/phase3).
+
+## Improvements to xDD and COSMOS in Reporting Period
+**xDD infrastructure.** We have made improvements to the xDD "set" generation and processing system. Document sets define collections of publications that are identified on the basis of their content, journal or other criteria to be relevant to a given research problem. The creation of a set defines the corpus over which the COSMOS pipeline is deployed and for which embedding models are generated. The xDD corpus also grew by some 200K documents, to over 13.5M full text PDFs.
+
+**PubMed Abstracts.** At the request of ASKE collaborators we have incorporated all PubMed abstracts into xDD. These abstracts are indexed discoverable via the xDD API. Parameters have been added that allow specification of corpus: (https://xdd.wisc.edu/api/articles?term=remdesivir&corpus=pubmed_abstracts&max=10). Abstracts are pre-labled with EMMAA statements and Mitre druglist entities. 
+
+**COSMOS image resolution.** To improve the performance of downstream user applications, we introduced image scaling to the COSMOS API. The default response (i.e., no parameter fro image resolution specified) is to return compressed jpg version of table, figure, and equation elements that are suitable for most scree-based display of information. Optionally, users my request thumbnails or the full PNG version of the extracted images
