@@ -11,7 +11,9 @@ UW-Madison xDD and COSMOS capabilities have been improved and extended to accomm
 
 **Updated COSMOS pipleline.** We released another major update to the COSMOS pipeline that included a retrained model (using additional annotations over the COVID19 set), bug fixes and general improvements. Several additions and improvements were also made to the COSMOS API, including document-level summaries). This release was merged into the master branch of [COSMOS](https://github.com/UW-COSMOS/Cosmos) prior to running the pipeline over the updated xDD COVID-19 set.
 
-**COSMOS image resolution.** To improve the performance of downstream user applications, we introduced image scaling to the COSMOS API. The default response (i.e., no parameter fro image resolution specified) is to return compressed jpg version of table, figure, and equation elements that are suitable for most scree-based display of information. Optionally, users my request thumbnails or the full PNG version of the extracted images
+**COSMOS image resolution.** To improve the performance of downstream user applications, we introduced image scaling to the COSMOS API. The default response (i.e., no parameter fro image resolution specified) is to return compressed jpg version of table, figure, and equation elements that are suitable for most scree-based display of information. Optionally, users my request thumbnails or the full PNG version of the extracted images.
+
+**COSMOS visualizer improvements.** The interface for COSMOS (https://xdd.wisc.edu/set_visualizer/sets/xdd-covid-19) was updated to accommodate changes to the API end points, implement COSMOS API key requirements, and fix bugs. Additional improvements to the document annotator and additional training and COSMOS assessment data were also collected during the reporting period.
 
 **COSMOS API Key Implementation.** To allow for controlled distribution of full image content from publications we implemented an API key-based mechansism for image distribution from COSMOS and distributed a key to ASKE team members.
 
