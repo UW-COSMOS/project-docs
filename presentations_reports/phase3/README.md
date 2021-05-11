@@ -8,7 +8,7 @@ Here you will find a concise summary of progress made during Phase 3.
     - https://xdd.wisc.edu/sets/: xDD document sets defined by full text searches and journal titles. Different transformations to documents within sets are available within sub-pages of the set. For example, documents within a set may be used to train a word embedding model, or the COSMOS extraction pipeline may be deployed to extract figures, tables, and equations for documents within a set
         - https://xdd.wisc.edu/sets/xdd-covid-19/: Lists information about the `xdd-covid-19` set of documents, and lists available products (transformations) derived from the set.
 2. **COSMOS API**: Figure, table, equation retreival by [COSMOS document processing pipeline](https://github.com/UW-COSMOS/Cosmos) deployed over xDD set. Note that use of these routes to retrieve table and figure objects requires an API key.
-    - [Getting started](https://uw-cosmos.github.io/Cosmos/index.html)
+    - Get started by reading the [COSMOS documentation](https://uw-cosmos.github.io/Cosmos/index.html) and understanding the back-end.
     - https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/: Base documentation for COSMOS search interface, available for the `xdd-covid-19` set.
     - https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/search: Documentation for searching the COSMOS extractions.
     - https://xdd.wisc.edu/set_visualizer/sets/xdd-covid-19: COSMOS search and discovery interface deployed over `xdd-covid-19` set.
