@@ -19,9 +19,12 @@ Here you will find a concise summary of progress made during Phase 3.
 4. **doc2vec API**: Document embedding model trained on xDD document set.
     - https://xdd.wisc.edu/sets/xdd-covid-19/doc2vec/api/similar: documentation to be added, but example ?doi=10.1002/pbc.28600
 5. **ASKE-ID API**: Generate unique IDs and lookup metadata and linking information for data and documents used in ASKE infrastructure.
-    - https://xdddev.chtc.io/aske-id/id/: base URL for API route, used for lookup.
+    - https://xdd.wisc.edu/aske-id/id/: base URL for API route, used for lookup.
     - Registering a new ASKE-ID and submitting metadata requires an API key
-    
+6. **thing2vec API** (experimental): For a given table, use the COSMOS object ID to discover tables "nearby" in a embedding model.  
+    - https://xdddev.chtc.io/sets/xdd-covid-19/thing2vec/api/: Documentation for the API to explore the table embedding model.
+
+
 ## xDD: Document acquisition, storage, processing, and search infrastructure
 1. Document Ingestion
     - 17 September: 13M document milestone crossed
@@ -74,6 +77,8 @@ Here you will find a concise summary of progress made during Phase 3.
         # Directly register locations, without first reserving blocks
         curl -X POST -H 'Content-Type: application/json' -d '["http://some_url", "https://some_other_url"]' https://xdddev.chtc.io/aske-id/create\?api_key\=995d5601-896b-4309-b21f-1684d4a6421f
     ```
+    - 18 May: Updates and production deployment
+       - Added ?all parameter to show complete list of registers ASKE-IDs (https://xdd.wisc.edu/aske-id/id?all)
 
 ## COSMOS: AI-powered technical assistant over text, tables, figures, equations
 1. Pipeline
@@ -111,6 +116,9 @@ Here you will find a concise summary of progress made during Phase 3.
         - xDD API articles, snippets queries restricted to only this set: (https://xdd.wisc.edu/api/articles?term=ACE2&dataset=xdd-covid-19&full_results=true or https://xdd.wisc.edu/api/snippets?term=remdesivir&dataset=xdd-covid-19&full_results=true )
         - COSMOS API (beta version) available: https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/search?query=remdesivir&type=Figure .
    - 14 January: initial doc2vec implementation over xdd-covid-19 set.
+   - 31 March: Initial experimental thing2vec implementation over xdd-covid-19 set (table embedding).
+   - 5 May: Add `vector` parameter to `word2vec`, `thing2vec` APIs to return embedded vectors.
+   - 25 May: Added `enriched` parameter to thing2vec model to leverage content-enriched table context.
 
 3. Visualizer and Other Apps
     - 8 October: Updates to web browser COSMOS search interface to accommodate improvements to COSMOS pipeline
