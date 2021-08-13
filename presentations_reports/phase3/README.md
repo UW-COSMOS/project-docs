@@ -12,7 +12,7 @@ Here you will find a concise summary of progress made during Phase 3.
     - https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/: Base documentation for COSMOS search interface, available for the `xdd-covid-19` set.
     - https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/search: Documentation for searching the COSMOS extractions.
     - https://xdd.wisc.edu/set_visualizer/sets/xdd-covid-19: COSMOS search and discovery interface deployed over `xdd-covid-19` set.
-    - Table/Figure body text content enrichment code released, deployed over `xdd-covid-19` set; extends retrieval via `cosmos/api/seach` to include body text callouts to objects.
+    - Table/Figure body text content enrichment code released, deployed over `xdd-covid-19` set; extends retrieval via `cosmos/api/seach` to include body text callouts to objects (dev version shipped as of 11 August).
 3. **word2vec API**: Word embedding models (unigram, bigram, trigram) trained on xDD document set. 
     - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/: Documentation for the API to explore the word embedding model.
         - https://xdd.wisc.edu/sets/xdd-covid-19/word2vec/api/most_similar - Documentation for the "most_similar" function
