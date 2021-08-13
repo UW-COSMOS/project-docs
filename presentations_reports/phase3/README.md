@@ -65,7 +65,7 @@ Here you will find a concise summary of progress made during Phase 3.
         - 16 November: Add Mars Jezero Crater/Perseverance rover set (with COSMOS output availability) https://xdd.wisc.edu/sets/mars
         - 16 November: COSMOS output visualizer now supports permalinks to COSMOS extractions stored in xDD (e.g. https://xdddev.chtc.io/set_visualizer/sets/mars/object/5abb12574e45fe1e202cb4952a6ae673b498d6f2)
     - 20 February: Retooling of set definition for `xdd-covid-19` and regeneration of set.
-    - 6 August 2021: Update of `xdd-covid-19` set to include newly published documents; 155K now available, models updated and rerun
+    - 6 August: Update of `xdd-covid-19` set to include newly published documents; 155K now available, models updated and rerun
     
 6. ASKE-ID
     - 18 December: Prototype of ASKE-ID interface set up in dev namespace.
