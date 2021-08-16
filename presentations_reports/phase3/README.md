@@ -38,6 +38,8 @@ Here you will find a concise summary of progress made during Phase 3.
     - 7 October: Hardware inventoried, racked
     - 28 October: Online and available within CHTC kubernetes cluster.
     - 30 November: mongo upgraded to 4.0
+    - 30 June: Transition postgresql databases into CHTC kubernetes cluster
+    - 20 July: (staging environment only) Test transition of Elasticsearch into CHTC kubernetes cluster complete, including data ingestion.
 
 3. [API](https://xdd.wisc.edu/api)
     - geodeepive.org domain host shifted, deprecated; xdd.wisc.edu domain made active and deployed on CHTC Infrastructure
@@ -51,7 +53,9 @@ Here you will find a concise summary of progress made during Phase 3.
     - 8 February: Added `pubname` parameter to `/snippets`/: https://xdd.wisc.edu/api/snippets?term=Baraboo%20Quartzite&pubname=Marine%20Geology
     - 23 March: Added searchable Pubmed abstracts; added `corpus` parameter to select between corpuses. (e.g. https://xdd.wisc.edu/api/articles?term=remdesivir&corpus=fulltext&max=10 vs https://xdd.wisc.edu/api/articles?term=remdesivir&corpus=pubmed_abstracts&max=10)
       - Pubmed abstracts include `known_entity` matching
+    - 24 June: `known_terms` parameter now accepts a list of xDD dictionary names to filter relevance.
     - 26 July: Added `aske_id` parameter for ingested ASKE-registered documents: https://xdd.wisc.edu/api/articles?aske_id=8467496e-3dfb-4efd-9061-433fef1b92de
+    - 27 July: Added `inclusive` parameter to `/articles` route for increased query flexibility.
  
 4. Custom Code Execution
     - 6 October: Initial container template for deploying collaborator code against xDD (https://github.com/UW-xDD/xdd-docker-recipe)
@@ -108,8 +112,10 @@ Here you will find a concise summary of progress made during Phase 3.
         - Bugfix: treatment of boolean parameters (`ignore_bytes`, `inclusive`) is consistent and meaningful.
         - Docstrings added for `/document`, `/object`
      - 23 March 2021: Deployed `image_type` parameter on all routes (options: [`original`, `thumbnail`, and `jpg`] to return smaller and/or compressed versions of extracted images.
-     - 26 July: Added `aske_id` parameter to `/document`, `/search`, and `/count` endpoints for ASKE-registered (and COSMOS-processed) document recall.
-     - 6 August: Added Table/Figure body text content enrichment code released, deployed over `xdd-covid-19` set; extends retrieval via `cosmos/api/seach` to include body text callouts to objects (dev version shipped as of 11 August).
+     - 10 August 2021: v0.5.0 release - 
+        - Added Table body text content
+        - Extends retrieval via `cosmos/api/search` to include body text callouts to objects
+        - Added option to normalize text
 
 2. API
     - API service migrated into CHTC Infrastructure
@@ -124,6 +130,7 @@ Here you will find a concise summary of progress made during Phase 3.
    - 31 March: Initial experimental thing2vec implementation over xdd-covid-19 set (table embedding).
    - 5 May: Add `vector` parameter to `word2vec`, `thing2vec` APIs to return embedded vectors.
    - 25 May: Added `enriched` parameter to thing2vec model to leverage content-enriched table context.
+   - 26 July: Added `aske_id` parameter to `/document`, `/search`, and `/count` endpoints for ASKE-registered (and COSMOS-processed) document recall.
 
 
 3. Visualizer and Other Apps
