@@ -7,3 +7,8 @@ cat $doc.md \
   | pandoc -t latex --pdf-engine=xelatex \
     --metadata geometry:margin=1in \
     --output=output/$doc.pdf
+
+cat README.md \
+  | pandoc -t latex --pdf-engine=xelatex \
+    --metadata geometry:margin=1in \
+    --output=output/phase-3-report.pdf
