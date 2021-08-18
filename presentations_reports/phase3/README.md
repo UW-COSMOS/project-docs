@@ -8,6 +8,7 @@ Here you will find a concise summary of progress made during Phase 3.
     - https://xdd.wisc.edu/sets/: xDD document sets defined by full text searches and journal titles. Different transformations to documents within sets are available within sub-pages of the set. For example, documents within a set may be used to train a word embedding model, or the COSMOS extraction pipeline may be deployed to extract figures, tables, and equations for documents within a set
         - https://xdd.wisc.edu/sets/xdd-covid-19/: Lists information about the `xdd-covid-19` set of documents, and lists available products (transformations) derived from the set.
 2. **COSMOS API**: Figure, table, equation retreival by [COSMOS document processing pipeline](https://github.com/UW-COSMOS/Cosmos) deployed over xDD set. Note that use of these routes to retrieve table and figure objects requires an API key.
+    - Get started by reading the [COSMOS documentation](https://uw-cosmos.github.io/Cosmos/index.html) and understanding the back-end.
     - https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/: Base documentation for COSMOS search interface, available for the `xdd-covid-19` set.
     - https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/search: Documentation for searching the COSMOS extractions.
     - https://xdd.wisc.edu/set_visualizer/sets/xdd-covid-19: COSMOS search and discovery interface deployed over `xdd-covid-19` set.
@@ -18,13 +19,17 @@ Here you will find a concise summary of progress made during Phase 3.
 4. **doc2vec API**: Document embedding model trained on xDD document set.
     - https://xdd.wisc.edu/sets/xdd-covid-19/doc2vec/api/similar: documentation to be added, but example ?doi=10.1002/pbc.28600
 5. **ASKE-ID API**: Generate unique IDs and lookup metadata and linking information for data and documents used in ASKE infrastructure.
-    - https://xdddev.chtc.io/aske-id/id/: base URL for API route, used for lookup.
+    - https://xdd.wisc.edu/aske-id/id/: base URL for API route, used for lookup.
     - Registering a new ASKE-ID and submitting metadata requires an API key
-    
+6. **thing2vec API** (experimental): For a given table, use the COSMOS object ID to discover tables "nearby" in a embedding model.  
+    - https://xdddev.chtc.io/sets/xdd-covid-19/thing2vec/api/: Documentation for the API to explore the table embedding model.
+
+
 ## xDD: Document acquisition, storage, processing, and search infrastructure
 1. Document Ingestion
     - 17 September: 13M document milestone crossed
     - 17 September: Agreement with Springer-Nature pending; 9 October draft document
+    - 11 August: 14M document milestone crossed, Springer-Nature agreement finalized, pending acquisition pipeline deployment
 
 2. Computing Infrastructure
     - 28 August: Hardware purchase request made
@@ -33,6 +38,8 @@ Here you will find a concise summary of progress made during Phase 3.
     - 7 October: Hardware inventoried, racked
     - 28 October: Online and available within CHTC kubernetes cluster.
     - 30 November: mongo upgraded to 4.0
+    - 30 June: Transition postgresql databases into CHTC kubernetes cluster
+    - 20 July: (staging environment only) Test transition of Elasticsearch into CHTC kubernetes cluster complete, including data ingestion.
 
 3. [API](https://xdd.wisc.edu/api)
     - geodeepive.org domain host shifted, deprecated; xdd.wisc.edu domain made active and deployed on CHTC Infrastructure
@@ -43,7 +50,12 @@ Here you will find a concise summary of progress made during Phase 3.
     - 23 October: `known_entities`, `known_terms` deployed to production
     - 17 November: Added `document_filter_terms` to `/snippets` route
     - 8 February: Added `EMMAA` annotations to `known_entities`: https://xdd.wisc.edu/api/articles?docid=5e7dc0df998e17af8269af5d&known_entities=drugs,emmaa
-    - 8 February: Added `pubname` parameter to `/snippest`/: https://xdd.wisc.edu/api/snippets?term=Baraboo%20Quartzite&pubname=Marine%20Geology
+    - 8 February: Added `pubname` parameter to `/snippets`/: https://xdd.wisc.edu/api/snippets?term=Baraboo%20Quartzite&pubname=Marine%20Geology
+    - 23 March: Added searchable Pubmed abstracts; added `corpus` parameter to select between corpuses. (e.g. https://xdd.wisc.edu/api/articles?term=remdesivir&corpus=fulltext&max=10 vs https://xdd.wisc.edu/api/articles?term=remdesivir&corpus=pubmed_abstracts&max=10)
+      - Pubmed abstracts include `known_entity` matching
+    - 24 June: `known_terms` parameter now accepts a list of xDD dictionary names to filter relevance.
+    - 26 July: Added `aske_id` parameter for ingested ASKE-registered documents: https://xdd.wisc.edu/api/articles?aske_id=8467496e-3dfb-4efd-9061-433fef1b92de
+    - 27 July: Added `inclusive` parameter to `/articles` route for increased query flexibility.
  
 4. Custom Code Execution
     - 6 October: Initial container template for deploying collaborator code against xDD (https://github.com/UW-xDD/xdd-docker-recipe)
@@ -58,6 +70,7 @@ Here you will find a concise summary of progress made during Phase 3.
         - 16 November: Add Mars Jezero Crater/Perseverance rover set (with COSMOS output availability) https://xdd.wisc.edu/sets/mars
         - 16 November: COSMOS output visualizer now supports permalinks to COSMOS extractions stored in xDD (e.g. https://xdddev.chtc.io/set_visualizer/sets/mars/object/5abb12574e45fe1e202cb4952a6ae673b498d6f2)
     - 20 February: Retooling of set definition for `xdd-covid-19` and regeneration of set.
+    - 6 August: Update of `xdd-covid-19` set to include newly published documents; 155K now available, models updated and rerun
     
 6. ASKE-ID
     - 18 December: Prototype of ASKE-ID interface set up in dev namespace.
@@ -71,6 +84,8 @@ Here you will find a concise summary of progress made during Phase 3.
         # Directly register locations, without first reserving blocks
         curl -X POST -H 'Content-Type: application/json' -d '["http://some_url", "https://some_other_url"]' https://xdddev.chtc.io/aske-id/create\?api_key\=995d5601-896b-4309-b21f-1684d4a6421f
     ```
+    - 18 May: Updates and production deployment
+       - Added ?all parameter to show complete list of registers ASKE-IDs (https://xdd.wisc.edu/aske-id/id?all)
 
 ## COSMOS: AI-powered technical assistant over text, tables, figures, equations
 1. Pipeline
@@ -96,6 +111,11 @@ Here you will find a concise summary of progress made during Phase 3.
         - Add object type filter on `/document`
         - Bugfix: treatment of boolean parameters (`ignore_bytes`, `inclusive`) is consistent and meaningful.
         - Docstrings added for `/document`, `/object`
+     - 23 March 2021: Deployed `image_type` parameter on all routes (options: [`original`, `thumbnail`, and `jpg`] to return smaller and/or compressed versions of extracted images.
+     - 10 August 2021: v0.5.0 release - 
+        - Added Table body text content
+        - Extends retrieval via `cosmos/api/search` to include body text callouts to objects
+        - Added option to normalize text
 
 2. API
     - API service migrated into CHTC Infrastructure
@@ -107,6 +127,11 @@ Here you will find a concise summary of progress made during Phase 3.
         - xDD API articles, snippets queries restricted to only this set: (https://xdd.wisc.edu/api/articles?term=ACE2&dataset=xdd-covid-19&full_results=true or https://xdd.wisc.edu/api/snippets?term=remdesivir&dataset=xdd-covid-19&full_results=true )
         - COSMOS API (beta version) available: https://xdd.wisc.edu/sets/xdd-covid-19/cosmos/api/search?query=remdesivir&type=Figure .
    - 14 January: initial doc2vec implementation over xdd-covid-19 set.
+   - 31 March: Initial experimental thing2vec implementation over xdd-covid-19 set (table embedding).
+   - 5 May: Add `vector` parameter to `word2vec`, `thing2vec` APIs to return embedded vectors.
+   - 25 May: Added `enriched` parameter to thing2vec model to leverage content-enriched table context.
+   - 26 July: Added `aske_id` parameter to `/document`, `/search`, and `/count` endpoints for ASKE-registered (and COSMOS-processed) document recall.
+
 
 3. Visualizer and Other Apps
     - 8 October: Updates to web browser COSMOS search interface to accommodate improvements to COSMOS pipeline
@@ -117,6 +142,7 @@ Here you will find a concise summary of progress made during Phase 3.
 
 4. Publications
     - Unsupervised relation extraction paper accepted to Findings of EMNLP 2020: https://arxiv.org/abs/2010.06804
+    - VLDB 2021 Demo Project accepted; Demo of Marius: Graph Embeddings with a Single Machine
 
 ### License and Acknowledgements
 All development work supported by DAPRA ASKE HR00111990013 and UW-Madison.
