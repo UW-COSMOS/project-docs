@@ -1,14 +1,10 @@
 #!/usr/bin/env zsh
+# Provide Markdown document as an argument.
 
 mkdir -p output
 
-doc=milestone_2_report
-cat $doc.md \
+doc="${1:t:r}"
+cat "$1" \
   | pandoc -t latex --pdf-engine=xelatex \
     --metadata geometry:margin=1in \
     --output=output/$doc.pdf
-
-cat README.md \
-  | pandoc -t latex --pdf-engine=xelatex \
-    --metadata geometry:margin=1in \
-    --output=output/phase-3-report.pdf
