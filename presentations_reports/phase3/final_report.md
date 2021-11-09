@@ -3,7 +3,7 @@
 ## Task 1: Scale and Enhance xDD Infrastructure and APIs
 
   #### Task 1.A. Expand Corpus
-  The xDD corpus has grown to over 14.2M full-text publications. Springer-Nature was added as a new publisher partner in late 2021 and fetching of documents for this source began in October.  
+  The xDD corpus has grown to over 14.2M full-text publications. Springer-Nature was added as a new publisher partner in late 2021 and fetching of documents for this source began in October. In addition, PubMed abstracts and document metadata have been added to xDD infrastructure as an integrated but separate source. This enables more comprehensive document metadata retrieval and makes abstracts available for various xDD transformation and extraction pipelines (e.g., NLP, word embeddings).
 
 ![xdd_growth copy](https://user-images.githubusercontent.com/6107153/140966945-e2a4a097-308f-4493-9662-ce354995f3c6.jpg)
 
