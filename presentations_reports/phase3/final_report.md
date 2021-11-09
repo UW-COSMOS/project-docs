@@ -8,7 +8,7 @@
 ![xdd_growth copy](https://user-images.githubusercontent.com/6107153/140966945-e2a4a097-308f-4493-9662-ce354995f3c6.jpg)
 
   #### Task 1.B. Developer Container Template for Collaboroator Code
-  We developed and released a container template.
+  We developed and released a container template (https://github.com/UW-xDD/xdd-docker-recipe) to enable xDD collaborators to write code that that can be executed over xDD full-text content. The primary user of this template has been HMS, who has used this template to deploy the INDRA reading system over COVID-19 and other related documents in xDD. The output of the HMS container consists of grounded INDRA statements, which are dumped into Amazon S3 storage units for return back to HMS and the EMMAA model.
   
   #### Task 1.C. Augment xDD Corpus with Container Outputs
   
