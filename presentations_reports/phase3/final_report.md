@@ -37,6 +37,18 @@
 ## Task 2: Scale and Enhance COSMOS Retrieval and API
   
   #### Task 2.A. Improve Visual Segmentation
+  
   #### Task 2.B. Incorporate Body-Text Content into Object Retrieval
+    A new COSMOS feature, added in release v0.5.0, is _table context enrichment_. This feature links table objects to their in-text references via a loose string matching on its label ("Table 1"). Text surrounding in-text mentions is added to the final object representation, allowing recall of these objects based on contextual clues coming from the text in addition to the table and its caption. Parameters were added to the COSMOS object search API in order to facilitate utilization of these mentions -- users can now query for a term within the object, its caption, or within the in-body text surrounding mentions of (references to) the object. This augmentation can be run as a step within the COSMOS processing pipeline, or it can be run standalone against previously produced COSMOS output.
+  
   #### Task 2.C. Automatic Knowledge Base Construction
+  
   #### Task 2.D. Release Public COSMOS API Over COVID-19 Set
+  The COSMOS API for the xDD COVID-19 set has been available for collaborators throughout the duration of the project, with updated data products from major COSMOS releases being made available alongside previous versions of the data. In this way, objects from previous versions were still recallable via ID, but queries are always serving the newest version of output. An API key was circulated to collaborators to authenticate, to assuage concerns of publishing partners.
+  A number of requested features were added to the COSMOS API during the year, including:
+  - Per-document recall. Many collaborators wanted to be able to query for all COSMOS extractions from a given DOI, xDD ID, or ASKE-ID, instead of using term-based searching.
+  - Document-level filters. Users can now search for objects containing a term while enforcing that additional term(s) be present elsewhere in the document.
+  - Filtration by object size. This can be utilized to limit impact of full-page artifacts or segmentation errors early in the COSMOS pipeline.
+  - Image type options. Users can choose whether to recall full-resolution PNGs, compressed JPGs, or thumbnail-sized representations of the extracted objects.
+  - Search field options. Users can choose to query the objects, their associated captions, contextual snippeters surrounding text mentions referring to objects, or combinations of the three.
+  - Object-level filtration. Programmatic hooks are available within the API server to optionally filter objects matching certain criteria, for example reproduced versions of copyrighted material.
