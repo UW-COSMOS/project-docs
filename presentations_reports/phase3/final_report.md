@@ -37,11 +37,21 @@
 ## Task 2: Scale and Enhance COSMOS Retrieval and API
   
   #### Task 2.A. Improve Visual Segmentation
+  Visual segmentation has improved incrementally over the course of the project, as the heuristic approach has undergone improvements as shortcomings become apparent, especially within the scope of out-of-distribution document formats. Preprints in particular have caused the algorithms to need adjustments, as they contain a number of problematic elements:
+  
+  - Wide spacing between lines of text cause an artificially high density of independent detected objects
+  - Watermarks can register as content in the visual process, resulting in incorrect too-large bounding boxes to be recognized as an object
+  - Line numbers often are included in body text sections, resulting in noisy text extractions
+  
+  Simple rules were added to the segmentation algorithm to negate these effects, to mild success. Further research and development are needed to further improve the segmentation step, with the ultimate goal of programmatically detecting, training, and applying models for segmentation based on the type of document (preprint, peer-reviewed journal article, manuscript, etc).
+  
   
   #### Task 2.B. Incorporate Body-Text Content into Object Retrieval
     A new COSMOS feature, added in release v0.5.0, is _table context enrichment_. This feature links table objects to their in-text references via a loose string matching on its label ("Table 1"). Text surrounding in-text mentions is added to the final object representation, allowing recall of these objects based on contextual clues coming from the text in addition to the table and its caption. Parameters were added to the COSMOS object search API in order to facilitate utilization of these mentions -- users can now query for a term within the object, its caption, or within the in-body text surrounding mentions of (references to) the object. This augmentation can be run as a step within the COSMOS processing pipeline, or it can be run standalone against previously produced COSMOS output.
   
   #### Task 2.C. Automatic Knowledge Base Construction
+ A recent addition to the COSMOS pipeline enhances knowledge base construction by automatically extracting dataframe objects representations of table objects using the open-source Camelot library (https://camelot-py.readthedocs.io/en/master/). This tool enables structured extractions from table objects within PDFs which include a text layer, which incudes the majority of xDD holdings. Similar to the table context enrichment outlined above, this is included in the COSMOS software suite as an optional command line argument in the primary pipeline or as a standalone script that can be executed after execution of the standard pipeline. Areas of a PDF page recognized as a table by the visual parser in COSMOS as tables are passed into the Camelot software, which detects and returns returns a pandas dataframe representation of the table. Although the quality of the extractions is imperfect, this is a significant step toward computer-driven (or computer-aided) extraction of values from tables, as the tool has proven to be adequate at recognizing columnar structures of simple tables.
+   
   
   #### Task 2.D. Release Public COSMOS API Over COVID-19 Set
   The COSMOS API for the xDD COVID-19 set has been available for collaborators throughout the duration of the project, with updated data products from major COSMOS releases being made available alongside previous versions of the data. In this way, objects from previous versions were still recallable via ID, but queries are always serving the newest version of output. An API key was circulated to collaborators to authenticate, to assuage concerns of publishing partners.
