@@ -7,23 +7,58 @@
 
 ![xdd_growth copy](https://user-images.githubusercontent.com/6107153/140966945-e2a4a097-308f-4493-9662-ce354995f3c6.jpg)
 
-  #### Task 1.B. Developer Container Template for Collaboroator Code
+  #### Task 1.B. Developer Container Template for Collaborator Code
   We developed and released a Docker container template (https://github.com/UW-xDD/xdd-docker-recipe) to enable xDD collaborators to write code that that can be executed over xDD full-text content. The primary user of this template has been HMS, who has used it to deploy the INDRA reading system for the EMMAA model over COVID-19 and other related documents in xDD. The output of the HMS container consists of grounded INDRA statements, which are dumped into Amazon S3 storage units for return back to HMS and the EMMAA model.
   
   #### Task 1.C. Augment xDD Corpus with Container Outputs
-  xDD's API exposes article metadata and snippets around targetted search terms. We incorporated key elements of the output of HMS's INDRA reading system and Mitre's curated drug list into the document-level annotations in xDD and developed infrastructure to make such additions when other sources of knowledge become available. Users have the ability to opitionally request that these additional knowledge annotations be automatically appended to documents that are retrieved in any arbitrary search using the xDD API. This allows for rapid assessment of related knowledge linked at the document level when conducting a search that is not directly informed by this knowledge. For example, searching the xDD snippets route for the terms COVID-19 and intubation and specifying known_entities=drugs (https://xdd.wisc.edu/api/snippets?term=COVID-19,intubation&known_entities=drugs&clean) surfaces documents that are annotated with co-occurring drug mentions, making it possible to quickly assemble lists of candidate drugs that might be relevant to a given topic based on co-occurrence.
+  xDD's API exposes article metadata and snippets around targeted search terms. We incorporated key elements of the output of HMS's INDRA reading system and Mitre's curated drug list into the document-level annotations in xDD and developed infrastructure to make such additions when other sources of knowledge become available. Users have the ability to optionally request that these additional knowledge annotations be automatically appended to documents that are retrieved in any arbitrary search using the xDD API. This allows for rapid assessment of related knowledge linked at the document level when conducting a search that is not directly informed by this knowledge. For example, searching the xDD snippets route for the terms COVID-19 and intubation and specifying known_entities=drugs (https://xdd.wisc.edu/api/snippets?term=COVID-19,intubation&known_entities=drugs&clean) surfaces documents that are annotated with co-occurring drug mentions, making it possible to quickly assemble lists of candidate drugs that might be relevant to a given topic based on co-occurrence.
   
   #### Taks 1.D. Improve and Scale xDD API
   Numerous improvements to physical and software infrastructure were made to the xDD system. These improvements include migration to Kubernetes, the introduction of document sets, numerous software upgrades and updates, and many API updates and improvements, most made in direct response to ASKE-E collaborators. Below we briefly describe each of these and the other improvements made to the system.
   
-  1. Kubernetes
-  2. Software Upgrades and Updates
-  3. Sets
-  4. API updates and improvements
+  1. **Kubernetes**
+    Many of the xDD software and service components have been migrated into a kubernetes cluster UW-Madison's Center for High Throughput Computing (CHTC). This transition includes updates to a centralized configuration and build/deploy model. The primary reasons for these architecture changes are:
+      - Stability and redundancy. The kubernetes management layer ensures that all running instances of a software component are using the prescribed versions, eliminated the risk of version skew across scaled services. Additionally, the kubernetes model allows easy migration of services in the event of an individual node outage.
+      - Flexibility. Modifying and scaling services becomes trivial, enabling seamless deployment of updates and upgrades and changes to services and environments. Resources, once defined, can be modified and re-used to spin up additional services (for example, deploying data services across a wide array of document datasets).
+      - Security. Regular updates for software dependencies, network segmentation, and role- and namespace-based restrictions increase the security of the services and their hosts.
+      - Centralized configuration. Resource and service definitions are stored in version controlled software repositories (git). Centralizing and version-controlling theses configuration eases understanding and sharing of the update and deployment process while providing readily usable histories for rollbacks if needed.
+  
+  Although the kubernetes cluster is a shared CHTC resource, it includes new xDD-specific hardware to host the most critical and data-heavy xDD services and databases.
 
-## Task 2: Scle and Enhance COSMOS Retrieval and API
+  2. **Sets**
+    In this reporting period, we formalized the definition of "sets" in xDD. Document sets can be defined using any number of criteria, including full-text content searches, journal/publisher titles, a list of DOIs, or combinations of these methods. Once defined, a set provides a high-quality input set for a user to explore via by enabling dataset-specific filtration on relevant xDD API routes. Additionally, definition of a set enables easy transformations and processing of the underlying documents within the xDD ecosystem. Once processed, the kubernetes-backed ecosystem allows easy deployment of consumable endpoints and products based on the prescribed set of documents. The ability to generate on-demand sets of documents and have many such sets exist in parallel, with all data services operating over those sets, is a critical component of functionality in xDD that allows rapid pivoting into specific domains/subdomains of research over 14.2M documents in xDD. 
+
+  3. **Software Upgrades and Updates**
+    Several maintenance software upgrades and updates were deployed to ensure continued health and security of the xDD system. These include major version upgrades for the Mongodb and Postgresql backends, finalizing porting of the python software to python3, and upgrading hosts from Scientific Linux 6 to RHEL7.
+   
+  4. **API updates and improvements**
+    We continue to refine and enhance the xDD in many ways, from better documentation to new capabilities. These changes get pushed and made live as they go through our internal development and assessment cycles. Highlights in this reporting period includes API capabilities restricted to sets (described above), better ability to restrict text search responses based on document content, and appending known entities to the API response (e.g., a search for a given term can receive a response that is accompanied by co-occurring drugs in the Mitre drug list). 
+
+## Task 2: Scale and Enhance COSMOS Retrieval and API
   
   #### Task 2.A. Improve Visual Segmentation
+  Visual segmentation has improved incrementally over the course of the project, as the heuristic approach has undergone improvements as shortcomings become apparent, especially within the scope of out-of-distribution document formats. Preprints in particular have caused the algorithms to need adjustments, as they contain a number of problematic elements:
+  
+  - Wide spacing between lines of text cause an artificially high density of independent detected objects
+  - Watermarks can register as content in the visual process, resulting in incorrect too-large bounding boxes to be recognized as an object
+  - Line numbers often are included in body text sections, resulting in noisy text extractions
+  
+  Simple rules were added to the segmentation algorithm to negate these effects, to mild success. Further research and development are needed to further improve the segmentation step, with the ultimate goal of programmatically detecting, training, and applying models for segmentation based on the type of document (preprint, peer-reviewed journal article, manuscript, etc).
+  
+  
   #### Task 2.B. Incorporate Body-Text Content into Object Retrieval
+    A new COSMOS feature, added in release v0.5.0, is _table context enrichment_. This feature links table objects to their in-text references via a loose string matching on its label ("Table 1"). Text surrounding in-text mentions is added to the final object representation, allowing recall of these objects based on contextual clues coming from the text in addition to the table and its caption. Parameters were added to the COSMOS object search API in order to facilitate utilization of these mentions -- users can now query for a term within the object, its caption, or within the in-body text surrounding mentions of (references to) the object. This augmentation can be run as a step within the COSMOS processing pipeline, or it can be run standalone against previously produced COSMOS output.
+  
   #### Task 2.C. Automatic Knowledge Base Construction
+ A recent addition to the COSMOS pipeline enhances knowledge base construction by automatically extracting dataframe objects representations of table objects using the open-source Camelot library (https://camelot-py.readthedocs.io/en/master/). This tool enables structured extractions from table objects within PDFs which include a text layer, which incudes the majority of xDD holdings. Similar to the table context enrichment outlined above, this is included in the COSMOS software suite as an optional command line argument in the primary pipeline or as a standalone script that can be executed after execution of the standard pipeline. Areas of a PDF page recognized as a table by the visual parser in COSMOS as tables are passed into the Camelot software, which detects and returns returns a pandas dataframe representation of the table. Although the quality of the extractions is imperfect, this is a significant step toward computer-driven (or computer-aided) extraction of values from tables, as the tool has proven to be adequate at recognizing columnar structures of simple tables.
+   
+  
   #### Task 2.D. Release Public COSMOS API Over COVID-19 Set
+  The COSMOS API for the xDD COVID-19 set has been available for collaborators throughout the duration of the project, with updated data products from major COSMOS releases being made available alongside previous versions of the data. In this way, objects from previous versions were still recallable via ID, but queries are always serving the newest version of output. An API key was circulated to collaborators to authenticate, to assuage concerns of publishing partners.
+  A number of requested features were added to the COSMOS API during the year, including:
+  - Per-document recall. Many collaborators wanted to be able to query for all COSMOS extractions from a given DOI, xDD ID, or ASKE-ID, instead of using term-based searching.
+  - Document-level filters. Users can now search for objects containing a term while enforcing that additional term(s) be present elsewhere in the document.
+  - Filtration by object size. This can be utilized to limit impact of full-page artifacts or segmentation errors early in the COSMOS pipeline.
+  - Image type options. Users can choose whether to recall full-resolution PNGs, compressed JPGs, or thumbnail-sized representations of the extracted objects.
+  - Search field options. Users can choose to query the objects, their associated captions, contextual snippeters surrounding text mentions referring to objects, or combinations of the three.
+  - Object-level filtration. Programmatic hooks are available within the API server to optionally filter objects matching certain criteria, for example reproduced versions of copyrighted material.
