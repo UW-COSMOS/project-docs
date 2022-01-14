@@ -3,9 +3,11 @@
 ## Task 1: Scale and Enhance xDD Infrastructure and APIs
 
   #### Task 1.A. Expand Corpus
-  The xDD corpus has grown to over 14.2M full-text publications. Springer-Nature was added as a new publisher partner in late 2021 and fetching of documents for this source began in October. In addition, PubMed abstracts and document metadata have been added to xDD infrastructure as an integrated but separate source. This enables more comprehensive document metadata retrieval and makes abstracts available for various xDD transformation and extraction pipelines (e.g., NLP, word embeddings).
+  The xDD corpus has grown to over 14.5M full-text publications. Springer-Nature was added as a new publisher partner in late 2021 and fetching of documents for this source began in October. Rates of acquisition vary according to availability at publishers and infrastructure workload, but they have consistently been approximately four thousand per day. In addition, PubMed abstracts and document metadata have been added to xDD infrastructure as an integrated but separate document source. This enables more comprehensive document metadata retrieval and makes abstracts available for various xDD transformation and extraction pipelines (e.g., NLP, word embeddings).
 
 ![xdd_growth copy](https://user-images.githubusercontent.com/6107153/140966945-e2a4a097-308f-4493-9662-ce354995f3c6.jpg)
+![xDDgrowth copy](https://user-images.githubusercontent.com/6107153/149561456-bf66e1a9-b409-46ec-8693-15f637cc725e.jpg)
+
 
   #### Task 1.B. Developer Container Template for Collaborator Code
   We developed and released a Docker container template (https://github.com/UW-xDD/xdd-docker-recipe) to enable xDD collaborators to write code that that can be executed over xDD full-text content. The primary user of this template has been HMS, who has used it to deploy the INDRA reading system for the EMMAA model over COVID-19 and other related documents in xDD. The output of the HMS container consists of grounded INDRA statements, which are dumped into Amazon S3 storage units for return back to HMS and the EMMAA model.
