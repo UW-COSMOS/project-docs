@@ -2,6 +2,8 @@
 
 ## Task 1: Scale and Enhance xDD Infrastructure and APIs
 
+xDD is a published document retrieval, storage, and processing infrastructure that exposes key information in document metadata and full-text content to a public [application programming interface](https://xdd.wisc.edu/api/). xDD also provides select users with the ability to run custom code over selections of documents. Task 1 involved improvements to the xDD infrastructure and public API components; progress made in each of the four subtasks is described below.
+
   #### Task 1.A. Expand Corpus
   The xDD corpus has grown to over 14.5M full-text publications. Springer-Nature was added as a new publisher partner in late 2021 and fetching of documents for this source began in October. Rates of acquisition vary according to availability at publishers and infrastructure workload, but they have consistently been approximately four thousand per day. In addition, PubMed abstracts and document metadata have been added to xDD infrastructure as an integrated but separate document source. This enables more comprehensive document metadata retrieval and makes abstracts available for various xDD transformation and extraction pipelines (e.g., NLP, word embeddings).
 
