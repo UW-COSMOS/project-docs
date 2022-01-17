@@ -35,7 +35,9 @@
     We continue to refine and enhance the xDD in many ways, from better documentation to new capabilities. These changes get pushed and made live as they go through our internal development and assessment cycles. Highlights in this reporting period includes API capabilities restricted to sets (described above), better ability to restrict text search responses based on document content, and appending known entities to the API response (e.g., a search for a given term can receive a response that is accompanied by co-occurring drugs in the Mitre drug list). 
 
 ## Task 2: Scale and Enhance COSMOS Retrieval and API
-  
+  The primary software deliverable of our project is the [COSMOS document processing pipeline](https://github.com/UW-COSMOS/Cosmos), which ingests PDFs, segments them into text, table, figure, and equation elements, and enables retrieval using ElasticSearch and an optional neural reranker. Full documentation for the COSMOS pipeline is provided in the [online documentation](https://uw-cosmos.github.io/Cosmos/). Task 2 involved various improvements to the COSMOS pipeline; progress made in each of the four subtasks is described below.
+
+
   #### Task 2.A. Improve Visual Segmentation
   Visual segmentation has improved incrementally over the course of the project, as the heuristic approach has undergone improvements as shortcomings become apparent, especially within the scope of out-of-distribution document formats. Preprints in particular have caused the algorithms to need adjustments, as they contain a number of problematic elements:
   
