@@ -142,7 +142,7 @@ Here you will find a concise summary of progress made during Phase 3.
 
 4. Publications
     - Unsupervised relation extraction paper accepted to Findings of EMNLP 2020: https://arxiv.org/abs/2010.06804
-    - VLDB 2021 Demo Project accepted; Demo of Marius: Graph Embeddings with a Single Machine
+    - VLDB 2021 Demo Project accepted; Demo of Marius: Graph Embeddings with a Single Machine: https://dl.acm.org/doi/pdf/10.14778/3476311.3476338
 
 ### License and Acknowledgements
 All development work supported by DAPRA ASKE HR00111990013 and UW-Madison.
