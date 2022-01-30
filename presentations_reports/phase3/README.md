@@ -116,6 +116,7 @@ Here you will find a concise summary of progress made during Phase 3.
         - Added Table body text content
         - Extends retrieval via `cosmos/api/search` to include body text callouts to objects
         - Added option to normalize text
+     - January 2022: Deployed Camelot-based table parsing and data frame creation software as optional component of COSMOS.
 
 2. API
     - API service migrated into CHTC Infrastructure
