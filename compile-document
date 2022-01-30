@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# Provide Markdown document as an argument.
+# Provide Markdown document as an argument. Will produce a PDF file with the same name as the Markdown file.
 
 mkdir -p output
 
